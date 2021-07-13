@@ -1,0 +1,20 @@
+@mixin responsive-type($large: 1rem, $small: 1rem, $media: true, $current: 9999) {
+	@if $media {
+		@if $current >= strip-unit($b-medium) {
+			font-size: $large;
+
+			@media screen and (max-width: $b-medium) {
+				font-size: $small;
+			}
+		}
+		@if $current < strip-unit($b-medium) {
+			font-size: $small;
+		}
+	} @else {
+		@if $current > strip-unit($b-medium) {
+			font-size: $large;
+		} @else {
+			font-size: $small;
+		}
+	}
+}

@@ -1,0 +1,54 @@
+{
+  "extends": [
+    "stylelint-config-wordpress/scss"
+  ],
+	"ignoreFiles": ["css/**/*.css", ".gulp-templates/**/*.scss"],
+  "rules": {
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "ignore": [
+          "after-comment"
+        ],
+        "ignoreAtRules": [
+          "include",
+          "import",
+          "if",
+          "else",
+          "warn",
+          "for",
+          "return",
+					"use"
+        ]
+      }
+    ],
+    "rule-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment"
+        ]
+      }
+    ],
+    "declaration-empty-line-before": "never",
+    "number-leading-zero": "never",
+		"font-family-no-missing-generic-family-keyword": [
+			true,
+			{
+				"ignoreFontFamilies": [
+					/^object-(?:(?:fit)|(?:position)).*/
+				]
+			}
+		],
+		"function-url-quotes": "always",
+		"selector-class-pattern": [
+			"^([a-z0-9]+(-[a-z0-9]+)*)(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$",
+			{
+				"resolveNestedSelectors": true,
+			}
+		]
+  }
+}

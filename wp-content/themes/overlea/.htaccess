@@ -1,0 +1,5 @@
+# Prevent access to dev-specific files
+<FilesMatch "gulpfile\.js|\.babelrc|\.eslintrc|\.stylelintrc|composer\.json|composer\.lock|package\.json|package-lock\.json|webpack\.config\.js">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

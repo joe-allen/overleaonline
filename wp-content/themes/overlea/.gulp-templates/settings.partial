@@ -1,0 +1,11 @@
+"settings": {
+		"css.validate": false,
+		"less.validate": false,
+		"scss.validate": false,
+		"phpcs.enable": true,
+		"phpcs.executablePath": "<%= theme %>/vendor/squizlabs/php_codesniffer/bin/phpcs",
+		"phpcs.composerJsonPath": "<%= theme %>/composer.json",
+		"files.exclude": {
+			"**/.gulp-templates": true,
+		}
+	}

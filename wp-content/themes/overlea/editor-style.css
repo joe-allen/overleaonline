@@ -1,0 +1,49 @@
+.alpha {
+  font-size: 2em;
+  margin: .67em 0;
+}
+
+.beta {
+  font-size: 1.5em;
+  margin: .83em 0;
+}
+
+.gamma {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+.delta {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+.epsilon {
+  font-size: .83em;
+  margin: 1.67em 0;
+}
+
+.zeta {
+  font-size: .67em;
+  margin: 2.33em 0;
+}
+
+.v-blockquote {
+  padding: 20px;
+  border: 2px solid;
+}
+
+.v-blockquote :first-child {
+  margin-top: 0;
+}
+
+.v-blockquote :last-child {
+  margin-bottom: 0;
+}
+
+.v-blockquote .v-blockquote__cite {
+  margin: 20px -20px -20px;
+  padding: 20px;
+  font-weight: 700;
+  background: #e2e2e2;
+}

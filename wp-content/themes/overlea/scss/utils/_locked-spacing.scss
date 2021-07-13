@@ -1,0 +1,112 @@
+@use "sass:math";
+
+@mixin locked-spacing(
+	$use-side-a: true,
+	$use-side-b: true,
+	$type: margin,
+	$modifier: 1,
+	$media: true,
+	$current-raw: 9999,
+	$raw-max: 100px,
+	$axis: "vertical",
+	$floor: $b-small,
+	$min: null
+) {
+	$side-a: "";
+	$side-b: "";
+	@if $axis== "horizontal" {
+		$side-a: "left";
+		$side-b: "right";
+	} @else {
+		$side-a: "top";
+		$side-b: "bottom";
+	}
+
+	$max: $raw-max * $modifier;
+	$simple-tween: math.div(strip-unit($max), strip-unit($b-maxspacing)) * 100vw;
+	@if $min==null {
+		$min: math.div(strip-unit($simple-tween), 100) * $floor;
+	} @else {
+		$min: $min * $modifier;
+	}
+
+	$max-diff: strip-unit($max - $min);
+	$spacing-diff: strip-unit($b-maxspacing - $floor);
+	$tween: calc(#{$min} + (#{$max-diff} * ((100vw - #{$floor}) / #{$spacing-diff})));
+
+	$current: strip-unit($current-raw);
+	@if $media {
+		@if $current > $b-maxspacing {
+			@if $use-side-a {
+				#{$type}-#{$side-a}: $max;
+			}
+			@if $use-side-b {
+				#{$type}-#{$side-b}: $max;
+			}
+
+			@media screen and (max-width: $b-maxspacing) {
+				@if $use-side-a {
+					#{$type}-#{$side-a}: $tween;
+				}
+				@if $use-side-b {
+					#{$type}-#{$side-b}: $tween;
+				}
+			}
+
+			@media screen and (max-width: $floor) {
+				@if $use-side-a {
+					#{$type}-#{$side-a}: $min;
+				}
+				@if $use-side-b {
+					#{$type}-#{$side-b}: $min;
+				}
+			}
+		} @else if $current > strip-unit($floor) {
+			@if $use-side-a {
+				#{$type}-#{$side-a}: $tween;
+			}
+			@if $use-side-b {
+				#{$type}-#{$side-b}: $tween;
+			}
+
+			@media screen and (max-width: $floor) {
+				@if $use-side-a {
+					#{$type}-#{$side-a}: $min;
+				}
+				@if $use-side-b {
+					#{$type}-#{$side-b}: $min;
+				}
+			}
+		} @else {
+			@if $use-side-a {
+				#{$type}-#{$side-a}: $min;
+			}
+			@if $use-side-b {
+				#{$type}-#{$side-b}: $min;
+			}
+		}
+	} @else {
+		@if $current > strip-unit($b-maxspacing) {
+			@if $use-side-a {
+				#{$type}-#{$side-a}: $max;
+			}
+			@if $use-side-b {
+				#{$type}-#{$side-b}: $max;
+			}
+		} @else if $current > strip-unit($floor) {
+			@if $use-side-a {
+				#{$type}-#{$side-a}: $tween;
+			}
+			@if $use-side-b {
+				#{$type}-#{$side-b}: $tween;
+			}
+		} @else {
+			@if $use-side-a {
+				#{$type}-#{$side-a}: $min;
+			}
+			@if $use-side-b {
+				#{$type}-#{$side-b}: $min;
+			}
+		}
+	}
+}

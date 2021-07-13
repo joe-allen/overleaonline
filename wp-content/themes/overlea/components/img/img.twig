@@ -1,0 +1,11 @@
+{% set size = size ? size : 'full' %}
+<img
+  src="{{ Image(id).src(size) }}"
+  srcset="{{ Image(id).srcset(size) }}"
+  sizes="{{ Image(id).img_sizes(size) }}"
+  alt="{{ Image(id).alt }}"
+  class="{{class}}"
+	width="{{ Image(id).sizes[size].width }}"
+	height="{{ Image(id).sizes[size].height }}"
+	{% if not not_lazy %}loading="lazy"{% endif %}
+>

@@ -1,0 +1,45 @@
+{
+	"plugins": [ "varspacing", "jsdoc" ],
+	"extends": [
+		"plugin:@wordpress/eslint-plugin/esnext",
+		"plugin:@wordpress/eslint-plugin/custom",
+		"plugin:varspacing/recommended",
+		"plugin:jsdoc/recommended"
+	],
+	"globals": {
+		"wpPostData": "readonly"
+	},
+	"parserOptions": {
+		"ecmaVersion": 9
+	},
+	"env": {
+		"browser": true
+	},
+	"rules": {
+		"@wordpress/no-global-event-listener": "off",
+		"key-spacing": [1, {
+			"align": "value"
+		}],
+		"no-multi-spaces": [1, {
+			"exceptions": {
+				"VariableDeclarator": true,
+				"Property": true,
+				"ImportDeclaration": true,
+				"AssignmentExpression": true
+			}
+		}],
+		"require-jsdoc": [1, {
+			"require": {
+				"ArrowFunctionExpression": true
+			}
+		}],
+		"jsdoc/require-file-overview": [1, {
+			"tags": {
+				"file": {
+					"preventDuplicates": true,
+					"mustExist": true
+				}
+			}
+		}]
+	}
+}

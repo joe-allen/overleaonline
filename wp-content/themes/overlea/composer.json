@@ -1,0 +1,10 @@
+{
+	"require": {
+		"johnbillion/extended-cpts": "^4.5",
+		"stoutlogic/acf-builder": "^1.11",
+		"timber/timber": "^1.18"
+	},
+	"require-dev": {
+		"10up/phpcs-composer": "dev-master"
+	}
+}

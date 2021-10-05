@@ -1,0 +1,25 @@
+{% include "hero/hero.twig" with {
+	count: 1,
+	class: 'v-hero--sm'
+} %}
+
+{% include "recent-news/recent-news.twig" with {
+	count: 5,
+	title:    'Board Members',
+	subtitle: '',
+	type: 'fourth',
+} %}
+
+{% include "cta/cta.twig" with {
+	class: 'v-cta--bottom-overlap',
+	title: 'Would you like to help us improve the community of Overlea?',
+	cta: {
+		title: 'Join',
+		type: 'membership'
+	}
+} %}
+
+{% include "form/form.twig" with {
+	title:    'Contact Us',
+	subtitle: 'We\'re all ears!'
+} %}

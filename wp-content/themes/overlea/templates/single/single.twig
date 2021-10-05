@@ -1,0 +1,31 @@
+{% include "hero/hero.twig" with {
+	count: post.meta('slider')|length,
+	slides: post.meta('slider'),
+	title:    post.post_title,
+} %}
+
+{% include "content/content.twig" with {
+	sidebar: true,
+	content: post.meta('content')
+} %}
+
+{% include "recent-news/recent-news.twig" with {
+	count: 3,
+	title:    'Related News',
+	cta: 'View All News'
+} %}
+
+{% include "cta/cta.twig" with {
+	class: 'v-cta--bottom-overlap',
+	title: 'Join the Newsletter?',
+	cta: {
+		title: 'Submit',
+		type: 'newsletter'
+	}
+} %}
+
+{% include "form/form.twig" with {
+	title:    'Contact Us',
+	subtitle: 'We\'re all ears!'
+} %}
+

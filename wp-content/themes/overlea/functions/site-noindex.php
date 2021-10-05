@@ -5,7 +5,7 @@
  * Sets checkbox to true for discouraging search engines
  * from indexing  site unless on production server
  *
- * @package BoogieDown\Overlea\Functions
+ * @package Vitamin\Vanilla_Theme\Functions
  * @author  Vitamin
  * @version 1.0.0
  */

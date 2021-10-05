@@ -1,0 +1,147 @@
+@use "bootstrap" as v;
+
+.v-content {
+	padding: v.spacing("large") 0;
+
+	&__inner {
+		max-width: 1000px;
+		display: flex;
+		justify-content: space-between;
+		margin: 0 auto;
+	}
+
+	&__content {
+		max-width: 1000px;
+	}
+
+	&__sidebar {
+		position: sticky;
+		display: flex;
+		align-items: flex-end;
+		flex-direction: column;
+		top: v.spacing("xsmall");
+		margin-top: v.spacing("xsmall");
+		margin-left: v.spacing("small");
+		flex-shrink: 0;
+		width: 200px;
+		height: 100%;
+		text-align: right;
+	}
+
+	&__sponsor {
+		& + & {
+			margin-top: 1rem;
+		}
+	}
+
+	&__meta {
+		position: relative;
+		width: 100%;
+		margin-top: 1rem;
+		padding-top: 1rem;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			box-shadow: 0 1px 0 rgba(0, 0, 0, .15);
+		}
+
+		&-list {
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+		}
+
+		&-list--social {
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		&-item {
+			margin: .5rem 0;
+		}
+
+		&-item span:first-of-type {
+			font-weight: 600;
+		}
+
+		&-item span:last-of-type {
+			font-weight: 300;
+		}
+
+		&-list--social &-item {
+			display: flex;
+			align-items: center;
+		}
+
+		&-list--social &-item:not(:first-of-type) {
+			margin-left: 1rem;
+		}
+
+		&-tag-link {
+			font-weight: 400 !important;
+		}
+	}
+
+	// elements
+	a:not(.v-content__social-link) {
+		position: relative;
+		cursor: pointer;
+		color: var(--c-primary);
+		font-weight: 900;
+		border-bottom: 1px solid transparent;
+		padding-bottom: 1px;
+
+		&:hover {
+			text-decoration: none;
+			color: var(--c-primary-hover);
+			border-bottom: 1px solid var(--c-primary-hover);
+		}
+	}
+
+	img:not(.v-content__sponsor) {
+		margin: 1.75rem 0;
+	}
+
+	p + img:not(.v-content__sponsor) {
+		margin-top: 1rem;
+	}
+	// end elements
+}
+
+@media screen and (max-width: v.$b-large) and (min-width: v.$b-medium) {
+	.v-content {
+		&__sidebar {
+			top: v.spacing("large");
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-content {
+		padding-bottom: 0;
+
+		&__inner {
+			flex-direction: column;
+		}
+
+		&__sidebar {
+			align-items: flex-start;
+			width: 100%;
+			margin-left: 0;
+			text-align: start;
+		}
+
+		&__meta {
+			margin-top: 1.75rem;
+
+			&-list--social {
+				justify-content: flex-start;
+			}
+		}
+	}
+}

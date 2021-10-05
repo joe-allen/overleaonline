@@ -1,0 +1,109 @@
+@use "bootstrap" as v;
+
+.v-image-content {
+	padding: v.spacing("xsmall") 0 0;
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: v.spacing("xsmall", -1);
+		left: 0;
+		height: 50%;
+		width: 100vw;
+		background-color: v.$c-primary;
+		z-index: -1;
+	}
+
+	&:nth-last-of-type(2) {
+		padding-bottom: v.spacing("large");
+	}
+
+	& + &:nth-last-of-type(2)::after {
+		bottom: auto;
+		height: 50%;
+		top: 0;
+	}
+
+	& + & {
+		padding-top: v.spacing("large");
+
+		&::after {
+			bottom: auto;
+			height: 100%;
+			top: 0;
+		}
+	}
+
+	&__inner {
+		display: flex;
+		box-shadow: var(--box-shadow);
+	}
+
+	& + &:nth-child(even) &__inner {
+		display: flex;
+		flex-direction: row-reverse;
+	}
+
+	&__img-wrap {
+		position: relative;
+		width: 50%;
+		flex-shrink: 0;
+
+		&::after {
+			content: "";
+			display: block;
+			height: 150px;
+		}
+	}
+
+	&__img {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		object-fit: cover;
+		object-position: center;
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+
+	&__content {
+		display: block;
+		position: relative;
+		padding: v.spacing("small");
+		background-color: #fff;
+
+		&-title {
+			@include v.font-size("gamma");
+		}
+	}
+}
+
+.v-hero + .v-image-content {
+	padding: v.spacing("large", 1.5) 0 0;
+}
+
+.v-intro + .v-image-content:first-of-type {
+	padding-top: 0;
+}
+
+@media screen and (max-width: 850px) {
+	.v-image-content {
+		&__inner {
+			flex-direction: column;
+		}
+
+		& + &:nth-child(even) &__inner,
+		& + &:nth-child(odd) &__inner {
+			flex-direction: column;
+		}
+
+		&__img-wrap {
+			width: 100%;
+			height: 500px;
+		}
+	}
+}

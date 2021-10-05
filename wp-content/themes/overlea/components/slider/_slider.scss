@@ -1,0 +1,256 @@
+@use "bootstrap" as v;
+
+// keen-slider css
+.keen-slider {
+	display: flex;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-khtml-user-select: none;
+	touch-action: pan-y;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.keen-slider,
+.keen-slider__slide {
+	overflow: hidden;
+	position: relative;
+}
+
+.keen-slider__slide {
+	width: 100%;
+	// min-height: 100%;
+}
+
+.keen-slider[data-keen-slider-v] {
+	flex-wrap: wrap;
+}
+
+.keen-slider[data-keen-slider-v] .keen-slider__slide {
+	width: 100%;
+}
+
+.keen-slider[data-keen-slider-moves] * {
+	pointer-events: none;
+}
+// end keen-slider css
+
+.v-slider {
+	position: fixed;
+	height: 90vh;
+	width: 100%;
+	background-color: v.$c-primary;
+
+	&:hover .arrow {
+		opacity: 1;
+		transform: translateY(-50%) scale(1);
+	}
+
+	.arrow {
+		position: absolute;
+		cursor: pointer;
+		top: 50%;
+		left: clamp(1rem, 2vw, 2rem);
+		transform: translateY(-50%) scale(.38);
+		width: 2.5rem;
+		height: 2.5rem;
+		fill: v.$c-primary;
+		opacity: 0;
+		transition: opacity .15s ease-out, transform .15s ease-out, fill .15s ease-out;
+
+		&:hover {
+			fill: v.$c-primary-hover;
+		}
+
+		&--right {
+			left: auto;
+			right: clamp(1rem, 2vw, 2rem);
+		}
+	}
+
+	&__slider {
+		position: relative;
+	}
+
+	&__wrap {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+
+	&__img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: translate(-50%, -50%);
+	}
+
+	&__link {
+		@include v.max-width-container;
+		position: absolute;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		height: auto;
+		color: #fff;
+		padding: 0 0 clamp(2rem, 3vw, 4rem) clamp(2rem, 3vw, 4rem);
+		transition: opacity .15s ease-out, color 0s;
+		z-index: 1;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 15%;
+			right: 5%;
+			width: 150vw;
+			height: 150vh;
+			min-height: 1600px;
+			background: radial-gradient(circle, rgba(0, 0, 0, .5) 5%, transparent 50%);
+			z-index: 1;
+			pointer-events: none;
+		}
+
+		&:hover {
+			text-decoration: none;
+			opacity: .7;
+			color: #fff;
+		}
+	}
+
+	&__text-title {
+		z-index: 2;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	&__text-subtitle {
+		z-index: 2;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	&__dots {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		bottom: clamp(2rem, 3vw, 4rem);
+		right: clamp(2rem, 3vw, 4rem);
+
+		.dot {
+			position: relative;
+			border: 1px solid v.$c-primary;
+			width: 20px;
+			height: 20px;
+			margin: .5rem 0;
+			background: transparent;
+			border-radius: 0;
+			overflow: hidden;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 1px;
+				right: 0%;
+				width: 55px;
+				height: 55px;
+				transform: rotate(45deg);
+				border: 1px solid v.$c-primary;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0%;
+				right: 0%;
+				width: 55px;
+				height: 55px;
+				transform: translate(90%, -90%) rotate(-45deg);
+				transition: background-color .15s ease-out, transform .15s ease-out;
+			}
+
+			&:hover {
+				&::after {
+					transform: translate(50%, -90%) rotate(-45deg);
+					background-color: v.$c-primary;
+					opacity: .7;
+				}
+			}
+		}
+
+		.dot--active {
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0%;
+				left: 0%;
+				width: 55px;
+				height: 55px;
+				opacity: 0;
+				background-color: v.$c-primary;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				top: -20px;
+				left: 0%;
+				width: 55px;
+				height: 55px;
+				opacity: .7;
+				transform: translate(0) rotate(-45deg);
+				background-color: v.$c-primary;
+			}
+
+			&:hover::after {
+				transform: none;
+			}
+		}
+	}
+
+	&__overlay {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(circle, transparent, rgba(0, 0, 0, .5) 50%);
+		pointer-events: none;
+		z-index: 1;
+	}
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-slider {
+		.arrow {
+			opacity: 1;
+			width: 1.5rem;
+			height: 1.5rem;
+			transform: translateY(-50%) scale(1);
+		}
+
+		&__link {
+			padding-left: v.spacing("container");
+			padding-bottom: v.spacing("container");
+
+			&::before {
+				top: -10%;
+				right: -50%;
+			}
+		}
+
+		&__dots {
+			display: none;
+		}
+	}
+}

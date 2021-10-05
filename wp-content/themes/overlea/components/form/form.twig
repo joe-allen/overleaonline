@@ -1,0 +1,48 @@
+{#
+	@var string class plain text
+#}
+<section class="v-form {{class}}">
+	<div class="container">
+		<div class="v-form__inner">
+			{% if title %}
+				<div class="v-form__content">
+					<h2 class="v-form__content-title">{{title}}</h2>
+					<h3 class="v-form__content-subtitle">{{subtitle}}</h3>
+				</div>
+			{% endif %}
+			<form class="v-form__form">
+				<div class="v-form__field">
+					<label for="input1" class="v-form__input-label">
+						<span class="sr-only">name</span>
+						<input type="text" placeholder="Name" id="input1" name="name" class="v-form__input-input">
+					</label>
+				</div>
+				<div class="v-form__field">
+					<label for="input2" class="v-form__input-label">
+						<span class="sr-only">phone</span>
+						<input type="text" placeholder="Phone" id="input2" name="phone" class="v-form__input-input">
+					</label>
+				</div>
+				<div class="v-form__field">
+					<label for="input3" class="v-form__input-label">
+						<span class="sr-only">email</span>
+						<input type="text" placeholder="Email" id="input3" name="email" class="v-form__input-input">
+					</label>
+				</div>
+				<div class="v-form__field">
+					<label for="input4" class="v-form__input-label sr-only">Comment</label>
+					<textarea name="comment" id="input4" cols="30" rows="10" class="v-form__input-textarea" placeholder="Comment"></textarea>
+				</div>
+				<div class="v-form__flex">
+					<div class="v-form__field">
+						<input type="checkbox" name="newsletter" id="input5" cols="30" rows="10" class="v-form__input-checkbox" />
+						<label for="input5" class="v-form__input-label">Join Newsletter</label>
+					</div>
+					<div class="v-form__field v-form__field--submit">
+							<button type="submit" class="v-form__input-submit v-button v-button--dark">Send</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

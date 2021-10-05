@@ -1,13 +1,56 @@
 {#
 	@var string class plain text
 #}
-<article class="v-card mt-96 {{class}}">
-	<h1>Hi Card {{title}}</h1>
-	Once upon a time Epilogue had a different name. Since its previous story has ended this new iteration literally gained some weight and a variable slant angle. Sometimes you need a clean and crisp go-to font that isn't preinstalled on every computer in the world. Epilogue was made for that. It is familiar but unique enough to be memorable. This makes it both easy to use and a joy to apply.
+{% for item in items %}
+	<article class="v-card {{class}}">
+		{% set element = ('v-card--leader' in class) ? 'span' : 'a' %}
+		<{{element}} tabindex=0 href="{{item.link}}" class="v-card__link">
+			<div class="v-card__inner">
+				<div class="v-card__bg">
+					<div class="v-card__bg-overlay"></div>
+					{% if item.meta('slider')[0].slider_image %}
+						{% include 'img/img.twig' with {
+							id: item.meta('slider')[0].slider_image,
+							class: 'v-card__bg-img'
+						} %}
+					{% else %}
+						<img class="v-card__bg-img" src="{{theme.link}}/img/overlea-sign.jpg" alt="overlea wall art" width="416" height="227">
+					{% endif %}
 
-	The range of weights (Thin/100 to Black/900) make it easy to accommodate any size requirement, on screen and in print. And with the variable option you can choose your own weight, like 314 or 567. If the thin is feeling too thin try 150, it's all good. In fact, our current website – including this paragraph – is set in Epilogue.
+				</div>
+				<div class="v-card__content">
+					<h3 class="v-card__content-title">{{item.post_title}}</h3>
+					{% if 'v-card--leader' in class %}
+						<p class="v-card__content-position">{{title}}</p>
+					{% endif %}
+					<p class="v-card__content-subtitle">
+						{{item.excerpt}}
+					</p>
+					<div class="v-card__content-cta">
+						<span aria-label="link to {{title}}" class="v-card__content-cta-text sr-only">{{cta}}</span>
+					</div>
+				</div>
+			</div>
+		</{{element}}>
+	</article>
+{% endfor %}
 
-	Epilogue comes in static styles for desktop and web as well as a single variable font and has received several updates since its release in August of 2018. Thanks to Google Fonts, Epilogue now exists in libre form with an Open Font License and is available on Github
-
-
-</article>
+{% if cta %}
+	{% set link = (cta.link_type == 'internal') ? cta.link.internal_url : cta.link.external_url %}
+	<article class="v-card v-card--third v-card--tablet">
+		<a class="v-card__link" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>
+			<div class="v-card__inner">
+				<div class="v-card__bg">
+					<div class="v-card__bg-overlay"></div>
+					<img class="v-card__bg-img" src="https://images.unsplash.com/photo-1606787947360-4181fe0ab58c?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80" alt="placeholder" width="400" height="300">
+				</div>
+				<div class="v-card__content">
+					<h3 class="v-card__content-title">{{cta.link.text}}</h3>
+					<div class="v-card__content-cta">
+						<span aria-label="link to all news" class="v-card__content-cta-text sr-only">View More</span>
+					</div>
+				</div>
+			</div>
+		</a>
+	</article>
+{% endif %}

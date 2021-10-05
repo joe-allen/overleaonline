@@ -1,0 +1,22 @@
+{#
+	@var string class plain text
+#}
+<article class="v-cta {{class}} v-cta--{{cta.type}}">
+	<div class="container">
+		<div class="v-cta__inner">
+			{% if type == 'membership' %}
+				<h3 class="v-cta__cta-text">{{title}}</h3>
+				{% set link = (cta.link_type == 'internal') ? cta.link.internal_url : cta.link.external_url %}
+				<a class="v-cta__cta-cta v-button v-button--lg" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{cta.link.text}}</a>
+				{% elseif cta.type == 'newsletter' %}
+				<h3 class="v-cta__cta-text">{{title}}</h3>
+				<div class="v-cta__form-wrap">
+					<form class="v-cta__form">
+						<input type="email" class="v-form__field v-cta__input" placeholder="Email">
+						<button type="submit" class="v-cta__cta-cta v-button v-button--lg">{{cta.title}}</button>
+					</form>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</article>

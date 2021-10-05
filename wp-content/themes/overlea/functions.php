@@ -4,7 +4,7 @@
  *
  * Various site features defined as partials. Loads composer dependencies.
  *
- * @package BoogieDown\Overlea\Functions
+ * @package Vitamin\Vanilla_Theme\Functions
  * @author  Vitamin
  * @version 1.2.0
  */

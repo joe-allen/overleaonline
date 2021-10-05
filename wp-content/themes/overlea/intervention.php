@@ -2,7 +2,7 @@
 /**
  * Intervention
  *
- * @package BoogieDown\Overlea\Functions
+ * @package Vitamin\Vanilla_Theme\Functions
  * @version 1.0.0
  */
 
@@ -34,7 +34,7 @@ return [
 				'wp',
 			],
 			'footer'     => [
-				'credit' => 'Site by <a href="https://joeallen.dev" target="_blank">Joe Allen</a>',
+				'credit' => 'Site by Vitamin&reg;',
 			],
 			'pagination' => 40,
 			'tabs',
@@ -78,22 +78,9 @@ return [
 		],
 		'common'     => [
 			'footer.version',
-			'footer.credit' => 'Site by <a href="https://joeallen.dev" target="_blank">Joe Allen</a>',
 			'updates',
 		],
-		'dashboard'  => [
-			'pages',
-			'home.tabs',
-			'home.notices',
-			'home.activity',
-			'home.right-now',
-			'home.recent-comments',
-			'home.incoming-links',
-			'home.plugins',
-			'home.quick-draft',
-			'home.news',
-			'home.site-health',
-		],
+		'dashboard'  => 'pages',
 		'plugins',
 		'tools',
 	],

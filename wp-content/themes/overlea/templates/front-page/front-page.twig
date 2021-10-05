@@ -1,3 +1,33 @@
-{% include 'card/card.twig' with {
-	title: post.meta('card_example')
+{% include "hero/hero.twig" with {
+	count: post.meta('slider')|length,
+	slides: post.meta('slider')
+} %}
+
+{% include "recent-news/recent-news.twig" with {
+	count: posts|length,
+	items: posts,
+	title:    options.news_title,
+	subtitle: options.news_subtitle,
+	cta: options.news_link
+} %}
+
+{% include "cta/cta.twig" with {
+	title: post.meta('cta_text'),
+	cta: post.meta('cta_link'),
+	type: 'membership'
+} %}
+
+{% include "sponsors/sponsors.twig" with {
+	title: post.meta('sponsor_title'),
+	items: post.meta('sponsor'),
+	subtitle: post.meta('sponsor_text')
+} %}
+
+{% include "image-content/image-content.twig" with {
+	items: post.meta('ic'),
+} %}
+
+{% include "form/form.twig" with {
+	title:    options.contact_form_title,
+	subtitle: options.contact_form_text
 } %}

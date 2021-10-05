@@ -1,0 +1,40 @@
+{% include "hero/hero.twig" with {
+	count: 1,
+	class: 'v-hero--sm'
+} %}
+
+{% include "recent-news/recent-news.twig" with {
+	count: 12,
+	title:    'What\'s Happening',
+	subtitle: 'News around the neighborhood',
+	cta: 'View More'
+} %}
+
+{% include "pagination/pagination.twig" %}
+
+{% include "cta/cta.twig" with {
+	title: 'Would you like to help us improve the community of Overlea?',
+	cta: {
+		title: 'Join',
+		type: 'membership'
+	}
+} %}
+
+{% include "sponsors/sponsors.twig" with {
+	title:    'Our Sponsors',
+	count: 6,
+	subtitle: 'Sponsor images should be 200x200px only. Can we encourage sponsors to use their logo / icons instead of words? <a class="v-link" href="#!">View All</a>'
+} %}
+
+{% include "image-content/image-content.twig" with {
+	class: 'v-image-content--reverse',
+	title:    'Overlea is Rich in History',
+	count: 1,
+	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.'
+} %}
+
+{% include "form/form.twig" with {
+	title:    'Contact Us',
+	subtitle: 'We\'re all ears!'
+} %}
+

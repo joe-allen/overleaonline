@@ -31,6 +31,8 @@ class FieldsBuilder extends ParentDelegationBuilder implements NamedBuilder
      */
     protected $name;
 
+    CONST DEEP_NESTING_DELIMITER = '->';
+
     /**
      * @param string $name Field Group name
      * @param array $groupConfig Field Group configuration
@@ -71,6 +73,12 @@ class FieldsBuilder extends ParentDelegationBuilder implements NamedBuilder
         }
 
         return null;
+    }
+
+    public function updateGroupConfig($config)
+    {
+        $this->config = array_merge($this->config, $config);
+        return $this;
     }
 
     /**
@@ -639,8 +647,16 @@ class FieldsBuilder extends ParentDelegationBuilder implements NamedBuilder
      */
     public function modifyField($name, $modify)
     {
+        if ($this->hasDeeplyNestedField($name)) {
+            $fieldNames = explode(self::DEEP_NESTING_DELIMITER, $name, 2);
+            $this->getField($fieldNames[0])->modifyField($fieldNames[1], $modify);
+
+            return $this;
+        }
+
         if (is_array($modify)) {
             $this->getFieldManager()->modifyField($name, $modify);
+            return $this;
         } elseif ($modify instanceof \Closure) {
             $field = $this->getField($name);
 
@@ -672,9 +688,24 @@ class FieldsBuilder extends ParentDelegationBuilder implements NamedBuilder
      */
     public function removeField($name)
     {
+        if ($this->hasDeeplyNestedField($name)) {
+            $fieldNames = explode(self::DEEP_NESTING_DELIMITER, $name, 2);
+            $this->getField($fieldNames[0])->removeField($fieldNames[1]);
+            return $this;
+        }
+
         $this->getFieldManager()->removeField($name);
 
         return $this;
+    }
+
+    /**
+     * @param string $name Deeply nested field name
+     * @return bool
+     */
+    private function hasDeeplyNestedField($name)
+    {
+        return strpos($name, static::DEEP_NESTING_DELIMITER) !== false;
     }
 
     /**
@@ -725,6 +756,11 @@ class FieldsBuilder extends ParentDelegationBuilder implements NamedBuilder
     protected function generateName($name)
     {
         return strtolower(str_replace(' ', '_', $name));
+    }
+
+    public function __clone()
+    {
+        $this->fieldManager = clone $this->fieldManager;
     }
 
 }

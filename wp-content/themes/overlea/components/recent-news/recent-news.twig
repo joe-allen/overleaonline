@@ -1,0 +1,28 @@
+{#
+	@var string class plain text
+#}
+<section class="v-recent-news {{class}}">
+	<div class="container v-recent-news__header">
+		<div class="v-recent-news__header-titles">
+			<h2 class="v-recent-news__title">{{title}}</h1>
+				{% if subtitle %}
+					<h3 class="v-recent-news__subtitle">{{subtitle}}</h2>
+				{% endif %}
+		</div>
+
+		{% if cta %}
+			<div class="v-recent-news__header-cta">
+				{% set link = (cta.link_type == 'internal') ? cta.link.internal_url : cta.link.external_url %}
+				<a class="v-recent-news__cta v-button" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{cta.link.text}}</a>
+			</div>
+		{% endif %}
+	</div>
+
+	{% include 'grid/grid.twig' with {
+		count: count,
+		items: items,
+		cta: cta,
+		class: type == 'fourth' ? 'v-card--leader v-card--fourth' : 'v-card--third',
+	} %}
+
+</section>

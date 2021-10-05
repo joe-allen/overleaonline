@@ -3,8 +3,9 @@
  */
 
 import * as quicklink from 'quicklink';
-
-import vCard from '../components/card/card';
+import vHeader from '../components/header/header';
+import vSlider from '../components/slider/slider';
+import vHero from '../components/hero/hero';
 
 /**
  * Global functions
@@ -12,6 +13,12 @@ import vCard from '../components/card/card';
  * Runs component js and any global tasks
  */
 const vGlobal = () => {
+	const shareBtn = document.querySelector( '.v-content__social--share' );
+
+	vHeader();
+	vSlider();
+	vHero();
+
 	const selects = document.querySelectorAll( 'select' );
 	[ ...selects ].forEach( ( select ) => {
 		const selectParent = select.parentNode;
@@ -20,12 +27,23 @@ const vGlobal = () => {
 		}
 
 		const wrapper = document.createElement( 'span' );
+		const arrow   = document.createElement( 'span' );
 		wrapper.classList.add( 'v-form__select' );
+		arrow.classList.add( 'v-form__select-arrow' );
 		selectParent.insertBefore( wrapper, select );
 		wrapper.appendChild( select );
+		wrapper.appendChild( arrow );
+		select.classList.add( 'v-form__select-field' );
 	} );
 
-	vCard();
+	if ( shareBtn ) {
+		if ( ! navigator.share ) {
+			console.log( 'hyh' );
+			shareBtn.style.display = 'none';
+		} else {
+			shareBtn.addEventListener( 'click', shareOpen );
+		}
+	}
 
 	/**
 	 * Global Window Load
@@ -52,6 +70,41 @@ const vGlobal = () => {
 	} else {
 		window.addEventListener( 'load', onWindowLoad );
 	}
+};
+
+const shareOpen = ( e ) => {
+	const shareBtn     = document.querySelector( '.v-content__social--share' );
+
+	e.preventDefault();
+
+	if ( ! navigator.share ) {
+		// shareShowMessage( shareBtn, 'sorry, browser doesnt support!' );
+		return false;
+	}
+
+	const ogBtnContent = shareBtn.textContent;
+	const title        = document.querySelector( 'h1' ).textContent;
+	const url          = document.querySelector( 'link[rel=canonical]' ) &&
+							document.querySelector( 'link[rel=canonical]' ).href ||
+							window.location.href;
+
+	navigator.share( {
+		title,
+		url,
+	} ).then( () => {
+		shareShowMessage( shareBtn, 'Nice!' );
+	} ).error( () => {
+		console.log( 'here' );
+		shareShowMessage( shareBtn, 'Nope!' );
+	} );
+};
+
+const shareShowMessage = ( el, msg ) => {
+	el.textContent = msg;
+
+	setTimeout( () => {
+		el.textContent = msg;
+	}, 2000 );
 };
 
 if ( document.readyState !== 'loading' ) {

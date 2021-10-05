@@ -22,8 +22,7 @@ const pathFromRoot = currentPath.replace( /.*?\/wp-content/, 'wp-content' );
 const pathToRoot   = currentPath.replace( /\/wp-content.*/, '' );
 
 // SCSS
-const sass         = require( 'gulp-sass' );
-const fiber        = require( 'fibers' );
+const sass         = require( 'gulp-sass' )( require( 'sass' ) );
 const sassGlob     = require( 'gulp-sass-glob' );
 const sourcemaps   = require( 'gulp-sourcemaps' );
 const postcss      = require( 'gulp-postcss' );
@@ -42,15 +41,13 @@ const scss = () =>
 		.pipe( sourcemaps.init() )
 		.pipe( sassGlob() )
 		.pipe(
-			sass( {
-				fiber,
-				outputStyle: 'compressed',
+			sass.sync( {
+				includePaths: [ 'components/', 'scss/' ],
+				outputStyle:  'compressed',
 			} ).on( 'error', sass.logError ),
 		)
 		.pipe(
 			postcss( [
-				require( 'postcss-import' ),
-				require( 'tailwindcss' ),
 				autoprefixer( {
 					cascade: false,
 				} ),
@@ -160,6 +157,7 @@ const browserReload = ( cb ) => {
 const gulpTemplate  = require( 'gulp-template' );
 const minimist      = require( 'minimist' );
 const rename        = require( 'gulp-rename' );
+const footer        = require( 'gulp-footer' );
 const { argv }      = require( 'process' );
 const packageConfig = require( './package.json' );
 
@@ -185,7 +183,7 @@ const component = ( cb ) => {
 		.replace( 'Hp', 'Homepage' );
 	const themeName      = ( packageConfig.name || 'vanilla-theme' ).replace( /(?:^(.))|(?:-([a-z]))/g, ( g ) => ( g.length > 1 ? '_' + g[ 1 ] : g ).toUpperCase() );
 
-	const types = ( args.js ? 'js,' : '' ) + 'scss,twig,php';
+	const types = `${ ( args.js ? 'js,' : '' ) }${ ( args.css ? 'scss,' : '' ) }${ ( args.acf ? 'php,' : '' ) }twig`;
 
 	src( `.gulp-templates/component/*.{${ types }}` )
 		.pipe( gulpTemplate( {
@@ -203,6 +201,12 @@ const component = ( cb ) => {
 			path.basename = prefix + args.name + suffix;
 		} ) )
 		.pipe( dest( dir ) );
+
+	if ( args.css ) {
+		src( 'scss/components/_index.scss' )
+			.pipe( footer( `@use "${ args.name }/${ args.name }";\n` ) )
+			.pipe( dest( 'scss/components' ) );
+	}
 
 	cb();
 };
@@ -233,7 +237,7 @@ const template = ( cb ) => {
 	if ( args.js ) {
 		files.push( `${ templates }/template.js` );
 	}
-	if ( args.scss ) {
+	if ( args.css ) {
 		files.push( `${ templates }/template.scss` );
 	}
 

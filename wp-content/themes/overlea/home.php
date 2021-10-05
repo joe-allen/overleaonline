@@ -4,7 +4,7 @@
  *
  * Template used for news/post listing
  *
- * @package BoogieDown\Overlea\Templates
+ * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin
  * @version 1.0.0
  */

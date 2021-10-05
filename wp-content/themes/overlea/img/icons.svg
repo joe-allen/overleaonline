@@ -1,0 +1,19 @@
+<svg aria-hidden="true" style="position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<symbol id="v-icon-twitter" viewBox="0 0 256 256">
+			<title>Twitter</title>
+			<path d="M128,88.00288a40.00668,40.00668,0,0,1,76.67148-16.00327L240,72l-32.26239,32.2625A128.00746,128.00746,0,0,1,80,224c-32,0-40-12-40-12s32-12,48-36c0,0-64-32-48-120,0,0,40,40,87.9862,48Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+		</symbol>
+		<symbol id="v-icon-facebook" viewBox="0 0 256 256">
+			<title>Facebook</title>
+			<circle cx="128" cy="128" r="96" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></circle><path d="M168,88.00094H152a24,24,0,0,0-24,24v112" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><line x1="96" y1="144.00094" x2="160" y2="144.00094" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+		</symbol>
+		<symbol id="v-icon-share" viewBox="0 0 256 256">
+			<title>Share</title>
+			<polyline points="176 152 224 104 176 56" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline><path d="M192,216H40a8,8,0,0,1-8-8V88" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M75.0245,175.99967A96.04041,96.04041,0,0,1,168,104h56" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+		</symbol>
+	</defs>
+</svg>

@@ -1,0 +1,38 @@
+@use "bootstrap" as v;
+
+.container {
+	width: 100%;
+	@include v.max-width-container;
+	padding: 0 v.spacing("container");
+	margin: 0 auto;
+}
+
+.v-main {
+	&::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+.v-main .v-hero ~ section:not(.v-form),
+.v-main .v-hero ~ article {
+	background-color: #fff;
+	position: relative;
+	z-index: 2;
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-main {
+		&::before {
+			// top: -120vh;
+		}
+	}
+}
+
+
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		top: -46px;
+	}
+}

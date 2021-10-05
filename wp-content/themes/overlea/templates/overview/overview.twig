@@ -1,0 +1,33 @@
+{% include "hero/hero.twig" with {
+	count: 1,
+	title: post.post_title,
+	subtitle: '',
+	class: 'v-hero--sm'
+} %}
+
+{% include "intro/intro.twig" with {
+	title:    'Child of Events Page',
+	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus. t amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.',
+	heroHasSubtitle: false
+} %}
+
+{% include "image-content/image-content.twig" with {
+	title:    'Child of Events Page',
+	count: 6,
+	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus. t amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.'
+} %}
+
+{% include "cta/cta.twig" with {
+	class: 'v-cta--bottom-overlap',
+	title: 'Would you like to help us improve the community of Overlea?',
+	cta: {
+		title: 'Join',
+		type: 'membership'
+	}
+} %}
+
+{% include "form/form.twig" with {
+	title:    'Contact Us',
+	subtitle: 'We\'re all ears!'
+} %}
+

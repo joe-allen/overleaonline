@@ -1,0 +1,29 @@
+@use "bootstrap" as v;
+@use "sass:color";
+
+.v-skip-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	width: 100%;
+	padding: 10px 0;
+	font-weight: 700;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	background: v.$c-primary;
+	transform: translateY(-1000px);
+
+	&:focus {
+		background: color.adjust(color.adjust(v.$c-primary, v.$lightness: 15%), v.$saturation: -15%);
+		box-shadow: inset 0 0 0 5px v.$c-primary;
+		outline: 0;
+		transform: translateY(0);
+	}
+
+	&:hover {
+		color: #fff;
+		text-decoration: underline;
+	}
+}

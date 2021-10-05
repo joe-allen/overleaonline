@@ -2,7 +2,7 @@
 /**
  * Resize large uploads
  *
- * @package BoogieDown\Overlea\Functions
+ * @package Vitamin\Vanilla_Theme\Functions
  */
 
 /**

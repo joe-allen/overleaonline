@@ -1,0 +1,21 @@
+
+@use "bootstrap" as v;
+
+.v-icon {
+	width: 32px;
+	height: 32px;
+	stroke: #fff;
+	transition: stroke .15s ease-out;
+}
+
+.v-icon.v-content__social-icon {
+	stroke: var(--c-primary);
+}
+
+.v-icon:hover {
+	stroke: var(--c-text);
+}
+
+.v-footer .v-icon:hover {
+	stroke: var(--c-primary);
+}

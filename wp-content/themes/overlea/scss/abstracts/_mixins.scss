@@ -1,0 +1,136 @@
+@use "sass:math";
+@use "sass:map";
+@use "functions" as *;
+@use "vars" as v;
+
+@mixin font-size($size: "alpha", $media: true, $current: 9999) {
+	$large: map.get(v.$t-sizes, $size, "desktop");
+	$small: map.get(v.$t-sizes, $size, "mobile");
+
+	@if $media {
+		@if $current >= v.$b-medium {
+			font-size: $large;
+
+			@media screen and (max-width: v.$b-medium) {
+				font-size: $small;
+			}
+		}
+		@if $current < v.$b-medium {
+			font-size: $small;
+		}
+	} @else {
+		@if $current > v.$b-medium {
+			font-size: $large;
+		} @else {
+			font-size: $small;
+		}
+	}
+}
+
+@function spacing($size: "large", $modifier: 1) {
+	$raw-min: map.get(v.$s-sizes, $size, "min");
+	$raw-max: map.get(v.$s-sizes, $size, "max");
+	$max: $raw-max * $modifier;
+	$min: $raw-min * $modifier;
+
+	@if ( $modifier < 1 ) {
+		$max: $raw-min * $modifier;
+		$min: $raw-max * $modifier;
+	} @else {
+		$max: $raw-max * $modifier;
+		$min: $raw-min * $modifier;
+	}
+
+	$max-diff: strip-unit($max - $min);
+	$spacing-diff: strip-unit(v.$b-maxspacing - v.$b-minspacing);
+
+	$tween: calc(#{$min} + (#{$max-diff} * ((100vw - #{v.$b-minspacing}) / #{$spacing-diff})));
+
+	@return clamp(#{$min}, #{$tween}, #{$max});
+}
+
+@mixin max-width-container($modifier: 1) {
+	$raw-min: map.get(v.$s-sizes, "container", "min");
+	$raw-max: map.get(v.$s-sizes, "container", "max");
+	$max: $raw-max * $modifier;
+	$min: $raw-min * $modifier;
+
+	@if ( $modifier < 1 ) {
+		$max: $raw-min * $modifier;
+		$min: $raw-max * $modifier;
+	} @else {
+		$max: $raw-max * $modifier;
+		$min: $raw-min * $modifier;
+	}
+
+	$max-diff: strip-unit($max - $min);
+	$spacing-diff: strip-unit(v.$b-maxspacing - v.$b-minspacing);
+
+	$tween: calc((#{$min} + (#{$max-diff} * ((100vw - #{v.$b-minspacing}) / #{$spacing-diff}))) * 2 + #{v.$l-max-content});
+	max-width: clamp(calc(#{$min} * 2 + #{v.$l-max-content}), #{$tween}, calc(#{$max} * 2 + #{v.$l-max-content}));
+}
+
+@mixin a11y() {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	-webkit-clip-path: inset(50%);
+	clip-path: inset(50%);
+	border: 0;
+
+	&-focusable {
+		&:focus,
+		&:active {
+			position: static;
+			width: auto;
+			height: auto;
+			overflow: visible;
+			clip: auto;
+			white-space: normal;
+			-webkit-clip-path: none;
+			clip-path: none;
+		}
+	}
+}
+
+@mixin a11y_show() {
+	position: static;
+	width: auto;
+	height: auto;
+	overflow: visible;
+	clip: auto;
+	white-space: normal;
+	-webkit-clip-path: none;
+	clip-path: none;
+}
+
+@mixin msedge() {
+
+	@supports (-ms-ime-align: auto) {
+		@content;
+	}
+}
+
+@mixin ie11() {
+
+	@media screen and (-ms-high-contrast: active),
+		screen and (-ms-high-contrast: none) {
+		@content;
+	}
+}
+
+@mixin msedge_ie11() {
+
+	@supports (-ms-ime-align: auto) {
+		@content;
+	}
+
+	@media screen and (-ms-high-contrast: active),
+		screen and (-ms-high-contrast: none) {
+		@content;
+	}
+}

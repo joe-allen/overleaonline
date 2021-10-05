@@ -1,0 +1,83 @@
+{#
+	@var string class       plain text
+	@var int    width       Image width, optional
+	@var array  sizes       Image sizes
+		$sizes = [
+			{
+				'window' => int|string, // window width (no unit) or 'default'
+				'width'  => string,     // image width (with unit)
+			}
+		]
+	@var array  imageWidths Image widths, optional
+		$imageWidths = [
+			int,
+			...
+		]
+#}
+{% set image = Image(id) %}
+{% set imgPost = Post(id) %}
+{% set sizes = sizes|sort((a, b) => b.window <=> a.window) %}
+{% set imageWidths = imageWidths ? imageWidths : [
+	1920,
+	1440,
+	1024,
+	768,
+	550,
+	375,
+] %}
+
+{% set adjust = image.meta('_is-2x') ? 2 : 1 %}
+{% set xFocal = imgPost.meta('_focal-point-x') %}
+{% set yFocal = imgPost.meta('_focal-point-y') %}
+
+{% set finalWidth = width ? width : image.width // adjust %}
+{% set finalHeight = width ? (width * image.aspect)|round(0) : image.height // adjust %}
+
+<picture>
+  <source
+		type="image/webp"
+		srcset="
+			{{image.src|towebp}} {{image.width}}w,
+			{% for imageWidth in imageWidths %}
+				{% if imageWidth < image.width %}
+					{{image.src|resize( imageWidth )|towebp}} {{imageWidth}}w,
+				{% endif %}
+			{% endfor %}
+		"
+		sizes="
+			{% for size in sizes %}
+				{% if size.window == 'default' %}
+					{{size.width}},
+				{% else %}
+					(min-width: {{size.window}}px) {{size.width}},
+				{% endif %}
+			{% endfor %}
+		"
+	/>
+  <img
+		src="{{image.src}}"
+		srcset="
+			{{image.src}} {{image.width}}w,
+			{% for imageWidth in imageWidths %}
+				{% if imageWidth < image.width %}
+					{{image.src|resize( imageWidth )}} {{imageWidth}}w,
+				{% endif %}
+			{% endfor %}
+		"
+		sizes="
+			{% for size in sizes %}
+				{% if size.window == 'default' %}
+					{{size.width}},
+				{% else %}
+					(min-width: {{size.window}}px) {{size.width}},
+				{% endif %}
+			{% endfor %}
+		"
+		width="{{width ? width : image.width // adjust}}"
+		height="{{width ? (width * image.aspect)|round(0) : image.height // adjust}}"
+		alt="{{image.alt}}"
+		class="{{class}}"
+		{% if not not_lazy %}loading="lazy"{% endif %}
+		{{xFocal and yFocal ? 'style="object-fit: cover; object-position: ' ~ xFocal ~ '% ' ~ yFocal ~ '%;"'}}
+	/>
+</picture>

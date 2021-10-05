@@ -4,7 +4,7 @@
  *
  * Global site footer. Closes <main> that is started in header.php
  *
- * @package BoogieDown\Overlea\Core_Components
+ * @package Vitamin\Vanilla_Theme\Core_Components
  * @author  Vitamin
  * @version 1.0.0
  */

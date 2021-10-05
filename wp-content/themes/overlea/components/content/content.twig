@@ -1,0 +1,159 @@
+{# @var string class plain text #}
+<article class="v-content {{ class }}">
+	<div class="container">
+		<div class="v-content__inner">
+			<div class="v-content__content">
+				{{content}}
+				<!-- <h2>{{ title }}</h2>
+				<p>
+					Feugiat iaculis <a href="#">tincidunt varius volutpat</a> donec congue,
+					arcu ullamcorper justo inceptos tortor, himenaeos cras sociosqu ex
+					parturient. Curae ac vel nulla metus placerat arcu malesuada, sagittis
+					feugiat rhoncus erat conubia interdum, parturient massa nibh vehicula
+					pulvinar senectus. Accumsan neque sodales quam metus aliquet mauris
+					praesent nulla ullamcorper, dolor lectus nisi finibus imperdiet cursus
+					mollis. Nisl nibh habitasse fringilla sociosqu ultricies vehicula, proin
+					quisque blandit ultrices bibendum, pulvinar maximus adipiscing facilisi
+					quis. Ut quisque conubia libero pellentesque est etiam metus nec fames,
+					sem arcu habitasse eros iaculis senectus maximus laoreet hac, rhoncus
+					varius penatibus finibus duis dolor eu volutpat.
+				</p>
+				<h3>This is an H3 with more text</h3>
+				<p>
+					Accumsan aptent ac aliquet eros mauris posuere justo maximus, tristique
+					malesuada dapibus leo pretium elementum sagittis, mollis eu urna rutrum
+					mus maecenas habitasse. Curabitur varius finibus vel conubia nostra
+					senectus ante habitasse, nascetur nam velit odio rutrum mi. Posuere quis
+					hac ultrices suspendisse at tempus fermentum rutrum torquent vulputate, ac
+					varius nisi pellentesque eros euismod netus curabitur purus amet, tellus
+					ultricies ante elementum aliquam vitae finibus magna eu.
+				</p>
+				<h4>This is an H4</h4>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ipsa dolor
+					odio laborum recusandae ex provident ipsum quam laudantium porro odit
+					ratione tenetur commodi officiis culpa, vitae veniam dolorem suscipit.
+				</p>
+				<img src="https://images.unsplash.com/photo-1624374984719-0d146ea066e1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80" alt="">
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta omnis iste
+					ea quidem cum, porro voluptatum quo beatae consequatur asperiores dolore
+					est assumenda fuga necessitatibus perspiciatis? Ipsam et distinctio
+					debitis!
+				</p>
+				<h4>This is an H4, and it has more text.</h4>
+				<ul>
+					<li>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+						exercitationem dicta optio illo quaerat. Fuga aperiam unde eum est
+						commodi.
+					</li>
+					<li>
+						Eaque ducimus, dolores labore dolorum reiciendis nobis facere amet
+						quibusdam, earum nemo, possimus fugit. A sapiente repudiandae est nihil
+						deleniti.
+					</li>
+					<li>
+						Rerum, eligendi culpa nihil vel, ratione praesentium eius maxime tempore
+						nesciunt ipsa velit? Et aliquam dicta maxime iure porro velit?
+					</li>
+					<li>
+						Atque perferendis sequi praesentium eum? Rem nam aliquam voluptas
+						assumenda. Animi ducimus ratione cumque. Labore dolorem nostrum deleniti
+						sint architecto?
+					</li>
+				</ul>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore facere,
+					in neque nulla consequuntur qui debitis voluptatem incidunt.
+					Necessitatibus velit veniam et ipsa molestias tenetur ratione eos.
+					Laborum, magnam tenetur?
+				</p>
+				<ol>
+					<li>
+						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias,
+						perferendis!
+					</li>
+					<li>
+						Ipsam quaerat possimus corrupti quam quisquam voluptas esse amet
+						doloremque?
+					</li>
+					<li>Consequatur optio vel et soluta nesciunt nemo at provident sed!</li>
+					<li>
+						Ab veniam, quia nesciunt earum libero molestias pariatur quas. Itaque.
+					</li>
+				</ol>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime tenetur,
+					eligendi amet incidunt officia ad facere obcaecati similique delectus
+					veritatis eaque quod perspiciatis cum, laborum, perferendis praesentium.
+					Natus, quasi odio?
+				</p>
+				<blockquote class="v-blockquote">
+					<div class="v-blockquote__img">
+					</div>
+					<div class="v-blockquote__content">
+						<p>
+							He’s better than any wrapped present. I love having the company.
+							&quot;
+						</p>
+						<footer class="v-blockquote__cite">&mdash;John Smith</footer>
+					</div>
+				</blockquote>
+				<p>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, doloribus
+					quod sunt voluptatibus explicabo maiores recusandae, eligendi natus
+					distinctio quas ipsum quaerat doloremque molestias, aliquam accusantium
+					fugiat sint quibusdam porro.
+				</p>
+			</div> -->
+			{% if sidebar %}
+				<div class="v-content__sidebar">
+					<h4>Sponsors</h4>
+					<img class="v-content__sponsor" src="https://via.placeholder.com/100x100/" alt="placeholder" width="100" height="100">
+					<img class="v-content__sponsor" src="https://via.placeholder.com/100x100/" alt="placeholder" width="100" height="100">
+					<div class="v-content__meta">
+						<ul class="v-content__meta-list">
+							<li class="v-content__meta-item"><span>Author:</span><br><span>Doris Harding</span></li>
+							<li class="v-content__meta-item"><span>Date:</span><br><span>Mar 31st, 2021</span></li>
+							<li class="v-content__meta-item">
+								<span>Tags:</span><br>
+								<span>
+									<a class="v-content__meta-tag-link" href="#!">Business</a>,
+									<a class="v-content__meta-tag-link" href="#!">News</a>
+								</span>
+							</li>
+						</ul>
+						<span class="v-content__meta-item"><strong>Share:</strong></span>
+						<ul class="v-content__meta-list v-content__meta-list--social">
+							<li class="v-content__meta-item v-content__social">
+								<a class="v-content__social-link" href="#!" aria-label="facebook link" target="_blank" rel="noopener">
+									<span class="sr-only">facebook</span>
+									<svg class="v-content__social-icon v-icon" role="img" aria-label="facebook icon">
+										<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-facebook" />
+									</svg>
+								</a>
+							</li>
+							<li class="v-content__meta-item v-content__social">
+								<a class="v-content__social-link" href="#!" aria-label="twitter link" target="_blank" rel="noopener">
+									<span class="sr-only">Twitter</span>
+									<svg class="v-content__social-icon v-icon" role="img" aria-label="twitter icon">
+										<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-twitter" />
+									</svg>
+								</a>
+							</li>
+							<li class="v-content__meta-item v-content__social v-content__social--share">
+								<a class="v-content__social-link" href="#!" aria-label="share link">
+									<span class="sr-only">Share</span>
+									<svg class="v-content__social-icon v-icon" role="img" aria-label="share icon">
+										<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-share" />
+									</svg>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</article>

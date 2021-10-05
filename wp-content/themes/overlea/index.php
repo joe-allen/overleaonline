@@ -4,7 +4,7 @@
  *
  * Nothing to see here. Falls back to the default page, just in case.
  *
- * @package BoogieDown\Overlea\Templates
+ * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin
  * @version 1.0.0
  */

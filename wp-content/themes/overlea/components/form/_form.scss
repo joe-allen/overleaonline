@@ -1,0 +1,139 @@
+@use "bootstrap" as v;
+
+.v-form {
+	position: relative;
+	padding: v.spacing("large") 0;
+	background-color: v.$c-primary;
+	overflow: hidden;
+
+	&--contact {
+		background-color: #fff;
+		padding-top: 0;
+	}
+
+	&__inner {
+		position: relative;
+		padding: v.spacing("large") 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&--contact &__inner {
+		padding-top: 0;
+		justify-content: center;
+	}
+
+	&__content {
+		position: absolute;
+		left: 45%;
+		top: 50%;
+		transform: translate(-55%, -50%);
+		width: 55%;
+		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&--contact &__content {
+		width: 75%;
+	}
+
+	&__content-title,
+	&__content-subtitle {
+		color: #fff;
+		padding-left: 0;
+	}
+
+	&--contact &__content-title,
+	&--contact &__content-subtitle {
+		color: v.$c-text;
+	}
+
+	&__form {
+		width: 45%;
+		margin-left: auto;
+		z-index: 1;
+	}
+
+	&--contact &__form {
+		margin: 0 auto;
+		width: 60%;
+	}
+
+	&__flex {
+		display: flex;
+	}
+
+	&__input-label {
+		color: #fff;
+	}
+
+	&--contact &__input-label {
+		color: v.$c-text;
+	}
+
+	&__field--submit {
+		display: flex;
+		margin-left: auto;
+		justify-content: flex-end;
+	}
+}
+
+@media screen and (max-width: v.$b-large) {
+	.v-form {
+		&__content {
+			left: 7%;
+			transform: translate(0, -50%);
+		}
+	}
+}
+
+
+@media screen and (max-width: v.$b-medium-large) {
+	.v-form {
+		&__content {
+			left: 5%;
+			transform: translate(0, -50%);
+		}
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.v-form {
+		margin: 0;
+
+		&__inner {
+			flex-direction: column;
+		}
+
+		&__content {
+			position: relative;
+			left: auto;
+			transform: none;
+			width: 100%;
+		}
+
+		&__content-title,
+		&__content-subtitle {
+			padding-left: 0;
+		}
+
+		&__form {
+			width: 100%;
+			margin-top: v.spacing("xsmall");
+		}
+
+		&--contact &__form {
+			margin-top: 0;
+		}
+
+		&__field {
+			padding: 15px 0;
+		}
+
+		.v-cta &__field {
+			padding: 15px 1.75em;
+		}
+	}
+}

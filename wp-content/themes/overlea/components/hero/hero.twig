@@ -1,0 +1,10 @@
+{#
+	@var string class plain text
+#}
+<section class="v-hero {{class}}">
+	{% include 'slider/slider.twig' with {
+		slides: slides,
+		count: count
+	} %}
+	<div class="v-hero__overlay"></div>
+</section>

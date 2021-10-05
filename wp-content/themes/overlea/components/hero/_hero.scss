@@ -1,0 +1,47 @@
+@use "bootstrap" as v;
+
+.v-hero {
+	position: relative;
+	left: 0;
+	width: 100%;
+	height: 90vh;
+
+	&--sm {
+		height: 40vh;
+		min-height: 400px;
+	}
+
+	&__overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		opacity: 0;
+		background-color: v.$c-primary-hover;
+		pointer-events: none;
+	}
+}
+
+.v-hero .v-slider {
+	// min-height: 100%;
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-hero {
+		height: 80vh;
+
+		&--sm {
+			height: 40vw;
+		}
+	}
+
+	.v-hero .v-slider {
+		height: 80vh;
+	}
+
+	.v-hero--sm .v-slider {
+		height: 40vh;
+	}
+}

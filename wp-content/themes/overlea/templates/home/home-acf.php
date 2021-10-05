@@ -2,7 +2,7 @@
 /**
  * Home ACF
  *
- * @package BoogieDown\Overlea\ACF
+ * @package Vitamin\Vanilla_Theme\ACF
  */
 
 use StoutLogic\AcfBuilder\FieldsBuilder;

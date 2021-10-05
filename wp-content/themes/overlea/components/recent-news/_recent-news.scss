@@ -1,0 +1,33 @@
+@use "bootstrap" as v;
+
+.v-recent-news {
+	padding: v.spacing("large") 0 v.spacing("xsmall");
+
+	&__header {
+		margin-bottom: v.spacing("xsmall");
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+
+	&__title {
+		@include v.font-size("beta");
+		font-weight: 400;
+	}
+
+	body:not(.home) & {
+		padding-bottom: v.spacing("xsmall");
+	}
+
+	.blog &__cta {
+		display: none;
+	}
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-recent-news {
+		&__header-cta {
+			display: none;
+		}
+	}
+}

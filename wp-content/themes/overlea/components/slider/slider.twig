@@ -1,0 +1,50 @@
+{#
+	@var string class plain text
+#}
+<article class="v-slider {{class}}">
+	<div id="my-keen-slider" class="v-slider__wrap keen-slider">
+		{% for slide in slides %}
+			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
+				<div class="v-slider__overlay"></div>
+				{% include 'img/img.twig' with {
+					id: slide.slider_image,
+					class: 'v-slider__img'
+				} %}
+				<!-- if function('is_template', 'template-frontpage.php') %} // element a : span -->
+				{% if slide.slider_link %}
+					{% set link = (slide.slider_link.link_type == 'internal') ? slide.slider_link.link.internal_url : slide.slider_link.link.external_url %}
+					<a class="v-slider__link" href="{{link}}" {% if slide.slider_link.link.new_tab %}target="_blank"{% endif %}>
+						<h1 class="v-slider__text-title">{{slide.slider_link.link.text}}</h1>
+						{% if slide.slider_subtitle %}
+							<h2 class="v-slider__text-subtitle">{{slide.slider_subtitle}}</h2>
+						{% endif %}
+					</a>
+				{% endif %}
+			</div>
+		{% endfor %}
+	</div>
+	{% if count > 1 %}
+		<svg
+			id="arrow-left"
+			class="arrow arrow--left"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+		>
+			<path
+				d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+			></path>
+		</svg>
+		<svg
+			id="arrow-right"
+			class="arrow arrow--right"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+		>
+			<path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"></path>
+		</svg>
+	{% endif %}
+</div>
+{% if count > 1 %}
+	<div id="dots" class="v-slider__dots dots"></div>
+{% endif %}
+</article>

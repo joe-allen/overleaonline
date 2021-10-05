@@ -2,7 +2,7 @@
 /**
  * Front Page ACF
  *
- * @package BoogieDown\Overlea\ACF
+ * @package Vitamin\Vanilla_Theme\ACF
  */
 
 use StoutLogic\AcfBuilder\FieldsBuilder;
@@ -14,12 +14,20 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
  */
 function front_page_acf() {
 
-	$card = require get_theme_file_path('components/card/card-acf.php');
-	// $hero          = require get_theme_file_path( 'components/hp-hero/hp-hero-acf.php' );
+	$slider = require get_template_directory() . "/components/slider/slider-acf.php";
+	$cta = require get_template_directory() . "/components/cta/cta-acf.php";
+	$sponsors = require get_template_directory() . "/components/sponsors/sponsors-acf.php";
+	$ic = require get_template_directory() . "/components/image-content/image-content-acf.php";
+	$excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
 
 	$g_front_page = new FieldsBuilder( 'homepage' );
 	$g_front_page
-		->addFields( $card )
+		->addFields( $slider )
+		->addFields( $cta )
+		->addFields( $sponsors )
+		->addFields( $ic )
+			->modifyField( 'ic', [ 'max' => 1 ] )
+		->addFields( $excerpt )
 
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'page_type', '==', 'front_page' );

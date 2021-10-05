@@ -1,0 +1,26 @@
+{#
+	@var string class plain text
+#}
+{% for item in items %}
+	<article class="v-image-content {{class}}">
+		<div class="container">
+			<div class="v-image-content__inner">
+				<div class="v-image-content__img-wrap">
+					{% include 'img/img.twig' with {
+						id: item.ic_image,
+						class: 'v-image-content__img'
+					} %}
+				</div>
+				<div class="v-image-content__content">
+					<h1 class="v-image-content__content-title">{{item.ic_title}}</h1>
+					<p class="v-image-content__content-text">{{item.ic_text}}</p>
+					{% if item.ic_link %}
+						{% set link = (item.ic_link.link_type == 'internal') ? item.ic_link.link.internal_url : item.ic_link.link.external_url %}
+						<a class="v-image-content__content-cta v-button" href="{{link}}" {% if item.ic_link.link.new_tab %}target="_blank"{% endif %}>{{item.ic_link.link.text}}</a>
+					{% endif %}
+					<!-- <a href="#!" class="">Learn More</a> -->
+				</div>
+			</div>
+		</div>
+	</article>
+{% endfor %}

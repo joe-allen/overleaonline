@@ -4,7 +4,7 @@
  *
  * Template used for homepage
  *
- * @package BoogieDown\Overlea\Templates
+ * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin
  * @version 1.0.0
  */
@@ -19,6 +19,14 @@ if ( have_posts() ) :
 
 		$context         = Timber::get_context();
 		$context['post'] = new Post();
+
+		$args = [
+			'posts_per_page' => 3,
+			'post_type' => 'post',
+			'order' => 'ASC',
+			'order_by' => 'published_at',
+		];
+		$context['posts'] = Timber::get_posts( $args );
 
 		Timber::render( 'front-page/front-page.twig', $context );
 

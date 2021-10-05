@@ -1,11 +1,50 @@
+{#
+	@var string class       plain text
+	@var int    width       Image width, optional
+	@var string size        WP image size, optional (thumbnail|medium|medium_large|large|full + customs)
+	@var array  sizes       Image sizes attr (optional, defaults to WordPress generated sizes attr)
+		$sizes = [
+			{
+				'window' => int|string, // window width (no unit) or 'default'
+				'width'  => string,     // image width (with unit)
+			}
+		]
+#}
+
 {% set size = size ? size : 'full' %}
+{% set image = Image(id) %}
+{% set imgPost = Post(id) %}
+{% set sizeInfo = image.sizes[size] %}
+
+{% set adjust = image.meta('_is-2x') ? 2 : 1 %}
+{% set xFocal = imgPost.meta('_focal-point-x') %}
+{% set yFocal = imgPost.meta('_focal-point-y') %}
+
+{% if sizes %}
+	{% set sizesArr = sizes|sort((a, b) => b.window <=> a.window) %}
+	{% set sizes = '' %}
+	{% for size in sizesArr %}
+		{% if size.window == 'default' %}
+			{% set sizes = sizes ~ size.width ~ ',' %}
+		{% else %}
+			{% set sizes = sizes ~ '(min-width: ' ~ size.window ~ 'px) ' ~ size.width ~ ',' %}
+		{% endif %}
+	{% endfor %}
+{% else %}
+	{% set sizes = image.img_sizes(size) %}
+{% endif %}
+
+{% set finalWidth = width ? width : sizeInfo.width // adjust %}
+{% set finalHeight = width ? (width * image.aspect)|round(0) : sizeInfo.height // adjust %}
+
 <img
-  src="{{ Image(id).src(size) }}"
-  srcset="{{ Image(id).srcset(size) }}"
-  sizes="{{ Image(id).img_sizes(size) }}"
-  alt="{{ Image(id).alt }}"
+  src="{{ image.src(size) }}"
+  srcset="{{ image.srcset(size) }}"
+  sizes="{{ sizes }}"
+  alt="{{ image.alt }}"
   class="{{class}}"
-	width="{{ Image(id).sizes[size].width }}"
-	height="{{ Image(id).sizes[size].height }}"
+	width="{{ finalWidth }}"
+	height="{{ finalHeight }}"
 	{% if not not_lazy %}loading="lazy"{% endif %}
+	{{xFocal and yFocal ? 'style="object-fit: cover; object-position: ' ~ xFocal ~ '% ' ~ yFocal ~ '%;"'}}
 >

@@ -1,0 +1,45 @@
+@use "bootstrap" as v;
+
+.v-pagination {
+	margin-top: v.spacing("xsmall", -1);
+
+	&__inner {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__control {
+		position: relative;
+		display: flex;
+		align-items: center;
+		background-color: v.$c-primary;
+		border: none;
+		border-radius: 0;
+		width: 56px;
+		height: 56px;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: calc(50% + .3rem);
+			width: 1.25rem;
+			height: 1.25rem;
+			border-top: 2px solid #fff;
+			border-right: 2px solid #fff;
+			background-color: transparent;
+			transform: translate(-50%, -50%) rotate(-135deg);
+		}
+
+		&:last-of-type::after {
+			left: calc(50% - .3rem);
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-medium-large) {
+	.v-pagination {
+		margin-top: v.spacing("xsmall", -.5);
+	}
+}

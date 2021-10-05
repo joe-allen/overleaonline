@@ -1,0 +1,200 @@
+@use "bootstrap" as v;
+
+html {
+	position: relative;
+	font-size: v.$t-base-text;
+}
+
+body {
+	position: relative;
+	font-family: v.$t-body-font;
+	font-size: 100%;
+	line-height: v.$t-line-height;
+	color: v.$c-text;
+	background: #fff;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+p,
+ul,
+ol,
+dl,
+table,
+figure,
+blockquote,
+address,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.alpha,
+.beta,
+.gamma,
+.delta,
+.epsilon,
+.zeta {
+	margin-top: 0;
+	margin-bottom: 1.25rem;
+}
+
+p,
+ul,
+ol,
+dl,
+table,
+figure,
+address {
+	font-size: 1em;
+}
+
+h1,
+.alpha {
+	@include v.font-size("alpha");
+}
+
+h2,
+.beta {
+	@include v.font-size("beta");
+}
+
+h3,
+.gamma {
+	@include v.font-size("gamma");
+}
+
+h4,
+.delta {
+	@include v.font-size("delta");
+}
+
+h5,
+.epsilon {
+	@include v.font-size("epsilon");
+}
+
+h6,
+.zeta {
+	@include v.font-size("zeta");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.alpha,
+.beta,
+.gamma,
+.delta,
+.epsilon,
+.zeta {
+	font-family: v.$t-heading-font;
+	line-height: 1.2;
+	margin-top: 2.5rem;
+	font-weight: 800;
+
+	+ h1,
+	+ h2,
+	+ h3,
+	+ h4,
+	+ h5,
+	+ h6,
+	+ .alpha,
+	+ .beta,
+	+ .gamma,
+	+ .delta,
+	+ .epsilon,
+	+ .zeta {
+		margin-top: 0;
+	}
+}
+
+h1 + h2 {
+	@include v.font-size("delta");
+	opacity: .7;
+	font-weight: 300;
+	margin-top: -1rem;
+	max-width: 1000px;
+	line-height: 1.4;
+
+	a.v-link {
+		font-weight: 400;
+	}
+}
+
+h2 + h3 {
+	@include v.font-size("delta");
+	opacity: .7;
+	font-weight: 300;
+	margin-top: -1rem;
+	max-width: 1000px;
+	line-height: 1.4;
+
+	a.v-link {
+		font-weight: 400;
+	}
+}
+
+a {
+	color: v.$c-primary;
+	text-decoration: none;
+
+	&:hover {
+		color: v.$c-primary-hover;
+		text-decoration: underline;
+	}
+}
+
+address {
+	font-style: normal;
+}
+
+ul,
+ol {
+	padding-left: 1rem;
+
+	li {
+		margin: 1rem 0;
+	}
+
+	ul,
+	ol {
+		margin-top: .5rem;
+
+		li {
+			margin: .5rem 0;
+		}
+	}
+}
+
+.v-blockquote,
+blockquote {
+	@include v.font-size("epsilon");
+	font-weight: 300;
+	margin: v.spacing("container");
+	padding: v.spacing("container");
+	border: 6px solid currentColor;
+
+	&__cite,
+	footer {
+		font-weight: 100;
+		text-align: right;
+		text-transform: uppercase;
+
+		cite {
+			font-style: normal;
+		}
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	.v-blockquote,
+	blockquote {
+		margin: v.spacing("xsmall");
+		padding: v.spacing("xsmall");
+	}
+}

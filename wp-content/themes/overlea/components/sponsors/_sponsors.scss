@@ -1,0 +1,51 @@
+@use "bootstrap" as v;
+
+.v-sponsors {
+	padding: v.spacing("xsmall") 0;
+
+	&__header {
+		margin-bottom: v.spacing("xsmall");
+	}
+
+	&__title {
+		@include v.font-size("beta");
+		font-weight: 400;
+	}
+
+	&__wrap {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		margin: -1.25rem;
+	}
+
+	.v-sponsor {
+		padding: 1.25rem;
+		margin: clamp(2rem, 3vw, 4rem);
+		width: 33.3333%;
+	}
+
+	.v-sponsor__img {
+		margin: 0 auto;
+		display: block;
+		width: 200px;
+		height: auto;
+	}
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-sponsors {
+		.v-sponsor {
+			padding: 1.25rem;
+			width: 50%;
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-small) {
+	.v-sponsors {
+		.v-sponsor {
+			width: 100%;
+		}
+	}
+}

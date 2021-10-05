@@ -1,0 +1,26 @@
+{#
+	@var string class plain text
+#}
+<section class="v-sponsors {{class}}">
+	<div class="container v-sponsors__header">
+		<div class="v-sponsors__header-titles">
+			<h2 class="v-sponsors__title">{{title}}</h1>
+			<h3 class="v-sponsors__subtitle">{{subtitle}}</h3>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="v-sponsors__wrap">
+			{% for item in items %}
+				<div class="v-sponsor">
+					<a href="{{item.sponsor_website}}" target="_blank" rel="nofollow noopener">
+						{% include 'img/img.twig' with {
+							id: item.sponsor_logo,
+							class: 'v-sponsor__img'
+						} %}
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

@@ -4,12 +4,64 @@
  *
  * All customizations related to ACF, including loading fields
  *
- * @package BoogieDown\Overlea\Functions
+ * @package Vitamin\Vanilla_Theme\Functions
  * @author  Vitamin
  * @version 1.1.0
  */
 
 use StoutLogic\AcfBuilder\FieldsBuilder;
+
+/**
+ * Create a full-featured link field group
+ *
+ * @param string $name  field name
+ * @param string $label field label
+ * @return FieldsBuilder ACF builder fields
+ * @throws FieldNameCollisionException ACF Builder collision
+ */
+function v_create_link_field( $name, $label ) {
+	$field_group = new FieldsBuilder( 'vitamin_button' );
+	return (
+		$field_group
+			->addGroup( $name, [ 'label' => $label ] )
+				->addSelect( 'link_type' )
+					->addChoices( [ 'internal' => 'Internal' ], [ 'external' => 'External' ] )
+				->addGroup( 'link', [ 'layout' => 'table' ] )
+					->addText( 'text' )
+					->addPageLink(
+						'internal_url',
+						[
+							'label'      => 'URL',
+							'post_type'  => [
+								'post',
+								'page',
+								'events',
+								'opportunity',
+								'board',
+								'reps',
+								'sponsors',
+							],
+							'allow_null' => true,
+						]
+					)
+						->conditional( 'link_type', '==', 'internal' )
+					->addUrl( 'external_url', [ 'label' => 'URL' ] )
+						->conditional( 'link_type', '==', 'external' )
+					->addTrueFalse(
+						'new_tab',
+						[
+							'label'   => 'Open in a new tab?',
+							'ui'      => true,
+							'wrapper' => [
+								'width' => '25',
+							],
+						]
+					)
+					->endGroup()
+				->addText( 'query_string', [ 'prepend' => '?' ] )
+				->endGroup()
+	);
+}
 
 /**
  * Load ACF fields from templates and components
@@ -26,9 +78,30 @@ function v_define_acf() {
 
 	$g_global = new FieldsBuilder( 'global_settings' );
 	$g_global
-		->addTab( 'Company' )
-		->addEmail( 'company_email', [ 'label' => 'Email' ] )
-		->addText( 'company_phone', [ 'label' => 'Phone' ] )
+		->addTab( 'Association' )
+			->addEmail( 'association_email', [ 'label' => 'Email' ] )
+			->addText( 'association_phone', [ 'label' => 'Phone' ] )
+		->addTab( 'Social' )
+			->addRepeater( 'company_social', [ 'label' => 'Social Links' ] )
+				->addSelect( 'icon' )
+					->addChoices(
+						[ 'facebook'  => 'Facebook' ],
+						[ 'twitter'   => 'Twitter' ],
+						[ 'instagram' => 'Instagram' ],
+					)
+				->addUrl( 'url', [ 'label' => 'URL' ] )
+			->endRepeater()
+		->addTab( 'Contact Form' )
+			->addText( 'contact_form_title', [ 'label' => 'Title' ] )
+			->addText( 'contact_form_text', [ 'label' => 'Text' ] )
+		->addTab( 'News' )
+			->addText( 'news_title', [ 'label' => 'Title' ] )
+			->addText( 'news_subtitle', [ 'label' => 'Text' ] )
+			->addFields( v_create_link_field( 'news_link', 'CTA Link' ) )
+		->addTab( 'Recent News' )
+			->addText( 'news_title_recent', [ 'label' => 'Title' ] )
+			->addText( 'news_subtitle_recent', [ 'label' => 'Text' ] )
+			->addFields( v_create_link_field( 'news_link_recent', 'CTA Link' ) )
 		->setLocation( 'options_page', '==', 'acf-options-global-settings' );
 
 	$acf_groups[] = $g_global->build();

@@ -1,0 +1,49 @@
+@use "bootstrap" as v;
+
+.v-button {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	padding: .75em 3em;
+	line-height: 1.2;
+	color: #fff;
+	background: var(--c-primary);
+	border: 0;
+	box-shadow: none;
+	border-radius: 25px;
+	font-weight: 800;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background .15s ease-out;
+
+	&:hover {
+		background: var(--c-primary-hover);
+		text-decoration: none;
+		color: #fff;
+	}
+
+	&--dark {
+		background: var(--c-primary-hover);
+	}
+
+	&--lg {
+		@include v.font-size("zeta");
+		padding: .75em 3em;
+	}
+}
+
+.v-link {
+	position: relative;
+	cursor: pointer;
+	color: var(--c-primary);
+	font-weight: 900;
+	border-bottom: 3px solid transparent;
+	padding-bottom: 1px;
+	transition: border-bottom .2s ease-out, opacity .15s ease-out, color .15s ease-out;
+
+	&:hover {
+		text-decoration: none;
+		color: var(--c-primary-hover);
+		border-bottom: 3px solid var(--c-primary-hover);
+	}
+}

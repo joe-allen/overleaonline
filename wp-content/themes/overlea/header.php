@@ -4,7 +4,7 @@
  *
  * Global site header. Starts a page wrap with <main> that is closed in footer.php
  *
- * @package BoogieDown\Overlea\Core_Components
+ * @package Vitamin\Vanilla_Theme\Core_Components
  * @author  Vitamin
  * @version 1.0.0
  */

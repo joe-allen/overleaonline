@@ -4,7 +4,7 @@
  *
  * Default search form used by get_search_form()
  *
- * @package BoogieDown\Overlea\Core_Components
+ * @package Vitamin\Vanilla_Theme\Core_Components
  * @author  Vitamin
  * @version 1.0.0
  */

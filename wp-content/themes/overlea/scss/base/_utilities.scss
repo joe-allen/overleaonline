@@ -1,0 +1,64 @@
+@use "bootstrap" as v;
+
+.sr-only {
+	@include v.a11y;
+}
+
+.responsive-embed {
+	position: relative;
+
+	&::before {
+		content: "";
+		display: block;
+		padding-bottom: 56.25%;
+	}
+
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.alignleft,
+.alignright,
+.aligncenter,
+.alignnone {
+	margin-bottom: 1.25rem;
+}
+
+.alignleft {
+	float: left;
+	margin-right: 10px;
+}
+
+.alignright {
+	float: right;
+	margin-left: 10px;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+:first-child {
+	margin-top: 0;
+}
+
+:last-child {
+	margin-bottom: 0;
+}
+
+@media screen and (max-width: v.$b-small) {
+	.alignleft,
+	.alignright {
+		float: none;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

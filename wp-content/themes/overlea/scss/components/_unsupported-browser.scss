@@ -1,0 +1,19 @@
+@use "bootstrap" as v;
+
+.v-unsupported-browser {
+	display: none;
+	padding: 10px 0;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	background: v.$c-primary;
+
+	&__link {
+		color: inherit;
+		text-decoration: underline;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}

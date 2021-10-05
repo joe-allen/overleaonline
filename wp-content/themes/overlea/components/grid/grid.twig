@@ -1,0 +1,15 @@
+{#
+	@var string class plain text
+#}
+<section class="v-grid">
+	<div class="container">
+		<div class="v-grid__inner">
+			{% include 'card/card.twig' with {
+				class: class,
+				count: count,
+				items: items,
+				cta: cta
+			} %}
+		</div>
+	</div>
+</section>

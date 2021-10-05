@@ -1,0 +1,141 @@
+@use "bootstrap" as v;
+
+.v-footer {
+	position: relative;
+	background-color: var(--c-text);
+	padding: v.spacing("small") 0 v.spacing("small");
+	height: 100%;
+	width: 100vw;
+
+	&__inner {
+		position: relative;
+	}
+
+	&__list {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	&__logo {
+		max-width: 300px;
+		width: 15.625vw;
+		min-width: 150px;
+		height: auto;
+		fill: #fff;
+
+		&--top path {
+			stroke: v.$c-text;
+			stroke-width: 2px;
+		}
+
+		&--bottom path {
+			stroke: v.$c-text;
+			stroke-width: 1px;
+			fill: v.$c-primary;
+		}
+	}
+
+	&__item {
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		&:nth-of-type(2) {
+			margin-top: v.spacing("small");
+		}
+	}
+
+	&__link {
+		color: #fff;
+		padding-bottom: 1px;
+		border: 1px solid transparent;
+		font-weight: 900;
+		transition: opacity .15s ease-out;
+
+		&:hover {
+			color: #fff;
+			text-decoration: none;
+			border-bottom: 1px solid #fff;
+			border-bottom: 3px solid transparent;
+			opacity: .7;
+		}
+	}
+
+	&__social-list {
+		margin-top: 1.5rem;
+		margin: v.spacing("small") 0;
+		padding-left: 0;
+		list-style: none;
+	}
+
+	&__outro-link {
+		display: inline-block;
+		color: #fff;
+		font-weight: 300;
+		padding-bottom: 1px;
+		border: 1px solid transparent;
+
+		&:hover {
+			color: #fff;
+			text-decoration: none;
+			border-bottom: 1px solid #fff;
+		}
+	}
+
+	&__outro-link ~ .divider {
+		color: #fff;
+		margin: 0 .5rem;
+	}
+}
+
+@media screen and (min-width: v.$b-medium) {
+	.v-footer {
+		&__list {
+			display: flex;
+		}
+
+		&__item {
+			&:nth-of-type(2) {
+				margin-top: 1rem;
+				margin-left: auto;
+			}
+		}
+
+		&__item:not(:last-child) &__link {
+			margin: 0 1rem;
+		}
+
+		&__item:last-child &__link {
+			margin-left: 1rem;
+		}
+
+		&__item:first-child &__link {
+			margin-left: 0;
+		}
+
+		&__social-list {
+			display: flex;
+			justify-content: flex-end;
+			margin: v.spacing("xsmall") 0 0;
+		}
+
+		&__social-item {
+			&:first-child {
+				margin: 1rem 1rem 1rem 0;
+			}
+
+			&:not(:first-child) {
+				margin: 1rem 1rem 0 0;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		&__outro {
+			position: absolute;
+			bottom: 1rem;
+		}
+	}
+}

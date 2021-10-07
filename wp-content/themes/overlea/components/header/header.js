@@ -169,11 +169,17 @@ const vHeader = () => {
 					} );
 
 					if ( ! logoLettersTop[ 0 ].hasAttribute( 'style' ) ) {
-						logo.style.display = 'none';
-						[ ...logoLettersTop ].forEach( ( el ) => {
-							// el.removeAttribute( 'style' );
-							// el.setAttribute( 'transform', 'matrix(1,0,0,1,0,0)' );
-						} );
+						if ( window.scrollY <= hero.getBoundingClientRect().height ) {
+							// console.log( `logo`, window.scrollY );
+							// [ ...logoLettersTop ].forEach( ( el ) => {
+							// 	el.removeAttribute( 'style' );
+							// 	el.setAttribute( 'transform', 'matrix(1,0,0,1,0,0)' );
+							// } );
+						} else {
+							[ ...logoLettersTop ].forEach( ( el ) => {
+								el.style.opacity = '0';
+							} );
+						}
 					}
 
 					// clear search input
@@ -266,7 +272,6 @@ const vHeader = () => {
 	 */
 	const hideLogoOnScroll = () => {
 		if ( mqLg.matches ) {
-			console.log( `heroBottom`, heroBottom );
 			const tlLogo = gsap.timeline( {
 				scrollTrigger: {
 					trigger:  '.v-hero',
@@ -275,8 +280,8 @@ const vHeader = () => {
 					scrub:    .1,
 					duration: 1,
 					repeat:   -1,
-					start:    `${ heroBottom - 300 }px top`,
-					end:      `${ heroBottom - 100 }px top`,
+					start:    `${ heroBottom - 400 }px top`,
+					end:      `${ heroBottom - 200 }px top`,
 					onLeave:  () => {
 						logo.style.display = 'none';
 					},
@@ -294,14 +299,14 @@ const vHeader = () => {
 			} );
 
 			tlLogo.from( logoLettersTop, {
-				y:       0,
+				// y:       0,
 				opacity: 1,
 			} ).to( logoLettersTop, {
 				stagger: {
-					each:    .5,
-					y:       -100,
-					opacity: 0,
+					each: .5,
+					// y:       -100,
 				},
+				opacity: 0,
 			}, '+=.1' );
 		}
 	};

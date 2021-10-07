@@ -31,7 +31,7 @@
 
 @media screen and (max-width: v.$b-medium) {
 	.v-hero {
-		height: 80vh;
+		height: 60vh;
 
 		&--sm {
 			height: 40vw;
@@ -39,7 +39,7 @@
 	}
 
 	.v-hero .v-slider {
-		height: 80vh;
+		height: 60vh;
 	}
 
 	.v-hero--sm .v-slider {

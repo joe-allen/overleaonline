@@ -471,7 +471,8 @@
 
 @media screen and (max-width: v.$b-medium-large) {
 	.v-header {
-		height: 100%;
+		// height: 100%;
+		// JOEJOE w/o 100 it's not working on iOS
 
 		&__logo {
 			position: fixed;

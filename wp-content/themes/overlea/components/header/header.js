@@ -10,13 +10,16 @@ gsap.registerPlugin( ScrollTrigger );
  * Header component
  */
 const vHeader = () => {
-	const mqLg           = window.matchMedia( '(max-width: 1024px' );
-	const header         = document.querySelector( '.v-header' );
-	const headerNavItems = header.querySelectorAll( '.v-header__nav-item:not(:first-of-type)' );
-	const hamburger      = header.querySelector( '.v-header__hamburger' );
-	const search         = header.querySelector( '.v-header__nav-search-input' );
-	const hero           = document.querySelector( '.v-hero' ) || document.querySelector( '.v-hero' );
-	const heroBottom     = hero.getBoundingClientRect().bottom;
+	const mqLg              = window.matchMedia( '(max-width: 1024px)' );
+	const header            = document.querySelector( '.v-header' );
+	const logo              = header.querySelector( '.v-header__logo' );
+	const logoLettersTop    = logo.querySelectorAll( '.v-header__logo .v-header__logo--top path' );
+	const logoLettersBottom = logo.querySelectorAll( '.v-header__logo .v-header__logo--bottom' );
+	const headerNavItems    = header.querySelectorAll( '.v-header__nav-item:not(:first-of-type)' );
+	const hamburger         = header.querySelector( '.v-header__hamburger' );
+	const search            = header.querySelector( '.v-header__nav-search-input' );
+	const hero              = document.querySelector( '.v-hero' ) || document.querySelector( '.v-hero' );
+	const heroBottom        = hero.getBoundingClientRect().height;
 
 	if ( ! header ) {
 		return;
@@ -68,6 +71,10 @@ const vHeader = () => {
 
 	// opens dropdown
 	const open = ( dropdown, currentTarget ) => {
+		if ( header.classList.contains( 'open' ) ) {
+			return false;
+		}
+
 		currentTarget.classList.add( 'open' );
 		body.classList.add( 'open' );
 		prevOpenNav = currentTarget;
@@ -161,6 +168,14 @@ const vHeader = () => {
 						el.removeAttribute( 'style' );
 					} );
 
+					if ( ! logoLettersTop[ 0 ].hasAttribute( 'style' ) ) {
+						logo.style.display = 'none';
+						[ ...logoLettersTop ].forEach( ( el ) => {
+							// el.removeAttribute( 'style' );
+							// el.setAttribute( 'transform', 'matrix(1,0,0,1,0,0)' );
+						} );
+					}
+
 					// clear search input
 					if ( search.value.length ) {
 						search.value = '';
@@ -174,11 +189,20 @@ const vHeader = () => {
 			if ( hamburger.hasAttribute( 'style' ) ) {
 				hamburger.removeAttribute( 'style' );
 			}
+
 			[ ...headerNavItems ].forEach( ( el ) => {
 				el.style.opacity   = 0;
 				el.style.transform = 'translateY(-16px)';
 				el.classList.add( 'show' );
 			} );
+
+			if ( logoLettersTop[ 0 ].hasAttribute( 'style' ) ) {
+				logo.removeAttribute( 'style' );
+				[ ...logoLettersTop ].forEach( ( el ) => {
+					el.removeAttribute( 'style' );
+					el.removeAttribute( 'transform' );
+				} );
+			}
 
 			header.classList.add( 'open' );
 			body.style.overflowY = 'hidden';
@@ -220,6 +244,9 @@ const vHeader = () => {
 				onEnter:  () => {
 					hamburger.classList.add( 'v-header__hamburger--entering' );
 				},
+				onLeaveBack: () => {
+					hamburger.classList.remove( 'v-header__hamburger--entering' );
+				},
 			},
 		} );
 
@@ -233,7 +260,55 @@ const vHeader = () => {
 	};
 	showHamburgerOnScroll();
 
+	/**
+	 *
+	 * @return
+	 */
+	const hideLogoOnScroll = () => {
+		if ( mqLg.matches ) {
+			console.log( `heroBottom`, heroBottom );
+			const tlLogo = gsap.timeline( {
+				scrollTrigger: {
+					trigger:  '.v-hero',
+					markers:  true,
+					ease:     'sine.out',
+					scrub:    .1,
+					duration: 1,
+					repeat:   -1,
+					start:    `${ heroBottom - 300 }px top`,
+					end:      `${ heroBottom - 100 }px top`,
+					onLeave:  () => {
+						logo.style.display = 'none';
+					},
+					onEnterBack: () => {
+						logo.style.display = 'block';
+					},
+				},
+			} );
+
+			tlLogo.from( logoLettersBottom, {
+				opacity: 1,
+			} ).to( logoLettersBottom, {
+				opacity:  0,
+				duration: 2,
+			} );
+
+			tlLogo.from( logoLettersTop, {
+				y:       0,
+				opacity: 1,
+			} ).to( logoLettersTop, {
+				stagger: {
+					each:    .5,
+					y:       -100,
+					opacity: 0,
+				},
+			}, '+=.1' );
+		}
+	};
+	hideLogoOnScroll();
+
 	mqLg.addEventListener( 'change', showHamburgerOnScroll );
+	mqLg.addEventListener( 'change', hideLogoOnScroll );
 
 	hamburger.addEventListener( 'click', toggleMenu );
 	[ ...itemWithChildren ].forEach( ( el ) => el.addEventListener( 'click', toggle ) );

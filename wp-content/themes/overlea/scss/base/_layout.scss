@@ -8,6 +8,8 @@
 }
 
 .v-main {
+	overflow-x: hidden;
+
 	&::after {
 		content: "";
 		display: table;

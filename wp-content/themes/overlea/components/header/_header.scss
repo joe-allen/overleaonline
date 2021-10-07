@@ -286,10 +286,6 @@
 		margin: 0;
 		padding: 0 1.5rem;
 
-		&:first-of-type {
-			padding-top: .5rem;
-		}
-
 		&:last-of-type {
 			padding-bottom: .5rem;
 		}
@@ -351,6 +347,9 @@
 		z-index: 1;
 		font-size: 1.5rem;
 
+		&:hover {
+			opacity: 1;
+		}
 	}
 
 	&.open &__nav-child-link {
@@ -358,11 +357,15 @@
 		letter-spacing: .1em;
 		z-index: 1;
 		padding: 0;
+
+		&:hover {
+			border-bottom: 3px solid currentColor;
+		}
 	}
 
 	&.open &__nav {
 		position: relative;
-		height: 100vh;
+		height: 100%;
 		display: flex;
 		justify-content: flex-end;
 		text-align: right;
@@ -374,6 +377,7 @@
 		background-color: v.$c-primary-hover;
 		font-size: 1.25rem;
 		margin-right: -4px;
+		white-space: nowrap;
 	}
 
 	&.open &__nav-list {
@@ -382,6 +386,7 @@
 		width: 100%;
 		padding-right: clamp(2rem, 3vw, 4rem);
 		padding: clamp(2rem, 3vw, 4rem);
+		margin-top: 100px;
 		margin-right: 0;
 		text-align: right;
 		height: auto;
@@ -414,6 +419,11 @@
 		& > .v-link {
 			position: relative;
 
+			&:hover {
+				opacity: 1;
+				border-bottom: 3px solid transparent;
+			}
+
 			&::after {
 				content: "";
 				position: absolute;
@@ -422,6 +432,17 @@
 				top: .75em;
 				left: calc(100% - clamp(-1rem, -2vw, -3rem));
 				background-color: #fff;
+			}
+		}
+	}
+
+	&.open &__nav-has-children {
+		& > .v-link {
+			position: relative;
+
+			&:hover {
+				opacity: 1;
+				border-bottom: 3px solid transparent;
 			}
 		}
 	}
@@ -444,11 +465,18 @@
 		position: relative;
 		background-color: transparent;
 		border-radius: 2px;
+		display: block;
 	}
 }
 
 @media screen and (max-width: v.$b-medium-large) {
 	.v-header {
+		height: 100%;
+
+		&__logo {
+			position: fixed;
+		}
+
 		&__nav-item:not(:first-of-type) {
 			display: none;
 
@@ -484,6 +512,10 @@
 
 @media screen and (max-width: 650px) {
 	.v-header {
+		&__nav-list {
+			height: 100%;
+		}
+
 		&__nav-logo {
 			left: clamp(15px, calc(15px + (95 * ((100vw - 375px) / 1545))), 110px);
 		}

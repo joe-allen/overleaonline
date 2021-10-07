@@ -270,7 +270,7 @@ const vHeader = () => {
 			const tlLogo = gsap.timeline( {
 				scrollTrigger: {
 					trigger:  '.v-hero',
-					markers:  true,
+					markers:  false,
 					ease:     'sine.out',
 					scrub:    .1,
 					duration: 1,

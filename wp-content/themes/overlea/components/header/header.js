@@ -235,7 +235,7 @@ const vHeader = () => {
 			hamburger.style.position = 'fixed';
 			hamburger.classList.remove( 'v-header__hamburger--entering' );
 			// should remove TL, but neither that or set is working
-			gsap.set( hamburger, { y: 0, opactiy: 1 } );
+			gsap.set( hamburger, { y: 0, opactiy: 1, scale: .7 } );
 			return false;
 		}
 
@@ -246,7 +246,8 @@ const vHeader = () => {
 				scrub:    .1,
 				ease:     'sine.out',
 				duration: 1,
-				start:    `${ ( heroBottom > 400 ) ? 700 : heroBottom }px center`,
+				// start:    `${ ( heroBottom > 400 ) ? 700 : heroBottom }px center`,
+				start:    `${ heroBottom - 400 }px top`,
 				onEnter:  () => {
 					hamburger.classList.add( 'v-header__hamburger--entering' );
 				},
@@ -271,44 +272,44 @@ const vHeader = () => {
 	 * @return
 	 */
 	const hideLogoOnScroll = () => {
-		if ( mqLg.matches ) {
-			const tlLogo = gsap.timeline( {
-				scrollTrigger: {
-					trigger:  '.v-hero',
-					markers:  false,
-					ease:     'sine.out',
-					scrub:    .1,
-					duration: 1,
-					repeat:   -1,
-					start:    `${ heroBottom - 400 }px top`,
-					end:      `${ heroBottom - 200 }px top`,
-					onLeave:  () => {
-						logo.style.display = 'none';
-					},
-					onEnterBack: () => {
-						logo.style.display = 'block';
-					},
+		// if ( mqLg.matches ) {
+		const tlLogo = gsap.timeline( {
+			scrollTrigger: {
+				trigger:  '.v-hero',
+				markers:  false,
+				ease:     'sine.out',
+				scrub:    .1,
+				duration: 1,
+				repeat:   -1,
+				start:    `${ heroBottom - 400 }px top`,
+				end:      `${ heroBottom - 200 }px top`,
+				onLeave:  () => {
+					logo.style.display = 'none';
 				},
-			} );
-
-			tlLogo.from( logoLettersBottom, {
-				opacity: 1,
-			} ).to( logoLettersBottom, {
-				opacity:  0,
-				duration: 2,
-			} );
-
-			tlLogo.from( logoLettersTop, {
-				// y:       0,
-				opacity: 1,
-			} ).to( logoLettersTop, {
-				stagger: {
-					each: .5,
-					// y:       -100,
+				onEnterBack: () => {
+					logo.style.display = 'block';
 				},
-				opacity: 0,
-			}, '+=.1' );
-		}
+			},
+		} );
+
+		tlLogo.from( logoLettersBottom, {
+			opacity: 1,
+		} ).to( logoLettersBottom, {
+			opacity:  0,
+			duration: 2,
+		} );
+
+		tlLogo.from( logoLettersTop, {
+			// y:       0,
+			opacity: 1,
+		} ).to( logoLettersTop, {
+			stagger: {
+				each: .5,
+				// y:       -100,
+			},
+			opacity: 0,
+		}, '+=.1' );
+		// }
 	};
 	hideLogoOnScroll();
 

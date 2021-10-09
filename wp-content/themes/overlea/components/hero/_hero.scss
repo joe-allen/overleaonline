@@ -46,3 +46,14 @@
 		height: 40vh;
 	}
 }
+
+
+@media screen and (max-width: v.$b-small) {
+	.v-hero {
+		height: 90vh;
+	}
+
+	.v-hero .v-slider {
+		height: 90vh;
+	}
+}

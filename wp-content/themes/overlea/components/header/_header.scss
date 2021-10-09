@@ -95,7 +95,7 @@
 	}
 
 	&__nav-logo {
-		position: absolute;
+		position: fixed;
 		top: clamp(2rem, 3vw, 4rem);
 		left: clamp(2rem, 3vw, 4rem);
 		margin-right: auto;
@@ -124,6 +124,10 @@
 
 	&__nav-item:last-of-type {
 		display: none;
+	}
+
+	&__nav-search {
+		display: none !important;
 	}
 
 	&__nav-search-input {
@@ -177,8 +181,6 @@
 
 	&__nav-link:hover &__nav-child-arrow {
 		transform: translateY(calc(-50% - 2px)) rotate(45deg);
-		// border-right: 3px solid var(--c-primary-hover);
-		// border-bottom: 3px solid var(--c-primary-hover);
 	}
 
 	&__nav-child-list {
@@ -186,7 +188,7 @@
 		cursor: default;
 		top: 1.75rem;
 		left: -1.5rem;
-		background-color: #fff;
+		background-color: transparent;
 		list-style: none;
 		padding: 0;
 		z-index: 1;
@@ -212,12 +214,24 @@
 	}
 
 	&__nav-child-link {
+		position: relative;
 		white-space: nowrap;
-		padding: 1rem 0;
+		padding: .2rem 0;
 		font-weight: 400;
 		text-transform: uppercase;
 		font-size: 1rem;
 		letter-spacing: .0375rem;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -10px;
+			width: calc(100% + 20px);
+			height: 100%;
+			background-color: #fff;
+			z-index: -1;
+		}
 	}
 	// end children items
 
@@ -230,6 +244,7 @@
 		border: none;
 		top: clamp(2rem, 3vw, 4rem);
 		right: clamp(2rem, 3vw, 4rem);
+		transform-origin: right bottom;
 		width: 54px;
 		height: 32px;
 		z-index: 1;
@@ -299,7 +314,7 @@
 
 	&.open &__hamburger {
 		opacity: 1 !important;
-		transform: translateY(0) !important;
+		transform: translateY(0) scale(.7) !important;
 
 		&::after {
 			background-color: transparent;
@@ -353,7 +368,7 @@
 	}
 
 	&.open &__nav-child-link {
-		color: #fff;
+		// color: #fff;
 		letter-spacing: .1em;
 		z-index: 1;
 		padding: 0;
@@ -472,7 +487,6 @@
 @media screen and (max-width: v.$b-medium-large) {
 	.v-header {
 		// height: 100%;
-		// JOEJOE w/o 100 it's not working on iOS
 
 		&__logo {
 			position: fixed;
@@ -495,6 +509,7 @@
 			display: flex;
 			position: fixed;
 			right: v.spacing("container");
+			transform: scale(.7);
 
 			&::after {
 				left: calc(50% - 12px);
@@ -522,7 +537,7 @@
 		}
 
 		&__hamburger {
-			right: clamp(27px, calc(27px + (95 * ((100vw - 375px) / 1545))), 110px);
+			right: clamp(27px, calc(23px + (95 * ((100vw - 375px) / 1545))), 110px);
 
 			&::after {
 				left: 50%;
@@ -537,6 +552,14 @@
 			&--bottom path {
 				display: none;
 			}
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-small) {
+	.v-header {
+		&__hamburger {
+			right: 23px;
 		}
 	}
 }

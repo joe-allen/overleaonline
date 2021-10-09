@@ -23,6 +23,7 @@
 		padding: 1.25rem;
 		margin: clamp(2rem, 3vw, 4rem);
 		width: 33.3333%;
+		max-width: 200px;
 	}
 
 	.v-sponsor__img {
@@ -46,6 +47,15 @@
 	.v-sponsors {
 		.v-sponsor {
 			width: 100%;
+			margin: 0;
+
+			&:first-of-type {
+				margin-top: v.spacing("xsmall");
+			}
+
+			&:last-of-type {
+				margin-bottom: v.spacing("xsmall");
+			}
 		}
 	}
 }

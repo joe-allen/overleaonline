@@ -33,15 +33,15 @@ $s-sizes: (
 );
 
 // (C)olors
-$c-primary: #00a3a1;
+$c-primary: #00706f;
 $c-primary-hover: color.scale(color.adjust($c-primary, $lightness: -10%), $saturation: 10%);
 $c-secondary: #a3a100;
 $c-secondary-hover: color.scale(color.adjust($c-secondary, $lightness: -10%), $saturation: 10%);
 $c-text: #252525; // body copy color
 
 :root {
-	--c-primary: #00a3a1;
-	--c-primary-hover: #00706f;
+	--c-primary: #00706f;
+	--c-primary-hover: #003d3c;
 	--c-secondary: #a3a100;
 	--c-secondary-hover: #706f00;
 	--c-text: #252525;
@@ -62,27 +62,27 @@ $t-line-height: 1.5;
 $t-sizes: (
 	"kilo": (
 		"desktop": 5.25rem,
-		"mobile": 4rem,
+		"mobile": 3rem,
 	),
 	"alpha": (
 		"desktop": 4.5rem,
-		"mobile": 3.25rem,
+		"mobile": 2.5rem,
 	),
 	"beta": (
 		"desktop": 3.75rem,
-		"mobile": 2.6rem,
+		"mobile": 2.1rem,
 	),
 	"gamma": (
 		"desktop": 3rem,
-		"mobile": 2.05rem,
+		"mobile": 1.75rem,
 	),
 	"delta": (
 		"desktop": 2.25rem,
-		"mobile": 1.6rem,
+		"mobile": 1.2rem,
 	),
 	"epsilon": (
 		"desktop": 1.5rem,
-		"mobile": 1.25rem,
+		"mobile": 1.05rem,
 	),
 	"zeta": (
 		"desktop": 1.125rem,

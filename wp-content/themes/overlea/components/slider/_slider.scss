@@ -60,6 +60,7 @@
 		fill: v.$c-primary;
 		opacity: 0;
 		transition: opacity .15s ease-out, transform .15s ease-out, fill .15s ease-out;
+		display: none;
 
 		&:hover {
 			fill: v.$c-primary-hover;
@@ -149,12 +150,12 @@
 
 		.dot {
 			position: relative;
-			border: 1px solid v.$c-primary;
-			width: 20px;
-			height: 20px;
+			border: 1px solid v.$c-secondary;
+			width: 24px;
+			height: 24px;
 			margin: .5rem 0;
 			background: transparent;
-			border-radius: 0;
+			border-radius: 50%;
 			overflow: hidden;
 
 			&::before {
@@ -165,7 +166,8 @@
 				width: 55px;
 				height: 55px;
 				transform: rotate(45deg);
-				border: 1px solid v.$c-primary;
+				border: 1px solid v.$c-secondary;
+				display: none;
 			}
 
 			&::after {
@@ -182,7 +184,7 @@
 			&:hover {
 				&::after {
 					transform: translate(50%, -90%) rotate(-45deg);
-					background-color: v.$c-primary;
+					background-color: v.$c-secondary;
 					opacity: .7;
 				}
 			}
@@ -197,7 +199,7 @@
 				width: 55px;
 				height: 55px;
 				opacity: 0;
-				background-color: v.$c-primary;
+				background-color: v.$c-secondary;
 			}
 
 			&::after {
@@ -207,9 +209,9 @@
 				left: 0%;
 				width: 55px;
 				height: 55px;
-				opacity: .7;
+				opacity: 1;
 				transform: translate(0) rotate(-45deg);
-				background-color: v.$c-primary;
+				background-color: v.$c-secondary;
 			}
 
 			&:hover::after {
@@ -238,11 +240,13 @@
 			width: 1.5rem;
 			height: 1.5rem;
 			transform: translateY(-50%) scale(1);
+			display: none;
 		}
 
 		&__link {
 			padding-left: v.spacing("container");
-			padding-bottom: v.spacing("container");
+			padding-bottom: v.spacing("small");
+			padding-right: clamp(2rem, 3vw, 4rem);
 
 			&::before {
 				top: -10%;
@@ -251,7 +255,17 @@
 		}
 
 		&__dots {
-			display: none;
+			right: v.spacing("container");
+			bottom: v.spacing("small");
+			// display: none;
+
+			.dot {
+				width: 20px;
+				height: 20px;
+				max-width: 20px;
+				max-height: 20px;
+				font-size: 50%;
+			}
 		}
 	}
 }

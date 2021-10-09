@@ -50,7 +50,7 @@
 
 	&__bg {
 		position: relative;
-		height: clamp(400px, 50vw, 600px);
+		height: clamp(300px, 50vw, 600px);
 
 		&-overlay {
 			content: "";
@@ -113,6 +113,7 @@
 
 	&__content {
 		padding: v.spacing("xsmall");
+		padding-right: v.spacing("small");
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -311,6 +312,10 @@
 
 		&--tablet &__link:hover &__bg-overlay {
 			opacity: 1;
+		}
+
+		&__content {
+			padding-right: v.spacing("xsmall");
 		}
 
 		&__content-subtitle {

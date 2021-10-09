@@ -13,6 +13,18 @@ import vHero from '../components/hero/hero';
  * Runs component js and any global tasks
  */
 const vGlobal = () => {
+	const links = document.querySelectorAll( 'a' );
+
+	[ ...links ].forEach( ( link ) => {
+		link.addEventListener( 'click', ( e ) => {
+			const location = window.location.href;
+
+			if ( location.indexOf( 'localhost' ) <= 0 ) {
+				e.preventDefault();
+				console.log( 'Blocking all links clicked in global.js' );
+			}
+		} );
+	} );
 	const shareBtn = document.querySelector( '.v-content__social--share' );
 
 	vHeader();

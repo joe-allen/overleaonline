@@ -92,6 +92,11 @@
 		transform: translate(-50%, -50%);
 	}
 
+	span.v-slider__link {
+		&:hover {
+			opacity: 1;
+		}
+	}
 	&__link {
 		@include v.max-width-container;
 		position: absolute;
@@ -126,6 +131,7 @@
 	}
 
 	&__text-title {
+		position: relative;
 		z-index: 2;
 
 		&:hover {
@@ -135,6 +141,7 @@
 
 	&__text-subtitle {
 		z-index: 2;
+		padding-right: 4rem;
 
 		&:hover {
 			text-decoration: none;

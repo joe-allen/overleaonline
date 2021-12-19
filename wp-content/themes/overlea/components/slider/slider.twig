@@ -6,22 +6,40 @@
 		{% for slide in slides %}
 			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
 				<div class="v-slider__overlay"></div>
-				{% include 'img/img.twig' with {
-					id: slide.slider_image,
-					class: 'v-slider__img'
-				} %}
+				{% if slide.slider_image %}
+					{% include 'img/img.twig' with {
+						id: slide.slider_image,
+						class: 'v-slider__img'
+					} %}
+				{% else %}
+					<img class="v-slider__img" src="https://via.placeholder.com/1920x1080?text=Need+Image" alt="placeholder" width="1920" height="1080">
+				{% endif %}
 				<!-- if function('is_template', 'template-frontpage.php') %} // element a : span -->
 				{% if slide.slider_link %}
 					{% set link = (slide.slider_link.link_type == 'internal') ? slide.slider_link.link.internal_url : slide.slider_link.link.external_url %}
 					<a class="v-slider__link" href="{{link}}" {% if slide.slider_link.link.new_tab %}target="_blank"{% endif %}>
-						<h1 class="v-slider__text-title">{{slide.slider_link.link.text}}</h1>
+						{% if slide.slider_link.link.text %}
+							<h1 class="v-slider__text-title">{{ slide.slider_link.link.text|default(post.post_title) }}</h1>
+						{% endif %}
+
 						{% if slide.slider_subtitle %}
-							<h2 class="v-slider__text-subtitle">{{slide.slider_subtitle}}</h2>
+							<h2 class="v-slider__text-subtitle">{{ slide.slider_subtitle }}</h2>
 						{% endif %}
 					</a>
+				{% else %}
+					<span class="v-slider__link">
+							<h1 class="v-slider__text-title">{{ title|default(post.post_title) }}</h1>
+					</span>
 				{% endif %}
 			</div>
 		{% endfor %}
+		{% if not slides %}
+			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
+				<span class="v-slider__link">
+						<h1 class="v-slider__text-title">{{ post.post_title }}</h1>
+				</span>
+			</div>
+		{% endif %}
 	</div>
 	{% if count > 1 %}
 		<svg

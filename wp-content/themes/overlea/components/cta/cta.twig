@@ -1,19 +1,30 @@
 {#
 	@var string class plain text
 #}
+
 <article class="v-cta {{class}} v-cta--{{cta.type}}">
 	<div class="container">
 		<div class="v-cta__inner">
-			{% if type == 'membership' %}
+			{% if type == 'Random' %}
 				<h3 class="v-cta__cta-text">{{title}}</h3>
-				{% set link = (cta.link_type == 'internal') ? cta.link.internal_url : cta.link.external_url %}
+				{% set link = (cta.link_type == 'external') ? cta.link.external_url : cta.link.internal_url %}
 				<a class="v-cta__cta-cta v-button v-button--lg" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{cta.link.text}}</a>
-				{% elseif cta.type == 'newsletter' %}
-				<h3 class="v-cta__cta-text">{{title}}</h3>
+			{% elseif type == 'Membership' %}
+				<h3 class="v-cta__cta-text">{{cta.Membership.text}}</h3>
+				{% set link = cta.Membership.membership_link.link.internal_url %}
+				{% set text = cta.Membership.membership_link.link.text %}
+				<a class="v-cta__cta-cta v-button v-button--lg" href="{{link}}">{{text}}</a>
+			{% elseif type == 'Opportunities' %}
+				<h3 class="v-cta__cta-text">{{cta.Opportunities.text}}</h3>
+				{% set link = cta.Opportunities.opportunities_link.link.internal_url %}
+				{% set text = cta.Opportunities.opportunities_link.link.text %}
+				<a class="v-cta__cta-cta v-button v-button--lg" href="{{link}}">{{text}}</a>
+			{% elseif type == 'Newsletter' %}
+				<h3 class="v-cta__cta-text">{{cta.Newsletter.text}}</h3>
 				<div class="v-cta__form-wrap">
 					<form class="v-cta__form">
-						<input type="email" class="v-form__field v-cta__input" placeholder="Email">
-						<button type="submit" class="v-cta__cta-cta v-button v-button--lg">{{cta.title}}</button>
+						<input type="email" class="v-form__field v-cta__input" placeholder="name@example.com">
+						<button type="submit" class="v-cta__cta-cta v-button v-button--lg">{{cta.Newsletter.link}}</button>
 					</form>
 				</div>
 			{% endif %}

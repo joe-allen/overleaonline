@@ -12,9 +12,9 @@
 } %}
 
 {% include "cta/cta.twig" with {
-	title: post.meta('cta_text'),
-	cta: post.meta('cta_link'),
-	type: 'membership'
+	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,
+	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
+	type: post.meta('cta_type'),
 } %}
 
 {% include "sponsors/sponsors.twig" with {

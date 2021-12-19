@@ -2,18 +2,44 @@
 	@var string class plain text
 #}
 {% for item in items %}
+
+	<!-- loop child pages -->
+	{% if item.post_parent == post.ID %}
+		{% set item = {
+				ic_image: item.meta('slider')[0].slider_image,
+				ic_title: item.post_title,
+				ic_text: item.meta('excerpt'),
+				ic_link: {
+					link_type: 'internal',
+					link: {
+						internal_url: item.link,
+						new_tab: false,
+						text: 'View'
+					}
+				}
+			}
+		%}
+	{% endif %}
+
 	<article class="v-image-content {{class}}">
 		<div class="container">
 			<div class="v-image-content__inner">
 				<div class="v-image-content__img-wrap">
+					{%
+						if (item.ic_image)
+					%}
 					{% include 'img/img.twig' with {
 						id: item.ic_image,
 						class: 'v-image-content__img'
 					} %}
+					{% else %}
+					<img class="v-image-content__img" src="https://via.placeholder.com/1920x1080?text=Need+Image" alt="placeholder" width="1920" height="1080">
+					{% endif %}
 				</div>
 				<div class="v-image-content__content">
 					<h1 class="v-image-content__content-title">{{item.ic_title}}</h1>
-					<p class="v-image-content__content-text">{{item.ic_text}}</p>
+					{%	set default_text = 'PLACEHOLDER TEXT... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.' %}
+					<p class="v-image-content__content-text">{{item.ic_text|default(default_text)}}</p>
 					{% if item.ic_link %}
 						{% set link = (item.ic_link.link_type == 'internal') ? item.ic_link.link.internal_url : item.ic_link.link.external_url %}
 						<a class="v-image-content__content-cta v-button" href="{{link}}" {% if item.ic_link.link.new_tab %}target="_blank"{% endif %}>{{item.ic_link.link.text}}</a>

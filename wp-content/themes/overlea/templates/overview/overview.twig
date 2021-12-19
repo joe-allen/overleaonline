@@ -1,29 +1,36 @@
 {% include "hero/hero.twig" with {
-	count: 1,
-	title: post.post_title,
-	subtitle: '',
+	count: post.meta('slider')|length,
+	slides: post.meta('slider'),
 	class: 'v-hero--sm'
 } %}
 
-{% include "intro/intro.twig" with {
-	title:    'Child of Events Page',
-	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus. t amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.',
-	heroHasSubtitle: false
-} %}
+{% if post.meta('intro') %}
+	{% include "intro/intro.twig" with {
+		title:    'Child of Events Page',
+		content: post.meta('intro'),
+		heroHasSubtitle: false
+	} %}
+{% endif %}
+
+{% if post.ID == 11 %}
+	{% include "recent-news/recent-news.twig" with {
+		count: posts|length,
+		items: events,
+		title:    'Events',
+		subtitle: null,
+		cta: null,
+	} %}
+{% endif %}
 
 {% include "image-content/image-content.twig" with {
-	title:    'Child of Events Page',
-	count: 6,
-	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus. t amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.'
+	items: post.children,
 } %}
 
 {% include "cta/cta.twig" with {
+	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,
+	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
 	class: 'v-cta--bottom-overlap',
-	title: 'Would you like to help us improve the community of Overlea?',
-	cta: {
-		title: 'Join',
-		type: 'membership'
-	}
+	type: post.meta('cta_type'),
 } %}
 
 {% include "form/form.twig" with {

@@ -78,7 +78,7 @@
 				background-color: v.$c-primary-hover;
 				transform: scale(1) skewX(-60deg);
 				transform-origin: bottom;
-				transition: transform .3s ease-out;
+				transition: transform .5s ease-out;
 				z-index: 1;
 			}
 		}
@@ -188,8 +188,8 @@
 			position: absolute;
 			top: 50%;
 			right: 0;
-			border-top: 3px solid #fff;
-			border-right: 3px solid #fff;
+			border-top: 2px solid #fff;
+			border-right: 2px solid #fff;
 			// border-radius: 4px;
 			width: 24px;
 			height: 24px;
@@ -208,6 +208,9 @@
 			border-radius: 24242px;
 			transform: translateY(-50%);
 			transition: transform .5s ease-out;
+
+			// decided not to use the full arrrow
+			display: none;
 		}
 	}
 

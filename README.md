@@ -1,14 +1,16 @@
 # overleaonline
 
+## Currently Working On:
+- Start history template
 ## ToDo:
 - 'v-card--leader' should be 25% width and have less height.
 - Tabindex on main nav `<span>` dropdown items. W/ aria-controls label.
 - resize above 1024px when mobile menu open should close menu and show desktop nav.
 - social icons
 - main logo
-- checkbox on form
+- checkbox on form (use accent-color)
 - search
-- parallax homepage
+[x] - parallax homepage
 - on slider.twig add `element = function('is_front_page') ? a : span;`
 - Slider 'left' arrow working?
 - If you refresh 1/2 down the page, the hamburger is shown even if you scroll all the way to the top.

@@ -20,6 +20,17 @@ if ( have_posts() ) :
 		$context         = Timber::get_context();
 		$context['post'] = Timber::get_post();
 
+		if ( $context['post']->ID == 11 ) {
+			$context['events'] = Timber::get_posts(
+				[
+					'post_type'      => 'events',
+					'posts_per_page' => -1,
+					'orderby'        => 'menu_order',
+					'order'          => 'ASC',
+				]
+			);
+		}
+
 		Timber::render( 'overview/overview.twig', $context );
 
 	endwhile;

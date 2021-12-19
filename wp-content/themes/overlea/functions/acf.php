@@ -102,6 +102,55 @@ function v_define_acf() {
 			->addText( 'news_title_recent', [ 'label' => 'Title' ] )
 			->addText( 'news_subtitle_recent', [ 'label' => 'Text' ] )
 			->addFields( v_create_link_field( 'news_link_recent', 'CTA Link' ) )
+		->addTab( 'CTAs' )
+			->addgroup( 'Newsletter' )
+				->addText(
+					'text',
+						[
+							'label' => 'Text',
+							'default_value' => 'Sign up for our newsletter',
+						]
+					)
+				->addText(
+					'link',
+					[
+						'label' => 'Link Title',
+						'default_value' => 'Sign up',
+					]
+				)
+			->endGroup()
+			->addgroup( 'Membership' )
+				->addText(
+					'text',
+						[
+							'label' => 'Text',
+							'default_value' => 'Become a member today and help support the growth and beautification of our community',
+						]
+					)
+				->addFields(
+					v_create_link_field( 'membership_link', 'CTA Link' )
+					->removeField( 'membership_link->link_type' )
+					->removeField( 'membership_link->query_string' )
+					->removeField( 'membership_link->link->external_url' )
+					->modifyField( 'membership_link->link->text', [ 'default_value' => 'Join' ] )
+				)
+			->endGroup()
+			->addgroup( 'Opportunities' )
+				->addText(
+					'text',
+						[
+							'label' => 'Text',
+							'default_value' => 'Want to give back? Check out our opportunities',
+						]
+					)
+				->addFields(
+					v_create_link_field( 'opportunities_link', 'CTA Link' )
+					->removeField( 'opportunities_link->link_type' )
+					->removeField( 'opportunities_link->query_string' )
+					->removeField( 'opportunities_link->link->external_url' )
+					->modifyField( 'opportunities_link->link->text', [ 'default_value' => 'View' ] )
+				)
+			->endGroup()
 		->setLocation( 'options_page', '==', 'acf-options-global-settings' );
 
 	$acf_groups[] = $g_global->build();

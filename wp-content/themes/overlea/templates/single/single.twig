@@ -1,7 +1,7 @@
 {% include "hero/hero.twig" with {
 	count: post.meta('slider')|length,
 	slides: post.meta('slider'),
-	title:    post.post_title,
+	class: 'v-hero--sm'
 } %}
 
 {% include "content/content.twig" with {

@@ -9,8 +9,9 @@ import KeenSlider from 'keen-slider';
 const vSlider = () => {
 	const sliderWrapEl = document.querySelector( '.v-slider' );
 	const sliderEl     = sliderWrapEl.querySelector( '.v-slider #my-keen-slider' );
+	let interval       = 0;
 
-	if ( ! sliderEl ) {
+	if ( ! sliderEl || sliderEl.children.length <= 1 ) {
 		return;
 	}
 
@@ -60,20 +61,20 @@ const vSlider = () => {
 		},
 	} );
 
-	if ( arrowL ) {
-		let interval = 0;
+	/**
+	 * @param run
+	 */
+	function autoplay( run ) {
+		clearInterval( interval );
+		interval = setInterval( () => {
+			if ( run && slider ) {
+				slider.next();
+			}
+		}, 8000 );
+	}
 
-		/**
-		 * @param run
-		 */
-		function autoplay( run ) {
-			clearInterval( interval );
-			interval = setInterval( () => {
-				if ( run && slider ) {
-					slider.next();
-				}
-			}, 8000 );
-		}
+	if ( arrowL ) {
+		autoplay();
 
 		sliderWrapEl.addEventListener( 'mouseover', () => {
 			autoplay( false );

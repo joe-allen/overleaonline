@@ -24,6 +24,10 @@
 	}
 }
 
+.v-intro + .v-recent-news {
+	padding-top: 0;
+}
+
 @media screen and (max-width: v.$b-medium) {
 	.v-recent-news {
 		&__header-cta {

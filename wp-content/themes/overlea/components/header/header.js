@@ -155,7 +155,7 @@ const vHeader = () => {
 			gsap.to( headerNavItems, {
 				duration: .4,
 				y:        -16,
-				delay:    .2,
+				delay:    0,
 				opacity:  0,
 				stagger:  {
 					amount: .2,

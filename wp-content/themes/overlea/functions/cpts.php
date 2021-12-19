@@ -120,8 +120,8 @@ function v_register_taxonomies() {
 		[],
 		[
 			'singular' => 'Category',
-			'plural' => 'Categories',
-			'slug' => 'event-type',
+			'plural'   => 'Categories',
+			'slug'     => 'event-type',
 		]
 	);
 
@@ -131,7 +131,7 @@ function v_register_taxonomies() {
 		[],
 		[
 			'singular' => 'Category',
-			'plural' => 'Categories',
+			'plural'   => 'Categories',
 		]
 	);
 }

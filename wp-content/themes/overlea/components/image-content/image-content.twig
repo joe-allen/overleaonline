@@ -21,6 +21,19 @@
 		%}
 	{% endif %}
 
+	{% if post.ID == 50 %}
+			{% set member = Post(item.ID) %}
+
+			{% set item = {
+				ic_image: member.leader_headshot,
+				ic_title: member.primary_title ? member.primary_title : member.post_title,
+				ic_text: member.meta('content'),
+				ic_link: n
+			}
+		%}
+	{% endif %}
+
+
 	<article class="v-image-content {{class}}">
 		<div class="container">
 			<div class="v-image-content__inner">
@@ -40,7 +53,7 @@
 					<h1 class="v-image-content__content-title">{{item.ic_title}}</h1>
 					{%	set default_text = 'PLACEHOLDER TEXT... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.' %}
 					<p class="v-image-content__content-text">{{item.ic_text|default(default_text)}}</p>
-					{% if item.ic_link %}
+					{% if item.ic_link.link.internal_url or item.ic_link.link.external_url %}
 						{% set link = (item.ic_link.link_type == 'internal') ? item.ic_link.link.internal_url : item.ic_link.link.external_url %}
 						<a class="v-image-content__content-cta v-button" href="{{link}}" {% if item.ic_link.link.new_tab %}target="_blank"{% endif %}>{{item.ic_link.link.text}}</a>
 					{% endif %}

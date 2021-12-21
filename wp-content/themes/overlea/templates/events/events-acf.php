@@ -36,6 +36,8 @@ function events_acf() {
 		->addFields( $zoom )
 		->addFields( $cta )
 		->addFields( $sponsors )
+			->removeField( 'sponsor_title' )
+			->removeField( 'sponsor_text' )
 
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'post_type', '==', 'events' );

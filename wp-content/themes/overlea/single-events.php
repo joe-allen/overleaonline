@@ -20,7 +20,7 @@ if ( have_posts() ) :
 		$context         = Timber::get_context();
 		$context['post'] = new Post();
 
-		Timber::render( 'single/single.twig', $context );
+		Timber::render( 'single-event/single-event.twig', $context );
 
 	endwhile;
 endif;

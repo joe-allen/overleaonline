@@ -15,6 +15,12 @@
 - Slider 'left' arrow working?
 - If you refresh 1/2 down the page, the hamburger is shown even if you scroll all the way to the top.
 
+----
+
+- EVENTS https://dev.overleaonline.org/events/
+  - update so that it does not show past events
+  - updates so that it says 'Check back soon' if empty
+
 ## Nice To Haves:
 
 ## Questions:

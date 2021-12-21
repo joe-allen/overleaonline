@@ -1,0 +1,35 @@
+{% include "hero/hero.twig" with {
+	count: post.meta('slider') ? post.meta('slider')|length : post.meta('hero_img')|length,
+	slides: post.meta('slider') ? post.meta('slider') : post.meta('hero_img'),
+	class: post.meta('hero_img') ? 'v-hero--sm' : '',
+} %}
+
+{% include "content/content.twig" with {
+	sidebar: true,
+	content: post.meta('content'),
+	author: Post(post.meta('author_board_member')),
+	sponsors: post.meta('sponsor'),
+	type: post.post_type,
+	zoom: null,
+} %}
+
+{# {% include "recent-news/recent-news.twig" with {
+	count: posts|length,
+	items: events,
+	title:    'Related News',
+	subtitle: null,
+	cta: 'View All News'
+} %} #}
+
+{% include "cta/cta.twig" with {
+	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,
+	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
+	class: 'v-cta--bottom-overlap',
+	type: post.meta('cta_type'),
+} %}
+
+{% include "form/form.twig" with {
+	title:    'Contact Us',
+	subtitle: 'We\'re all ears!'
+} %}
+

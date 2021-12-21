@@ -26,6 +26,22 @@
 								<li class="v-content__meta-item"><span>Published:</span><br><span>{{post.post_date|date("F j\, Y", "America/New_York")}}</span></li>
 							{% endif %}
 
+							{% if post.meta('Google Maps_text') %}
+								<li class="v-content__meta-item"><span>Location:</span><br>
+									<span>
+										<a href="{{post.meta('Google Maps_external_url')}}" target="{{post.meta('Google Maps_new_tab') ? '_blank' : ''}}">{{post.meta('Google Maps_text')}}</a>
+									</span>
+								</li>
+							{% endif %}
+
+							{% if post.meta('Zoom_text') %}
+								<li class="v-content__meta-item"><span>Virtual Link:</span><br>
+									<span>
+										<a href="{{post.meta('Zoom_external_url')}}" target="{{post.meta('Zoom_new_tab') ? '_blank' : ''}}">{{post.meta('Zoom_text')}}</a>
+									</span>
+								</li>
+							{% endif %}
+
 							{% if post.terms %}
 								<li class="v-content__meta-item">
 									<span>Tags:</span><br>

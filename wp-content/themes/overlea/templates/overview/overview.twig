@@ -11,6 +11,7 @@
 	} %}
 {% endif %}
 
+{# EVENTS #}
 {% if post.ID == 11 %}
 
 	{% include "recent-news/recent-news.twig" with {
@@ -44,6 +45,29 @@
 	{% endfor %}
 {% endif %}
 
+{# BOARD MEMBERS #}
+{% if post.ID == 50 %}
+
+	{% for event in board %}
+
+		{# {% include "recent-news/recent-news.twig" with {
+			count: posts|length,
+			type: 'event',
+			items: board,
+			title: 'Featured Events',
+			subtitle: null,
+			cta: null,
+		} %} #}
+
+
+		{% include "image-content/image-content.twig" with {
+			items: board,
+		} %}
+	{% endfor %}
+{% endif %}
+
+
+{# OPPOTUNITIES #}
 {% if post.ID == 32 and opportunities %}
 
 	<section class="v-intro v-intro--events">

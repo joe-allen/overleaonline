@@ -1,9 +1,9 @@
 <?php
 /**
- * Leaders
+ * Board
  *
- * Leaders template
- * Template Name: Leaders
+ * Board template
+ * Template Name: Board
  *
  * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin
@@ -20,7 +20,16 @@ if ( have_posts() ) :
 		$context         = Timber::get_context();
 		$context['post'] = Timber::get_post();
 
-		Timber::render( 'leaders/leaders.twig', $context );
+		$context['board'] = Timber::get_posts(
+			[
+				'post_type'      => 'board',
+				'posts_per_page' => -1,
+				'orderby'        => 'menu_order',
+				'order'          => 'DESC',
+			]
+		);
+
+		Timber::render( 'overview/overview.twig', $context );
 
 	endwhile;
 endif;

@@ -1,6 +1,6 @@
 {% include "hero/hero.twig" with {
-	count: post.meta('slider')|length,
-	slides: post.meta('slider'),
+	count: post.meta('slider') ? post.meta('slider')|length : post.meta('hero_img')|length,
+	slides: post.meta('slider') ? post.meta('slider') : post.meta('hero_img'),
 	class: 'v-hero--sm'
 } %}
 
@@ -68,6 +68,7 @@
 	{% endfor %}
 {% endif %}
 
+{# option: class: 'v-image-content--reverse' #}
 {% include "image-content/image-content.twig" with {
 	items: post.children,
 } %}

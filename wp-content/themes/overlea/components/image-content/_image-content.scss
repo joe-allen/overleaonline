@@ -11,8 +11,13 @@
 		left: 0;
 		height: 50%;
 		width: 100vw;
-		background-color: v.$c-primary;
 		z-index: -1;
+	}
+
+	&--reverse {
+		&::after {
+			background-color: v.$c-primary;
+		}
 	}
 
 	&:nth-last-of-type(2) {

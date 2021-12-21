@@ -81,8 +81,13 @@
 		&-item span:last-of-type {
 			font-weight: 300;
 		}
-		&-item span:last-of-type a{
+		&-item  a {
 			font-weight: 400;
+
+			&:hover {
+				text-decoration: none;
+				border-bottom: none !important;
+			}
 		}
 
 		&-list--social &-item {

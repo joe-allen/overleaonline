@@ -1,5 +1,7 @@
 {% include "hero/hero.twig" with {
-	class: 'v-hero--sm'
+	count: post.meta('slider') ? post.meta('slider')|length : post.meta('hero_img')|length,
+	slides: post.meta('slider') ? post.meta('slider') : post.meta('hero_img'),
+	class: post.meta('hero_img') ? 'v-hero--sm' : '',
 } %}
 
 {% include "content/content.twig" with {
@@ -10,9 +12,16 @@
 	type: post.post_type
 } %}
 
+{# option: class: 'v-image-content--reverse' #}
 {% include "image-content/image-content.twig" with {
-	class: 'v-image-content--reverse',
 	items: post.meta('ic'),
+} %}
+
+{% include "cta/cta.twig" with {
+	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,
+	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
+	class: 'v-cta--bottom-overlap',
+	type: post.meta('cta_type'),
 } %}
 
 {% include "form/form.twig" with {

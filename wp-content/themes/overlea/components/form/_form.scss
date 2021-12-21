@@ -63,6 +63,12 @@
 
 	&__flex {
 		display: flex;
+		align-items: center;
+	}
+
+	&__flex &__field {
+		display: flex;
+		align-items: center;
 	}
 
 	&__input-label {

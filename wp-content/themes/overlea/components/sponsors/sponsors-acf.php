@@ -27,7 +27,9 @@ $c_sponsors
 				'label'         => 'Sponsors',
 				'return_format' => 'object',
 				'post_type'     => 'sponsors',
-				'filters'       => [],
+				'filters'       => [
+					'search'
+				],
 				'min'           => 0,
 				'max'           => 8,
 			]

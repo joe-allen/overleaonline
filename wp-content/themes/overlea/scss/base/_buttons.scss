@@ -16,6 +16,7 @@
 	text-transform: uppercase;
 	transition: background .15s ease-out;
 
+	&:focus,
 	&:hover {
 		background: var(--c-primary-hover);
 		text-decoration: none;
@@ -40,8 +41,11 @@
 	border-bottom: 3px solid transparent;
 	padding-bottom: 1px;
 	transition: border-bottom .2s ease-out, opacity .15s ease-out, color .15s ease-out;
+	outline: none;
 
+	&:focus,
 	&:hover {
+		background: var(--c-primary-hover);
 		text-decoration: none;
 		color: var(--c-primary-hover);
 		border-bottom: 3px solid var(--c-primary-hover);

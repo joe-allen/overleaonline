@@ -4,12 +4,27 @@
 <section class="v-pagination {{class}}">
 	<div class="container">
 		<div class="v-pagination__inner">
-			<button class="v-pagination__control v-pagination__control--prev v-button">
-				<span class="sr-only">Previous</span>
-			</button>
-			<button class="v-pagination__control v-pagination__control--next v-button">
-				<span class="sr-only">Next</span>
-			</button>
+			{% if posts.pagination.prev %}
+				<a href="{{posts.pagination.prev.link}}" class="v-pagination__control v-pagination__control--prev v-button "><span class="">Prev</span></a>
+			{% else %}
+				<a href="#!"><span class="sr-only">Prev Disabled</span></a>
+			{% endif %}
+			<!-- <ul class="pages">
+				{% for page in posts.pagination.pages %}
+					<li>
+						{% if page.link %}
+							<a href="{{page.link}}" class="{{page.class}}">{{page.title}}</a>
+						{% else %}
+							<span class="{{page.class}}">{{page.title}}</span>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul> -->
+			{% if posts.pagination.next %}
+				<a href="{{posts.pagination.next.link}}" class="v-pagination__control v-pagination__control--next v-button "><span class="">Next</span></a>
+			{% else %}
+				<a href="#!"><span class="sr-only">Next Disabled</span></a>
+			{% endif %}
 		</div>
 	</div>
 </section>

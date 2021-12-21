@@ -2,4 +2,17 @@
 
 .v-intro {
 	padding: v.spacing("large") 0;
+
+	&--events {
+		padding-bottom: 0;
+	}
+
+	&__header {
+		margin-bottom: 0;
+	}
+
+	&__title {
+		@include v.font-size("beta");
+		font-weight: 300;
+	}
 }

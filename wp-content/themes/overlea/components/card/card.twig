@@ -2,9 +2,10 @@
 	@var string class plain text
 #}
 {% for item in items %}
+
 	<article class="v-card {{class}}">
 		{% set element = ('v-card--leader' in class) ? 'span' : 'a' %}
-		<{{element}} tabindex=0 href="{{item.link}}" class="v-card__link">
+		<{{element}} tabindex=0 href="{{Post(item.ID).link}}" class="v-card__link">
 			<div class="v-card__inner">
 				<div class="v-card__bg">
 					<div class="v-card__bg-overlay"></div>

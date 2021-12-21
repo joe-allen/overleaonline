@@ -34,6 +34,31 @@ select {
 	}
 }
 
+[type="checkbox"]:not(:checked) {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	background-color: v.$c-primary-hover;
+	border-radius: 4px;
+	outline: none;
+	transition-duration: 0.3s;
+}
+
+[type="checkbox"]:focus {
+	accent-color: v.$c-primary;
+	outline: 1px solid #fff;
+}
+
+[type="checkbox"] {
+	background-color: v.$c-primary;
+	width: 24px;
+	height: 24px;
+	margin-right: 12px;
+	border-radius: 4px;
+	align-self: center;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

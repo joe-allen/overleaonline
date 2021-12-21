@@ -4,27 +4,28 @@
 } %}
 
 {% include "recent-news/recent-news.twig" with {
-	count: 12,
 	title:    'What\'s Happening',
+	items: posts,
 	subtitle: 'News around the neighborhood',
 	cta: 'View More'
 } %}
 
-{% include "pagination/pagination.twig" %}
-
-{% include "cta/cta.twig" with {
-	title: 'Would you like to help us improve the community of Overlea?',
-	cta: {
-		title: 'Join',
-		type: 'membership'
-	}
+{% include "pagination/pagination.twig" with {
+	pagination: posts.pagination
 } %}
 
-{% include "sponsors/sponsors.twig" with {
+{% include "cta/cta.twig" with {
+	title: options,
+	cta: options,
+	class: 'v-cta--bottom-overlap',
+	type: 'Newsletter',
+} %}
+
+{# {% include "sponsors/sponsors.twig" with {
 	title:    'Our Sponsors',
 	count: 6,
 	subtitle: 'Sponsor images should be 200x200px only. Can we encourage sponsors to use their logo / icons instead of words? <a class="v-link" href="#!">View All</a>'
-} %}
+} %} #}
 
 {% include "image-content/image-content.twig" with {
 	class: 'v-image-content--reverse',

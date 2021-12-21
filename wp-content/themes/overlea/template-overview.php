@@ -21,12 +21,32 @@ if ( have_posts() ) :
 		$context['post'] = Timber::get_post();
 
 		if ( $context['post']->ID == 11 ) {
+			$args =
+				[
+					'post_type'      => 'events',
+					'posts_per_page' => -1,
+					'meta_key'       => 'event_start_date',
+					'tax_query'      => array(
+						array(
+							'taxonomy' => 'categories',
+							'field'    => 'slug',
+							'terms'    => 'featured',
+						),
+					),
+					'orderby'        => 'meta_value',
+					'order'          => 'DESC',
+				];
+
+			$context['events_featured'] = new WP_Query( $args);
+
+
 			$context['events'] = Timber::get_posts(
 				[
 					'post_type'      => 'events',
 					'posts_per_page' => -1,
-					'orderby'        => 'menu_order',
-					'order'          => 'ASC',
+					'meta_key'       => 'event_start_date',
+					'orderby'        => 'meta_value',
+					'order'          => 'DESC',
 				]
 			);
 		}

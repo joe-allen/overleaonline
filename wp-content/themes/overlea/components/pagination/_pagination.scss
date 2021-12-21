@@ -12,28 +12,40 @@
 		position: relative;
 		display: flex;
 		align-items: center;
+		justify-content: flex-start;
 		background-color: v.$c-primary;
 		border: none;
 		border-radius: 0;
-		width: 56px;
+		width: 120px;
 		height: 56px;
+		text-align: center;
 
 		&::after {
 			content: "";
 			position: absolute;
 			top: 50%;
-			left: calc(50% + .3rem);
-			width: 1.25rem;
-			height: 1.25rem;
+			left: 1.25rem;
+			width: .8rem;
+			height: .8rem;
 			border-top: 2px solid #fff;
 			border-right: 2px solid #fff;
 			background-color: transparent;
-			transform: translate(-50%, -50%) rotate(-135deg);
+			transform: translate(0, -50%) rotate(-135deg);
+		}
+
+		&:last-of-type {
+			justify-content: flex-end;
 		}
 
 		&:last-of-type::after {
-			left: calc(50% - .3rem);
-			transform: translate(-50%, -50%) rotate(45deg);
+			right: 1.25rem;
+			left: auto;
+			transform: translate(0, -50%) rotate(45deg);
+		}
+
+		&--disabled {
+			opacity: .4;
+			cursor: not-allowed;
 		}
 	}
 }

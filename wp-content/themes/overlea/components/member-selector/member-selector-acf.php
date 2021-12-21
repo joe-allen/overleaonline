@@ -10,13 +10,16 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
 $c_member_selector = new FieldsBuilder( 'member_selector' );
 
 $c_member_selector
-	->addTab('Contact')
+	->addTab( 'Author' )
 		->addRelationship(
-			'Member',
+			'author_board_member',
 			[
+				'label'         => 'Board Member',
 				'return_format' => 'id',
 				'post_type'     => 'board',
-				'filters'       => [],
+				'filters'       => [
+					'search'
+				],
 				'min'           => 0,
 				'max'           => 1,
 			]

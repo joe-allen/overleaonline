@@ -87,6 +87,7 @@
 			color: #fff;
 			opacity: .7;
 			border-bottom: 3px solid transparent;
+			background-color: transparent;
 		}
 	}
 
@@ -217,7 +218,7 @@
 	&__nav-child-link {
 		position: relative;
 		white-space: nowrap;
-		padding: .2rem 0;
+		padding: .5rem 0;
 		font-weight: 400;
 		text-transform: uppercase;
 		font-size: 1rem;
@@ -239,6 +240,7 @@
 
 		&:hover {
 			color: #fff;
+			background-color: transparent;
 		}
 
 		&:hover::before {

@@ -5,6 +5,24 @@
 	padding: v.spacing("small") 0;
 	z-index: 3;
 
+	&--event {
+		padding: v.spacing("xsmall") 0 0;
+
+		&:hover {
+			z-index: 33 !important;
+		}
+
+	}
+
+	&--event &__inner {
+		box-shadow: none;
+		// border-bottom: 1px solid ;
+	}
+
+	&--last {
+		padding: v.spacing("xsmall") 0 !important;
+	}
+
 	&--bottom-overlap {
 		margin-bottom: 0;
 		overflow: hidden;
@@ -29,11 +47,15 @@
 		background-color: #fff;
 		box-shadow: var(--box-shadow);
 	}
-
 	&__cta-text {
 		width: 75%;
 		margin-right: 1rem;
 		margin-bottom: 0;
+	}
+
+	&--event &__cta-text {
+		width: 100%;
+		padding-right: clamp(2rem, 3vw, 4rem);
 	}
 
 	&--newsletter &__cta-text {
@@ -41,8 +63,16 @@
 	}
 
 	&__cta-cta {
-		// align-self: flex-end;
+		white-space: nowrap;
 		align-self: center;
+	}
+
+	&--Newsletter &__cta-cta {
+		height: 48px;
+	}
+
+	&--event &__cta-cta {
+		align-self: flex-end;
 	}
 
 	&__form-wrap {

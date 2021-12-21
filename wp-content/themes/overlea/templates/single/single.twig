@@ -1,7 +1,7 @@
 {% include "hero/hero.twig" with {
 	count: post.meta('slider')|length,
 	slides: post.meta('slider'),
-	class: 'v-hero--sm'
+	class: ''
 } %}
 
 {% include "content/content.twig" with {
@@ -9,19 +9,19 @@
 	content: post.meta('content')
 } %}
 
-{% include "recent-news/recent-news.twig" with {
-	count: 3,
+{# {% include "recent-news/recent-news.twig" with {
+	count: posts|length,
+	items: events,
 	title:    'Related News',
+	subtitle: null,
 	cta: 'View All News'
-} %}
+} %} #}
 
 {% include "cta/cta.twig" with {
+	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,
+	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
 	class: 'v-cta--bottom-overlap',
-	title: 'Join the Newsletter?',
-	cta: {
-		title: 'Submit',
-		type: 'newsletter'
-	}
+	type: post.meta('cta_type'),
 } %}
 
 {% include "form/form.twig" with {

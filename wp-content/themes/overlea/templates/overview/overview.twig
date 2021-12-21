@@ -6,20 +6,42 @@
 
 {% if post.meta('intro') %}
 	{% include "intro/intro.twig" with {
-		title:    'Child of Events Page',
 		content: post.meta('intro'),
 		heroHasSubtitle: false
 	} %}
 {% endif %}
 
 {% if post.ID == 11 %}
+
 	{% include "recent-news/recent-news.twig" with {
 		count: posts|length,
-		items: events,
-		title:    'Events',
+		type: 'event',
+		items: events_featured.posts,
+		title: 'Featured Events',
 		subtitle: null,
 		cta: null,
 	} %}
+
+	<section class="v-intro v-intro--events">
+		<div class="container v-intro__header">
+			<h2 class="v-intro__title">All Events</h2>
+		</div>
+	</section>
+
+	{% for event in events %}
+		{% include "cta/cta.twig" with {
+			title: event.post_title,
+			date: event.event_start_date,
+			cta: {
+				link_type: 'internal',
+				link: {
+					internal_url: event.link,
+				}
+			},
+			class: loop.last ? 'v-cta--last' : '',
+			type: 'event',
+		} %}
+	{% endfor %}
 {% endif %}
 
 {% include "image-content/image-content.twig" with {

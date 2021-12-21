@@ -1,7 +1,7 @@
 @use "bootstrap" as v;
 
 .v-content {
-	padding: v.spacing("large") 0;
+	padding: v.spacing("large") 0 v.spacing("small");
 
 	&__inner {
 		max-width: 1000px;
@@ -20,7 +20,6 @@
 		align-items: flex-end;
 		flex-direction: column;
 		top: v.spacing("xsmall");
-		margin-top: v.spacing("xsmall");
 		margin-left: v.spacing("small");
 		flex-shrink: 0;
 		width: 200px;
@@ -123,7 +122,7 @@
 
 @media screen and (max-width: v.$b-medium) {
 	.v-content {
-		padding-bottom: 0;
+		// padding-bottom: 0;
 
 		&__inner {
 			flex-direction: column;
@@ -134,6 +133,7 @@
 			width: 100%;
 			margin-left: 0;
 			text-align: start;
+			margin-top: v.spacing("small");
 		}
 
 		&__meta {

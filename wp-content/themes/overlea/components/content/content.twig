@@ -10,7 +10,7 @@
 					<div class="v-content__meta">
 						<ul class="v-content__meta-list">
 							{% if author[0] %}
-								<li class="v-content__meta-item"><span>{{ (type == 'opportunity') ? 'Contact' : 'Author'}}:</span><br>
+								<li class="v-content__meta-item"><span>{{ (type == 'post') ? 'Author' : 'Contact'}}:</span><br>
 									<span>
 										{% set auth_name = author[0].primary_title ? author[0].primary_title : author[0].post_title %}
 

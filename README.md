@@ -20,7 +20,8 @@
 - EVENTS https://dev.overleaonline.org/events/
   - update so that it does not show past events
   - updates so that it says 'Check back soon' if empty
-
+	- Move sponsors below content instead of sidebar
+- On the date_time-acf, add a textarea for things like "every other Saturday between July - Oct."
 ## Nice To Haves:
 
 ## Questions:

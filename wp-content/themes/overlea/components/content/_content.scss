@@ -104,6 +104,10 @@
 		}
 	}
 
+	&__meta-item#{&}__social {
+		margin-top: .125rem;
+	}
+
 	// elements
 	a:not(.v-content__social-link) {
 		position: relative;

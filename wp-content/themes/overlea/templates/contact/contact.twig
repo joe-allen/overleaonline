@@ -2,14 +2,12 @@
 	class: 'v-hero--sm'
 } %}
 
-
 {% if post.meta('intro') %}
 	{% include "intro/intro.twig" with {
 		content: post.meta('intro'),
 		heroHasSubtitle: false
 	} %}
 {% endif %}
-
 
 {% include "form/form.twig" with {
 	title:    '',

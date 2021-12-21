@@ -13,8 +13,14 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
  * @return FieldsBuilder
  */
 function contact_acf() {
+	$hero = require get_template_directory() . "/components/hero/hero-acf.php";
+	$intro = require get_template_directory() . "/components/intro/intro-acf.php";
+
 	$g_contact = new FieldsBuilder( 'contact' );
 	$g_contact
+		->addFields($hero)
+		->addFields($intro)
+
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'page_template', '==', 'template-contact.php' );
 

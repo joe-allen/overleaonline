@@ -25,7 +25,7 @@ if ( have_posts() ) :
 				'post_type'      => 'board',
 				'posts_per_page' => -1,
 				'orderby'        => 'menu_order',
-				'order'          => 'DESC',
+				'order'          => 'ASC',
 			]
 		);
 

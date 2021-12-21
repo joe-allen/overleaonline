@@ -81,6 +81,9 @@
 		&-item span:last-of-type {
 			font-weight: 300;
 		}
+		&-item span:last-of-type a{
+			font-weight: 400;
+		}
 
 		&-list--social &-item {
 			display: flex;

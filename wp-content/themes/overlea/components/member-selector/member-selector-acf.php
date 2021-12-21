@@ -10,7 +10,7 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
 $c_member_selector = new FieldsBuilder( 'member_selector' );
 
 $c_member_selector
-	->addTab( 'Author' )
+	->addTab( 'Contact / Author' )
 		->addRelationship(
 			'author_board_member',
 			[

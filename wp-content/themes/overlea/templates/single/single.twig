@@ -8,7 +8,8 @@
 	sidebar: true,
 	content: post.meta('content'),
 	author: Post(post.meta('author_board_member')),
-	sponsors: post.meta('sponsor')
+	sponsors: post.meta('sponsor'),
+	type: post.post_type
 } %}
 
 {# {% include "recent-news/recent-news.twig" with {

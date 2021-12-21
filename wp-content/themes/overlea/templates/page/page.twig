@@ -1,21 +1,18 @@
 {% include "hero/hero.twig" with {
-	count: 1,
-	title: 'DEFAULT TEMPLATE!',
-	subtitle: 'DEFAULT Subtitle!',
 	class: 'v-hero--sm'
 } %}
 
 {% include "content/content.twig" with {
-	title:    post.post_title,
 	sidebar: false,
-	content: ''
+	content: post.meta('content'),
+	author: Post(post.meta('author_board_member')),
+	sponsors: post.meta('sponsor'),
+	type: post.post_type
 } %}
 
 {% include "image-content/image-content.twig" with {
 	class: 'v-image-content--reverse',
-	title:    'Overlea is Rich in History',
-	count: 1,
-	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.'
+	items: post.meta('ic'),
 } %}
 
 {% include "form/form.twig" with {

@@ -1,15 +1,14 @@
 {% include "hero/hero.twig" with {
-	count: 1,
-	title: 'Contact',
-	subtitle: '',
 	class: 'v-hero--sm'
 } %}
 
-{% include "intro/intro.twig" with {
-	title:    'Contact Page',
-	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus. t amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.',
-	heroHasSubtitle: false
-} %}
+
+{% if post.meta('intro') %}
+	{% include "intro/intro.twig" with {
+		content: post.meta('intro'),
+		heroHasSubtitle: false
+	} %}
+{% endif %}
 
 
 {% include "form/form.twig" with {

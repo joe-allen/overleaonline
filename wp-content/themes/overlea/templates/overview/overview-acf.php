@@ -35,7 +35,8 @@ function overview_acf() {
 		->addFields( $cta )
 		->addFields( $excerpt )
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
-		->setLocation( 'page_template', '==', 'template-overview.php' );
+		->setLocation( 'page_template', '==', 'template-overview.php' )
+			->or( 'page_template', '==', 'template-get-involved.php' );
 
 		return $g_overview;
 }

@@ -1,5 +1,4 @@
 {% include "hero/hero.twig" with {
-	count: 1,
 	class: 'v-hero--sm'
 } %}
 
@@ -14,6 +13,13 @@
 	pagination: posts.pagination
 } %}
 
+{# {% if post.meta('ic') %}
+	{% include "image-content/image-content.twig" with {
+		class: 'v-image-content--reverse',
+		items: post.meta('ic'),
+	} %}
+{% endif %} #}
+
 {% include "cta/cta.twig" with {
 	title: options,
 	cta: options,
@@ -26,13 +32,6 @@
 	count: 6,
 	subtitle: 'Sponsor images should be 200x200px only. Can we encourage sponsors to use their logo / icons instead of words? <a class="v-link" href="#!">View All</a>'
 } %} #}
-
-{% include "image-content/image-content.twig" with {
-	class: 'v-image-content--reverse',
-	title:    'Overlea is Rich in History',
-	count: 1,
-	text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.'
-} %}
 
 {% include "form/form.twig" with {
 	title:    'Contact Us',

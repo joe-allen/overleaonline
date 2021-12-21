@@ -10,7 +10,15 @@
 					<div class="v-content__meta">
 						<ul class="v-content__meta-list">
 							{% if author[0] %}
-								<li class="v-content__meta-item"><span>Author:</span><br><span>{{author[0].primary_title ? author[0].primary_title : author[0].post_title}}, {{author[0].secondary_title}} {{author[0].leader_retired ? '<em>(Retired)</em>' : ''}}</span></li>
+								<li class="v-content__meta-item"><span>{{ (type == 'opportunity') ? 'Contact' : 'Author'}}:</span><br>
+									<span>
+										{% set auth_name = author[0].primary_title ? author[0].primary_title : author[0].post_title %}
+
+										{% if not author[0].leader_retired[0] %}
+										<a href="mailto:{{author[0].leader_email}}?subject={{post.post_title}}">{{auth_name}}</a>{% else %}{{auth_name}}{% endif %},
+										{{author[0].secondary_title}} {{author[0].leader_retired[0] ? '<em>(Retired)</em>' : ''}}
+									</span>
+								</li>
 							{% endif %}
 							{% if post.post_modified != post.post_date %}
 								<li class="v-content__meta-item"><span>Updated:</span><br><span>{{post.post_modified|date("F j\, Y", "America/New_York")}}</span></li>

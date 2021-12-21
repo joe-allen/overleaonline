@@ -11,6 +11,12 @@
 	} %}
 {% endif %}
 
+{% if post.ID == 32 %}
+	{% include "image-content/image-content.twig" with {
+		items: post.meta('ic'),
+	} %}
+{% endif %}
+
 {% if post.ID == 11 %}
 
 	{% include "recent-news/recent-news.twig" with {
@@ -44,7 +50,7 @@
 	{% endfor %}
 {% endif %}
 
-{% if post.ID == 32 %}
+{% if post.ID == 32 and opportunities %}
 
 	<section class="v-intro v-intro--events">
 		<div class="container v-intro__header">
@@ -63,7 +69,7 @@
 				}
 			},
 			class: loop.last ? 'v-cta--last' : '',
-			type: 'opportunity',
+			type: 'event',
 		} %}
 	{% endfor %}
 {% endif %}

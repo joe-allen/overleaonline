@@ -13,25 +13,12 @@
 	pagination: posts.pagination
 } %}
 
-{# {% if post.meta('ic') %}
-	{% include "image-content/image-content.twig" with {
-		class: 'v-image-content--reverse',
-		items: post.meta('ic'),
-	} %}
-{% endif %} #}
-
 {% include "cta/cta.twig" with {
 	title: options,
 	cta: options,
 	class: 'v-cta--bottom-overlap',
 	type: 'Newsletter',
 } %}
-
-{# {% include "sponsors/sponsors.twig" with {
-	title:    'Our Sponsors',
-	count: 6,
-	subtitle: 'Sponsor images should be 200x200px only. Can we encourage sponsors to use their logo / icons instead of words? <a class="v-link" href="#!">View All</a>'
-} %} #}
 
 {% include "form/form.twig" with {
 	title:    'Contact Us',

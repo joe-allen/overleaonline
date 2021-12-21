@@ -3,7 +3,7 @@
  * Overview
  *
  * Overview template
- * Template Name: Overview
+ * Template Name: Get Involved
  *
  * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin

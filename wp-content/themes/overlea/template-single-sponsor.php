@@ -3,7 +3,6 @@
  * Single Sponsor
  *
  * Single Sponsor template
- * Template Name: Single Sponsor
  *
  * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin

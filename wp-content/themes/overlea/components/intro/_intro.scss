@@ -3,6 +3,10 @@
 .v-intro {
 	padding: v.spacing("large") 0;
 
+	& + & {
+		padding-top: 0;
+	}
+
 	&--events {
 		padding-bottom: 0;
 	}

@@ -3,6 +3,7 @@
 #}
 <article class="v-slider {{class}}">
 	<div id="my-keen-slider" class="v-slider__wrap keen-slider">
+
 		{% for slide in slides %}
 			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
 				<div class="v-slider__overlay"></div>
@@ -33,8 +34,18 @@
 				{% endif %}
 			</div>
 		{% endfor %}
-		{% if not slides %}
+		{% if post.meta('hero_img') %}
+
 			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
+				<div class="v-slider__overlay"></div>
+				{% if slides %}
+					{% include 'img/img.twig' with {
+						id: slides,
+						class: 'v-slider__img'
+					} %}
+				{% else %}
+					<img class="v-slider__img" src="https://via.placeholder.com/1920x1080?text=Need+Image" alt="placeholder" width="1920" height="1080">
+				{% endif %}
 				<span class="v-slider__link">
 						<h1 class="v-slider__text-title">{{ post.post_title }}</h1>
 				</span>

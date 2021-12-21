@@ -20,12 +20,12 @@ function single_opportunity_acf() {
 	$content = require get_template_directory() . "/components/content/content-acf.php";
 	$member_selector = require get_template_directory() . "/components/member-selector/member-selector-acf.php";
 	$date_picker = require get_template_directory() . "/components/date-picker/date-picker-acf.php";
-	$excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
+	// $excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
 
 	$g_single_opportunity = new FieldsBuilder( 'opportunity' );
 	$g_single_opportunity
 		->addFields( $hero )
-			->modifyField( 'hero_img', [ 'instructions' => 'Recommended size: 800px by 600px' ] )
+			->modifyField( 'hero_img', [ 'instructions' => 'Recommended size: 1920px by 1080px. Less than 500kb' ] )
 		->addFields( $date_picker )
 		->addFields( $content )
 			->modifyField( 'content', [ 'toolbar' => 'bare' ] )
@@ -34,8 +34,6 @@ function single_opportunity_acf() {
 		->addFields( $sponsors )
 			->removeField( 'sponsor_title' )
 			->removeField( 'sponsor_text' )
-		->addFields( $excerpt )
-
 
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'post_type', '==', 'opportunity' );

@@ -17,7 +17,7 @@ function page_acf() {
 	$content = require get_template_directory() . "/components/content/content-acf.php";
 	$ic = require get_template_directory() . "/components/image-content/image-content-acf.php";
 	$cta = require get_template_directory() . "/components/cta/cta-acf.php";
-	$excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
+	// $excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
 
 	$g_page = new FieldsBuilder( 'page' );
 	$g_page
@@ -35,7 +35,6 @@ function page_acf() {
 		->addFields( $content )
 		->addFields( $ic )
 		->addFields( $cta )
-		->addFields( $excerpt )
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'post_type', '==', 'page' )
 			->and( 'page_template', '==', 'default' )

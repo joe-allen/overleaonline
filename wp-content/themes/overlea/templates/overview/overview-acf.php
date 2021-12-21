@@ -17,7 +17,6 @@ function overview_acf() {
 	$intro = require get_template_directory() . "/components/intro/intro-acf.php";
 	// $ic = require get_template_directory() . "/components/image-content/image-content-acf.php";
 	$cta = require get_template_directory() . "/components/cta/cta-acf.php";
-	$excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
 
 	$g_overview = new FieldsBuilder( 'overview' );
 	$g_overview
@@ -37,7 +36,6 @@ function overview_acf() {
 		// 	->modifyField( 'ic', [ 'max' => 1 ] )
 		// 	->modifyField( 'ic', [ 'instructions' => 'Use this Image / Content tab for links to Membership page.' ] )
 		->addFields( $cta )
-		->addFields( $excerpt )
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'page_template', '==', 'template-overview.php' )
 			->or( 'page_template', '==', 'template-get-involved.php' );

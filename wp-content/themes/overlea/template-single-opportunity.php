@@ -3,7 +3,6 @@
  * Single Opportunity
  *
  * Single Opportunity template
- * Template Name: Single Opportunity
  *
  * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin
@@ -20,7 +19,7 @@ if ( have_posts() ) :
 		$context         = Timber::get_context();
 		$context['post'] = Timber::get_post();
 
-		Timber::render( 'single-opportunity/single-opportunity.twig', $context );
+		Timber::render( 'single/single.twig', $context );
 
 	endwhile;
 endif;

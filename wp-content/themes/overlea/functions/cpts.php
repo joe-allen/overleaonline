@@ -79,7 +79,7 @@ function v_register_post_types() {
 			'menu_position'      => 20.6,
 			'has_archive'        => false,
 			'featured_image'     => 'Image',
-			'publicly_queryable' => false,
+			'publicly_queryable' => true,
 			'supports'           => [
 				'title',
 				'thumbnail',

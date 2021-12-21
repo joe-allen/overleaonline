@@ -42,7 +42,6 @@ const vGlobal = () => {
 
 	if ( shareBtn ) {
 		if ( ! navigator.share ) {
-			console.log( 'hyh' );
 			shareBtn.style.display = 'none';
 		} else {
 			shareBtn.addEventListener( 'click', shareOpen );

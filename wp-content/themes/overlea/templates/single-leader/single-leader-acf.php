@@ -23,6 +23,15 @@ function leader_acf() {
 			->modifyfield( 'title_tab', [ 'label' => 'Info' ] )
 			->modifyfield( 'primary_title', [ 'label' => 'Name' ] )
 			->modifyfield( 'secondary_title', [ 'label' => 'Position' ] )
+			->addTrueFalse(
+				'leader_retired',
+				[
+					'label' => 'Is Retired?',
+					'ui' => true,
+					'default_value' => 0,
+
+				]
+			)
 			->addText( 'leader_phone', [ 'label' => 'Phone' ])
 			->addEmail( 'leader_email', [ 'label' => 'Email' ])
 			->addUrl( 'leader_linkedin', [ 'label' => 'Linkedin' ])

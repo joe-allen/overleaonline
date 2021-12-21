@@ -6,7 +6,9 @@
 
 {% include "content/content.twig" with {
 	sidebar: true,
-	content: post.meta('content')
+	content: post.meta('content'),
+	author: Post(post.meta('author_board_member')),
+	sponsors: post.meta('sponsor')
 } %}
 
 {# {% include "recent-news/recent-news.twig" with {

@@ -7,12 +7,11 @@
 			</div>
 			{% if sidebar %}
 				<div class="v-content__sidebar">
-					<h4>Sponsors</h4>
-					<img class="v-content__sponsor" src="https://via.placeholder.com/100x100/" alt="placeholder" width="100" height="100">
-					<img class="v-content__sponsor" src="https://via.placeholder.com/100x100/" alt="placeholder" width="100" height="100">
 					<div class="v-content__meta">
 						<ul class="v-content__meta-list">
-							<li class="v-content__meta-item"><span>Author:</span><br><span>Melissa Spicknall</span></li>
+							{% if author[0] %}
+								<li class="v-content__meta-item"><span>Author:</span><br><span>{{author[0].primary_title ? author[0].primary_title : author[0].post_title}}, {{author[0].secondary_title}} {{author[0].leader_retired ? '<em>(Retired)</em>' : ''}}</span></li>
+							{% endif %}
 							{% if post.post_modified != post.post_date %}
 								<li class="v-content__meta-item"><span>Updated:</span><br><span>{{post.post_modified|date("F j\, Y", "America/New_York")}}</span></li>
 							{% else %}
@@ -32,10 +31,10 @@
 								</li>
 							{% endif %}
 						</ul>
-						<span class="v-content__meta-item"><strong>Share:</strong></span>
+						<span class="v-content__meta-item">Share:</span>
 						<ul class="v-content__meta-list v-content__meta-list--social">
 							<li class="v-content__meta-item v-content__social">
-								<a class="v-content__social-link" href="#!" aria-label="facebook link" target="_blank" rel="noopener">
+								<a href="http://www.facebook.com/share.php?u={{post.link}}" class="v-content__social-link"  target="_blank" rel="noopener" aria-label="facebook - opens in a new tab">
 									<span class="sr-only">facebook</span>
 									<svg class="v-content__social-icon v-icon" role="img" aria-label="facebook icon">
 										<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-facebook" />
@@ -43,7 +42,7 @@
 								</a>
 							</li>
 							<li class="v-content__meta-item v-content__social">
-								<a class="v-content__social-link" href="#!" aria-label="twitter link" target="_blank" rel="noopener">
+								<a href="https://twitter.com/intent/tweet?url={{post.link}}"  class="v-content__social-link"  target="_blank" rel="noopener" aria-label="twitter - opens in a new tab">
 									<span class="sr-only">Twitter</span>
 									<svg class="v-content__social-icon v-icon" role="img" aria-label="twitter icon">
 										<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-twitter" />
@@ -60,6 +59,31 @@
 							</li>
 						</ul>
 					</div>
+					{% if sponsors %}
+					<div class="v-content__meta">
+
+						<ul class="v-content__meta-list">
+							<li class="v-content__meta-item">Sponsors:</li>
+
+						{% for sponsor in sponsors %}
+							<li class="v-content__meta-item">
+								{% if sponsor.sponsor_logo %}
+								<a href="{{sponsor.sponsor_website}}" target="_blank" rel="noopener nofollow">
+										{% include 'img/img.twig' with {
+											id: sponsor.sponsor_logo,
+											class: 'v-content__sponsor'
+										} %}
+								</a>
+							</li>
+								{% else %}
+									<li>{{sponsor.primary_title ? sponsor.primary_title : sponsor.post_title}}</li>
+								{% endif %}
+
+
+							{% endfor %}
+						</ul>
+						</div>
+					{% endif %}
 				</div>
 			{% endif %}
 	</div>

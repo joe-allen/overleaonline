@@ -26,22 +26,14 @@ function single_opportunity_acf() {
 	$g_single_opportunity
 		->addFields( $hero )
 			->modifyField( 'hero_img', [ 'instructions' => 'Recommended size: 800px by 600px' ] )
-		->addFields( $sponsors )
-		->addFields( $map )
+		->addFields( $date_picker )
 		->addFields( $content )
 			->modifyField( 'content', [ 'toolbar' => 'bare' ] )
+		->addFields( $map )
 		->addFields( $member_selector )
-			// ->modifyField('contact_tab',
-			// 	[
-			// 		'label' => 'Noo'
-			// 	]
-			// )
-			// ->modifyField('Member',
-			// 	[
-			// 		'post_type' => 'reps'
-			// 	]
-			// )
-		->addFields( $date_picker )
+		->addFields( $sponsors )
+			->removeField( 'sponsor_title' )
+			->removeField( 'sponsor_text' )
 		->addFields( $excerpt )
 
 

@@ -23,7 +23,7 @@ if ( have_posts() ) :
 		$args = [
 			'posts_per_page' => 3,
 			'post_type' => 'post',
-			'order' => 'ASC',
+			'order' => 'DESC',
 			'order_by' => 'published_at',
 		];
 		$context['posts'] = Timber::get_posts( $args );

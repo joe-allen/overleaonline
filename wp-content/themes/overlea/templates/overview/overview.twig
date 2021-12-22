@@ -103,7 +103,7 @@
 {% endif %}
 
 {# option: class: 'v-image-content--reverse' #}
-{% if post.children %}
+{% if post.children|length > 0 %}
 	{% include "image-content/image-content.twig" with {
 		items: post.children,
 	} %}

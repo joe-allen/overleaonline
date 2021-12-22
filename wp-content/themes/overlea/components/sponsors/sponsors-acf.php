@@ -33,6 +33,7 @@ $c_sponsors
 				'min'           => 0,
 				'max'           => 8,
 			]
-		);
+		)
+		->addFields( v_create_link_field( 'sponsor_cta', 'Link' ) );
 
 return $c_sponsors;

@@ -1,5 +1,22 @@
 @use "bootstrap" as v;
 
+.page-template-template-contact [type="text"],
+.page-template-template-contact [type="date"],
+.page-template-template-contact [type="number"],
+.page-template-template-contact [type="email"],
+.page-template-template-contact [type="tel"],
+.page-template-template-contact [type="submit"],
+.page-template-template-contact [type="search"],
+.page-template-template-contact [type="color"],
+.page-template-template-contact [type="password"],
+.page-template-template-contact [type="time"],
+.page-template-template-contact [type="url"],
+.page-template-template-contact [type="checkbox"]:not(:checked),
+.page-template-template-contact select,
+.page-template-template-contact textarea {
+	background-color: v.$c-primary;
+}
+
 [type="text"],
 [type="date"],
 [type="number"],

@@ -29,41 +29,41 @@
 		</div>
 	</section>
 
-	{% for event in events %}
-		{% include "cta/cta.twig" with {
-			title: event.post_title,
-			date: event.event_start_date,
-			cta: {
-				link_type: 'internal',
-				link: {
-					internal_url: event.link,
-				}
-			},
-			class: loop.last ? 'v-cta--last' : '',
-			type: 'event',
-		} %}
-	{% endfor %}
+{% if events %}
+		{% set nowDate = "now"|date("m/d/Y") %}
+		{% for event in events %}
+
+			{% if nowDate < event.event_start_date|date("m/d/Y") or event.event_start_date == '' %}
+				{% include "cta/cta.twig" with {
+					title: event.post_title,
+					date: event.event_start_date,
+					cta: {
+						link_type: 'internal',
+						link: {
+							internal_url: event.link,
+						}
+					},
+					class: loop.last ? 'v-cta--last' : '',
+					type: 'event',
+				} %}
+			{% endif %}
+		{% endfor %}
+
+	{% else %}
+		<section class="v-intro v-intro--events">
+			<div class="container v-intro__header">
+				<h4 style="font-weight: 300;">Nothing scheduled, but check back soon!</h4>
+				<br>
+			</div>
+		</section>
+	{% endif %}
 {% endif %}
 
 {# BOARD MEMBERS #}
 {% if post.ID == 50 %}
-
-	{% for event in board %}
-
-		{# {% include "recent-news/recent-news.twig" with {
-			count: posts|length,
-			type: 'event',
-			items: board,
-			title: 'Featured Events',
-			subtitle: null,
-			cta: null,
-		} %} #}
-
-
-		{% include "image-content/image-content.twig" with {
-			items: board,
-		} %}
-	{% endfor %}
+	{% include "image-content/image-content.twig" with {
+		items: board,
+	} %}
 {% endif %}
 
 

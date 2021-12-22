@@ -34,7 +34,7 @@ function leader_acf() {
 			)
 			->addText( 'leader_phone', [ 'label' => 'Phone' ])
 			->addEmail( 'leader_email', [ 'label' => 'Email' ])
-			->addUrl( 'leader_linkedin', [ 'label' => 'Linkedin' ])
+			->addUrl( 'leader_website', [ 'label' => 'Website (e.g. LinkedIn, Facebook, etc.)' ])
 		->addFields($content)
 			->modifyField( 'content_tab', [ 'label' => 'Bio' ] )
 			->modifyField( 'content', [ 'toolbar' => 'simple' ] )

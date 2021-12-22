@@ -84,6 +84,12 @@
 			@include v.font-size("gamma");
 		}
 	}
+
+	&__content-cta {
+		& + & {
+			margin-top: 1rem;
+		}
+	}
 }
 
 .v-hero + .v-image-content {
@@ -119,6 +125,15 @@
 	.v-image-content {
 		&__img-wrap {
 			height: 200px;
+		}
+
+		&__content {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__content-cta {
+			align-self: flex-start;
 		}
 	}
 }

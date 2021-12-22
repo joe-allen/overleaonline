@@ -20,10 +20,12 @@
 {% include "sponsors/sponsors.twig" with {
 	title: post.meta('sponsor_title'),
 	items: post.meta('sponsor'),
-	subtitle: post.meta('sponsor_text')
+	subtitle: post.meta('sponsor_text'),
+	cta: false
 } %}
 
 {% include "image-content/image-content.twig" with {
+	class: 'v-image-content--reverse',
 	items: post.meta('ic'),
 } %}
 

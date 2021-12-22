@@ -22,5 +22,11 @@
 				</div>
 			{% endfor %}
 		</div>
+		<div class="v-sponsors__cta-wrap">
+			{% if cta.link.internal_url or cta.link.external_url %}
+				{% set link = (cta.link_type == 'internal') ? cta.link.internal_url : cta.link.external_url %}
+				<a class="v-sponsors__cta v-button" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{cta.link.text}}</a>
+			{% endif %}
+		</div>
 	</div>
 </section>

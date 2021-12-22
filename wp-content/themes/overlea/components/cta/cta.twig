@@ -22,7 +22,9 @@
 				{% elseif type == 'event' %}
 					<div>
 						<h3 class="v-cta__cta-text">{{title}}</h3>
+						{% if date %}
 						<span>{{date|date("F j\, Y g:i A", "America/New_York")}}</span>
+						{% endif %}
 					</div>
 					{% set link = (cta.link_type == 'external') ? cta.link.external_url : cta.link.internal_url %}
 					<a class="v-cta__cta-cta v-button v-button--lg" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>View</a>

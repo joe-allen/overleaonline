@@ -63,6 +63,16 @@
 			list-style: none;
 		}
 
+		&-list--sponsors {
+			display: flex;
+			flex-wrap: wrap;
+			width: 100%;
+		}
+
+		&-list--sponsors li {
+			margin-right: 1.5rem;
+		}
+
 		&-list--social {
 			display: flex;
 			justify-content: flex-end;
@@ -160,7 +170,8 @@
 		}
 
 		&__meta {
-			margin-top: 1.75rem;
+			margin-top: 0;
+			padding-top: 0;
 
 			&-list--social {
 				justify-content: flex-start;

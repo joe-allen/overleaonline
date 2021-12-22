@@ -4,6 +4,32 @@
 		<div class="v-content__inner">
 			<div class="v-content__content">
 				{{content}}
+
+				{% if sponsors %}
+				<div class="v-content__meta">
+
+					<span class="v-content__meta-item">Sponsors:</span>
+					<ul class="v-content__meta-list v-content__meta-list--sponsors">
+
+					{% for sponsor in sponsors %}
+						<li class="v-content__meta-item">
+							{% if sponsor.sponsor_logo %}
+							<a href="{{sponsor.sponsor_website}}" target="_blank" rel="noopener nofollow">
+									{% include 'img/img.twig' with {
+										id: sponsor.sponsor_logo,
+										class: 'v-content__sponsor'
+									} %}
+							</a>
+						</li>
+							{% else %}
+								<li>{{sponsor.primary_title ? sponsor.primary_title : sponsor.post_title}}</li>
+							{% endif %}
+
+
+						{% endfor %}
+					</ul>
+					</div>
+				{% endif %}
 			</div>
 			{% if sidebar %}
 				<div class="v-content__sidebar">
@@ -83,31 +109,6 @@
 							</li>
 						</ul>
 					</div>
-					{% if sponsors %}
-					<div class="v-content__meta">
-
-						<ul class="v-content__meta-list">
-							<li class="v-content__meta-item">Sponsors:</li>
-
-						{% for sponsor in sponsors %}
-							<li class="v-content__meta-item">
-								{% if sponsor.sponsor_logo %}
-								<a href="{{sponsor.sponsor_website}}" target="_blank" rel="noopener nofollow">
-										{% include 'img/img.twig' with {
-											id: sponsor.sponsor_logo,
-											class: 'v-content__sponsor'
-										} %}
-								</a>
-							</li>
-								{% else %}
-									<li>{{sponsor.primary_title ? sponsor.primary_title : sponsor.post_title}}</li>
-								{% endif %}
-
-
-							{% endfor %}
-						</ul>
-						</div>
-					{% endif %}
 				</div>
 			{% endif %}
 	</div>

@@ -18,13 +18,18 @@
 ----
 
 - EVENTS https://dev.overleaonline.org/events/
-  - update so that it does not show past events
-  - updates so that it says 'Check back soon' if empty
-	- Move sponsors below content instead of sidebar
-- On the date_time-acf, add a textarea for things like "every other Saturday between July - Oct."
-## Nice To Haves:
+  [x] - update so that it does not show past events
+  [x] - updates so that it says 'Check back soon' if empty
+	[x] - Move sponsors below content instead of sidebar
 
+[x] - Board members, add position and email CTA https://dev.overleaonline.org/info/board/
+## Nice To Haves:
+- On the date_time-acf, add a textarea for things like "every other Saturday between July - Oct."
 ## Questions:
+Need images for the following:
+- Overview pages:
+  -
+- Do we need a dropdown for Events or should it go straight to the 'overview' page instead?
 - Ok to have "site by joeallen.dev"?
 - Would it be better to change 'Govt Reps' to something more general? That way we can add anyone who wants their contact info on the site that may be helpful to get in touch w/?
 - Metrics for:

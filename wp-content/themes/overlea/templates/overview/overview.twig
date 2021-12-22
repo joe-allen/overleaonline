@@ -95,17 +95,17 @@
 	{% else %}
 		<section class="v-intro v-intro--events">
 			<div class="container v-intro__header">
-				<h4 style="font-weight: 300;padding-top: 1.5rem;">Sorry, we don't have anything at the moment. Check back soon!</h4>
-				<br>
+				<h4 style="font-weight: 300;padding: 1.5rem 0 7rem;">Sorry, we don't have anything at the moment. Check back soon!</h4>
+
 			</div>
 		</section>
 	{% endif %}
 {% endif %}
 
 {# option: class: 'v-image-content--reverse' #}
-{% if post.children|length > 0 %}
+{% if post.meta('ic') or post.children %}
 	{% include "image-content/image-content.twig" with {
-		items: post.children,
+		items: post.meta('ic') ? post.meta('ic') : post.children,
 	} %}
 {% endif %}
 

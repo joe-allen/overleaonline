@@ -102,10 +102,6 @@
 	{% endif %}
 {% endif %}
 
-<pre>
-{{ function('var_dump', post.children|length) }}
-</pre>
-
 {# option: class: 'v-image-content--reverse' #}
 {% if post.children|length > 0 %}
 	{% include "image-content/image-content.twig" with {

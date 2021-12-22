@@ -52,7 +52,7 @@
 	{% else %}
 		<section class="v-intro v-intro--events">
 			<div class="container v-intro__header">
-				<h4 style="font-weight: 300;">Nothing scheduled, but check back soon!</h4>
+				<h4 style="font-weight: 300;padding-top: 1.5rem;">Nothing scheduled, but check back soon!</h4>
 				<br>
 			</div>
 		</section>
@@ -68,7 +68,7 @@
 
 
 {# OPPOTUNITIES #}
-{% if post.ID == 32 and opportunities %}
+{% if post.ID == 32 %}
 
 	<section class="v-intro v-intro--events">
 		<div class="container v-intro__header">
@@ -76,26 +76,38 @@
 		</div>
 	</section>
 
-	{% for event in opportunities %}
-		{% include "cta/cta.twig" with {
-			title: event.post_title,
-			date: event.event_start_date,
-			cta: {
-				link_type: 'internal',
-				link: {
-					internal_url: event.link,
-				}
-			},
-			class: loop.last ? 'v-cta--last' : '',
-			type: 'event',
-		} %}
-	{% endfor %}
+	{% if opportunities %}
+		{% for event in opportunities %}
+			{% include "cta/cta.twig" with {
+				title: event.post_title,
+				date: event.event_start_date,
+				cta: {
+					link_type: 'internal',
+					link: {
+						internal_url: event.link,
+					}
+				},
+				class: loop.last ? 'v-cta--last' : '',
+				type: 'event',
+			} %}
+		{% endfor %}
+
+	{% else %}
+		<section class="v-intro v-intro--events">
+			<div class="container v-intro__header">
+				<h4 style="font-weight: 300;padding-top: 1.5rem;">Sorry, we don't have anything at the moment. Check back soon!</h4>
+				<br>
+			</div>
+		</section>
+	{% endif %}
 {% endif %}
 
 {# option: class: 'v-image-content--reverse' #}
-{% include "image-content/image-content.twig" with {
-	items: post.children,
-} %}
+{% if post.children %}
+	{% include "image-content/image-content.twig" with {
+		items: post.children,
+	} %}
+{% endif %}
 
 {% include "cta/cta.twig" with {
 	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,

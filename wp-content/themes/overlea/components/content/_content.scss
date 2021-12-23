@@ -145,6 +145,10 @@
 	// end elements
 }
 
+.v-intro + .v-content {
+	padding-top: 0;
+}
+
 @media screen and (max-width: v.$b-large) and (min-width: v.$b-medium) {
 	.v-content {
 		&__sidebar {

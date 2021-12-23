@@ -4,6 +4,13 @@
 	class: post.meta('hero_img') ? 'v-hero--sm' : '',
 } %}
 
+{% if post.meta('intro') %}
+	{% include "intro/intro.twig" with {
+		content: post.meta('intro'),
+		heroHasSubtitle: false
+	} %}
+{% endif %}
+
 {% include "content/content.twig" with {
 	sidebar: false,
 	content: post.meta('content'),

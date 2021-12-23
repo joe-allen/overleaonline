@@ -86,7 +86,7 @@
 	}
 
 	& + &:nth-child(even) &__inner &__content {
-		align-self: flex-start;
+		margin-right: auto;
 	}
 
 	&__content-cta {

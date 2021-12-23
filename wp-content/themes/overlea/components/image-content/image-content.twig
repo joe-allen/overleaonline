@@ -9,7 +9,7 @@
 		{% set item = {
 				ic_image: item.meta('slider')[0].slider_image,
 				ic_title: item.post_title,
-				ic_text: item.meta('excerpt'),
+				ic_text: item.meta('intro'),
 				ic_link: {
 					link_type: 'internal',
 					link: {
@@ -73,8 +73,8 @@
 						<a class="v-image-content__content-cta v-button" href="tel:{{item.ic_phone}}">Phone</a>
 					{% endif %}
 					{% if item.ic_link.link.internal_url or item.ic_link.link.external_url %}
-						{% set link = (item.ic_link.link_type == 'internal') ? item.ic_link.link.internal_url : item.ic_link.link.external_url %}
-						<a class="v-image-content__content-cta v-button" href="{{link}}" target="_blank" rel="nofollow noopener">{{item.ic_link.link.text}}</a>
+						{% set link = (item.ic_link.link_type == 'external') ? item.ic_link.link.external_url : item.ic_link.link.internal_url %}
+						<a class="v-image-content__content-cta v-button" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{item.ic_link.link.text}}</a>
 					{% endif %}
 					<!-- <a href="#!" class="">Learn More</a> -->
 				</div>

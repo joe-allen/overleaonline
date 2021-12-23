@@ -14,6 +14,7 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
  */
 function page_acf() {
 	$slider = require get_template_directory() . "/components/slider/slider-acf.php";
+	$intro = require get_template_directory() . "/components/intro/intro-acf.php";
 	$content = require get_template_directory() . "/components/content/content-acf.php";
 	$ic = require get_template_directory() . "/components/image-content/image-content-acf.php";
 	$cta = require get_template_directory() . "/components/cta/cta-acf.php";
@@ -32,6 +33,7 @@ function page_acf() {
 			)
 			->removeField( 'slider->slider_link' )
 			->removeField( 'slider->slider_subtitle' )
+		->addFields( $intro )
 		->addFields( $content )
 		->addFields( $ic )
 		->addFields( $cta )

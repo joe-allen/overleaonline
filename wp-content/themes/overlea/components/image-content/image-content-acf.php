@@ -15,7 +15,7 @@ $c_image_content
 			[
 				'label'        => 'Image / Content',
 				'button_label' => 'Add Block',
-				'min'          => '1',
+				'min'          => '0',
 				'max'          => '6',
 				'layout'       => 'block',
 			]

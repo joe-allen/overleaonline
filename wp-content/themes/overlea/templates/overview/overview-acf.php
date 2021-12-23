@@ -26,13 +26,13 @@ function overview_acf() {
 			->modifyField( 'slider',
 				[
 					'label' => '',
+					'max'   => 1,
 				]
 			)
 			->removeField( 'slider->slider_link' )
 			->removeField( 'slider->slider_subtitle' )
 		->addFields( $intro )
 		->addFields( $ic )
-			->modifyField( 'ic', [ 'max' => 1 ] )
 			->modifyField( 'ic', [ 'instructions' => 'Use this Image / Content tab for links to Membership page.' ] )
 		->addFields( $cta )
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )

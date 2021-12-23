@@ -55,9 +55,15 @@
 
 @media screen and (max-width: v.$b-small) {
 	.v-sponsors {
+
+		&__wrap {
+			flex-wrap: wrap;
+		}
+
 		.v-sponsor {
 			width: 100%;
 			margin: 0;
+
 
 			&:first-of-type {
 				margin-top: v.spacing("xsmall");

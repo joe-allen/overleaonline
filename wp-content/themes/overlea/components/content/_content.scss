@@ -183,3 +183,15 @@
 		}
 	}
 }
+
+@media screen and (max-width: v.$b-small) {
+	.v-content {
+
+		&__meta {
+
+			&-list--sponsors {
+				flex-direction: column;
+			}
+		}
+	}
+}

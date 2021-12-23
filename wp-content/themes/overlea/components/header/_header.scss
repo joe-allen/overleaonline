@@ -625,6 +625,15 @@
 			right: 23px;
 		}
 
+		&.open &__nav-child-item {
+			line-height: .8;
+			padding: .3rem 1.5rem;
+		}
+
+		&__nav-child-link {
+			white-space: normal;
+		}
+
 		&.open &__nav-child-link {
 
 			&:hover::after,

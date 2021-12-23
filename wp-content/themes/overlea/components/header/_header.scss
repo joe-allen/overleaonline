@@ -466,6 +466,10 @@
 		display: none;
 	}
 
+	&.open &__nav-item {
+		outline: none;
+	}
+
 	&.open &__nav-item:not(:first-of-type) {
 		padding: 0;
 		margin: .5rem 0;
@@ -619,6 +623,15 @@
 	.v-header {
 		&__hamburger {
 			right: 23px;
+		}
+
+		&.open &__nav-child-link {
+
+			&:hover::after,
+			&:focus::after,
+			&:active::after {
+				transform: translate(28px, -50%) rotate(45deg);
+			}
 		}
 	}
 }

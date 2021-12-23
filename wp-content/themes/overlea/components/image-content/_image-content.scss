@@ -85,6 +85,10 @@
 		}
 	}
 
+	& + &:nth-child(even) &__inner &__content {
+		align-self: flex-start;
+	}
+
 	&__content-cta {
 		& + & {
 			margin-top: 1rem;

@@ -4,6 +4,13 @@
 	padding: v.spacing("large") 0;
 	@include v.font-size("epsilon");
 
+	&__inner {
+		max-width: 1000px;
+		display: flex;
+		justify-content: space-between;
+		margin: 0 auto;
+	}
+
 	& + & {
 		padding-top: 0;
 	}

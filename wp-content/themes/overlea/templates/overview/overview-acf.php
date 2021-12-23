@@ -26,7 +26,6 @@ function overview_acf() {
 			->modifyField( 'slider',
 				[
 					'label' => '',
-					'max'   => 1,
 				]
 			)
 			->removeField( 'slider->slider_link' )

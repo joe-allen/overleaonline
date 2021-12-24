@@ -1,7 +1,7 @@
 @use "bootstrap" as v;
 
 .v-recent-news {
-	padding: v.spacing("large") 0 v.spacing("xsmall");
+	padding: v.spacing("small") 0 v.spacing("xsmall");
 
 	&__header {
 		margin-bottom: v.spacing("xsmall");

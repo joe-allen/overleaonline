@@ -302,6 +302,14 @@
 				max-width: 20px;
 				max-height: 20px;
 				font-size: 50%;
+				margin: .2rem 0;
+				transform: scale(.8);
+			}
+
+			.dot--active {
+				&::after {
+					left: -100%;
+				}
 			}
 		}
 	}

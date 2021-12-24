@@ -28,6 +28,6 @@ $c_hero
 				'default_value' => 0,
 			]
 		)
-		->setInstructions('This will not crop the image and will show a duplicated blurred image in the background on desktop devices');
+		->setInstructions('Do not crop image. This is useful when entire image needs to be seen and image size is not near the suggested dimensions.');
 
 return $c_hero;

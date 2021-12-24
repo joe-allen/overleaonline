@@ -37,7 +37,7 @@ $c_slider
 				'default_value' => 0,
 			]
 		)
-		->setInstructions('Do not crop image. This is useful for images that are not near the suggested dimensions.')
+		->setInstructions('Do not crop image. This is useful when entire image needs to be seen and image size is not near the suggested dimensions.')
 		->addFields( v_create_link_field( 'slider_link', 'Slide Link' ) )
 		->addText( 'slider_subtitle', [ 'label' => 'Slide Subtitle' ] )
 	->endRepeater();

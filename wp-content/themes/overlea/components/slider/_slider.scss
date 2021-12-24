@@ -105,7 +105,7 @@
 		object-fit: cover;
 		transform: translate(-50%, -50%);
 		filter: blur(10px);
-		opacity: .5;
+		opacity: .6;
 		object-fit: cover;
 	}
 
@@ -264,13 +264,13 @@
 @media screen and (max-width: v.$b-medium) {
 	.v-slider {
 
-		&__img {
-			object-fit: cover;
-		}
+		// &__img {
+		// 	object-fit: cover;
+		// }
 
-		&__img--blur + &__img {
-			object-fit: cover;
-		}
+		// &__img--blur + &__img {
+		// 	object-fit: cover;
+		// }
 
 		.arrow {
 			opacity: 1;

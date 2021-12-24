@@ -15,7 +15,6 @@ $c_date_picker
 			'event_start_date',
 			[
 				'label'          => 'Start Date / Time',
-				'display_format' => 'm/d/Y',
 				'wrapper' => [
 					'width' => '50',
 				],
@@ -24,7 +23,6 @@ $c_date_picker
 				'event_end_date',
 				[
 					'label'          => 'End Date / Time',
-					'display_format' => 'm/d/Y',
 					'wrapper' => [
 						'width' => '50',
 					],

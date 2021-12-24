@@ -29,6 +29,15 @@ $c_slider
 				'preview_size'  => 'medium',
 			]
 		)
+		->addTrueFalse(
+			'slider_img_blur',
+			[
+				'label' => 'Contain image?',
+				'ui' => true,
+				'default_value' => 0,
+			]
+		)
+		->setInstructions('Do not crop image. This is useful for images that are not near the suggested dimensions.')
 		->addFields( v_create_link_field( 'slider_link', 'Slide Link' ) )
 		->addText( 'slider_subtitle', [ 'label' => 'Slide Subtitle' ] )
 	->endRepeater();

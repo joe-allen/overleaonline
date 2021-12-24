@@ -7,7 +7,16 @@
 		{% for slide in slides %}
 			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
 				<div class="v-slider__overlay"></div>
+				<pre>
+				{{ function('var_dump', slide.slider_img_blur) }}
+				</pre>
 				{% if slide.slider_image %}
+					{% if slide.slider_img_blur %}
+						{% include 'img/img.twig' with {
+							id: slide.slider_image,
+							class: 'v-slider__img v-slider__img--blur'
+						} %}
+					{% endif %}
 					{% include 'img/img.twig' with {
 						id: slide.slider_image,
 						class: 'v-slider__img'
@@ -39,6 +48,12 @@
 			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
 				<div class="v-slider__overlay"></div>
 				{% if slides %}
+					{% if post.meta('hero_img_blur') %}
+						{% include 'img/img.twig' with {
+							id: slides,
+							class: 'v-slider__img v-slider__img--blur'
+						} %}
+					{% endif %}
 					{% include 'img/img.twig' with {
 						id: slides,
 						class: 'v-slider__img'

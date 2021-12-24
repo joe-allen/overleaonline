@@ -32,6 +32,7 @@ Need images for the following:
 - Do we need a dropdown for Events or should it go straight to the 'overview' page instead?
 - Ok to have "site by joeallen.dev"?
 - Would it be better to change 'Govt Reps' to something more general? That way we can add anyone who wants their contact info on the site that may be helpful to get in touch w/?
+- The site that all of the Rec links link to is down https://dev.overleaonline.org/resources/recreation/
 - Metrics for:
   - Current Newsletter's being emailed?
   - Current Analytics

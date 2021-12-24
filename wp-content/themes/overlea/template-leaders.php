@@ -1,9 +1,9 @@
 <?php
 /**
- * Board
+ * Leadership
  *
- * Board template
- * Template Name: Board
+ * Leadership template
+ * Template Name: Leadership
  *
  * @package Vitamin\Vanilla_Theme\Templates
  * @author  Vitamin
@@ -25,7 +25,20 @@ if ( have_posts() ) :
 				'post_type'      => 'board',
 				'posts_per_page' => -1,
 				'orderby'        => 'menu_order',
+				'meta_key'			 => 'leader_board_member',
 				'order'          => 'ASC',
+				'meta_query'     => [
+					[
+						'key' => 'leader_board_member',
+						'value' => 1,
+						'compare' => '==',
+					],
+					[
+						'key' => 'leader_retired',
+						'value' => 0,
+						'compare' => '==',
+					],
+				],
 			]
 		);
 

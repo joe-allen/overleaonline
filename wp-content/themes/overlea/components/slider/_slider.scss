@@ -49,6 +49,10 @@
 		transform: translateY(-50%) scale(1);
 	}
 
+	&--blur {
+		// display: none;
+	}
+
 	.arrow {
 		position: absolute;
 		cursor: pointer;
@@ -90,6 +94,23 @@
 		height: 100%;
 		object-fit: cover;
 		transform: translate(-50%, -50%);
+	}
+
+	&__img--blur {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: translate(-50%, -50%);
+		filter: blur(10px);
+		opacity: .5;
+		object-fit: cover;
+	}
+
+	&__img--blur + &__img {
+		object-fit: contain;
 	}
 
 	span.v-slider__link {
@@ -242,6 +263,15 @@
 
 @media screen and (max-width: v.$b-medium) {
 	.v-slider {
+
+		&__img {
+			object-fit: cover;
+		}
+
+		&__img--blur + &__img {
+			object-fit: cover;
+		}
+
 		.arrow {
 			opacity: 1;
 			width: 1.5rem;

@@ -29,29 +29,29 @@ function v_register_post_types() {
 			],
 		],
 		[
-			'singular' => 'Member',
-			'plural'   => 'Board Members',
+			'singular' => 'Leader',
+			'plural'   => 'Leadership',
 		]
 	);
 
-	register_extended_post_type(
-		'reps',
-		[
-			'menu_icon'          => 'dashicons-bank',
-			'menu_position'      => 20.6,
-			'has_archive'        => false,
-			'featured_image'     => 'Headshot',
-			'publicly_queryable' => false,
-			'supports'           => [
-				'title',
-				'thumbnail',
-			],
-		],
-		[
-			'singular' => 'Rep / Resource',
-			'plural'   => 'Reps / Resources',
-		]
-	);
+	// register_extended_post_type(
+	// 	'reps',
+	// 	[
+	// 		'menu_icon'          => 'dashicons-bank',
+	// 		'menu_position'      => 20.6,
+	// 		'has_archive'        => false,
+	// 		'featured_image'     => 'Headshot',
+	// 		'publicly_queryable' => false,
+	// 		'supports'           => [
+	// 			'title',
+	// 			'thumbnail',
+	// 		],
+	// 	],
+	// 	[
+	// 		'singular' => 'Rep / Resource',
+	// 		'plural'   => 'Reps / Resources',
+	// 	]
+	// );
 
 	register_extended_post_type(
 		'events',

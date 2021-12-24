@@ -24,12 +24,26 @@ function leader_acf() {
 			->modifyfield( 'primary_title', [ 'label' => 'Name' ] )
 			->modifyfield( 'secondary_title', [ 'label' => 'Position' ] )
 			->addTrueFalse(
-				'leader_retired',
+				'leader_board_member',
 				[
-					'label' => 'Is Retired?',
+					'label' => 'Board Member?',
 					'ui' => true,
 					'default_value' => 0,
-
+				]
+			)
+			->addTrueFalse(
+				'leader_retired',
+				[
+					'label' => 'Retired?',
+					'ui' => true,
+					'default_value' => 0,
+					'conditional_logic' => [
+						[
+							'field' => 'leader_board_member',
+							'operator' => '==',
+							'value' => 1
+						]
+					],
 				]
 			)
 			->addText( 'leader_phone', [ 'label' => 'Phone' ])

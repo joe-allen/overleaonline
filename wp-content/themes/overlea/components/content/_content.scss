@@ -71,6 +71,9 @@
 
 		&-list--sponsors li {
 			margin-right: 1.5rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 		&-list--social {

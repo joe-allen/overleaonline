@@ -14,7 +14,6 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
  */
 function events_acf() {
 
-	$title = require get_template_directory() . "/components/title/title-acf.php";
 	$hero = require get_template_directory() . "/components/hero/hero-acf.php";
 	$content = require get_template_directory() . "/components/content/content-acf.php";
 	$member_selector = require get_template_directory() . "/components/member-selector/member-selector-acf.php";
@@ -27,7 +26,6 @@ function events_acf() {
 
 	$g_events = new FieldsBuilder( 'event' );
 	$g_events
-		->addFields( $title )
 		->addFields( $hero )
 		->addFields( $content )
 		->addFields( $member_selector )

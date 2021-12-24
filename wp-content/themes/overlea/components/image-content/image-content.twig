@@ -7,7 +7,7 @@
 	<!-- loop child pages -->
 	{% if item.post_parent == post.ID %}
 		{% set item = {
-				ic_image: item.meta('slider')[0].slider_image,
+				ic_image: item.meta('hero_img') ? item.meta('hero_img') : item.meta('slider')[0].slider_image,
 				ic_title: item.post_title,
 				ic_text: item.meta('intro'),
 				ic_link: {

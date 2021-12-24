@@ -4,11 +4,15 @@
 	class: post.meta('hero_img') ? 'v-hero--sm' : '',
 } %}
 
+{% if post.meta('intro') %}
+	{% include "intro/intro.twig" with {
+		content: post.meta('intro'),
+		heroHasSubtitle: false
+	} %}
+{% endif %}
+
 {% include "recent-news/recent-news.twig" with {
-	title:    'What\'s Happening',
 	items: posts,
-	subtitle: 'News around the neighborhood',
-	cta: 'View More'
 } %}
 
 {% include "pagination/pagination.twig" with {

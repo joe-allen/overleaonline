@@ -2,9 +2,12 @@
 	@var string class plain text
 #}
 <section class="v-recent-news {{class}}">
+	{% if title or cta %}
 	<div class="container v-recent-news__header">
 		<div class="v-recent-news__header-titles">
-			<h2 class="v-recent-news__title">{{title}}</h1>
+			{% if title %}
+				<h2 class="v-recent-news__title">{{title}}</h1>
+			{% endif %}
 				{% if subtitle %}
 					<h3 class="v-recent-news__subtitle">{{subtitle}}</h2>
 				{% endif %}
@@ -17,6 +20,7 @@
 			</div>
 		{% endif %}
 	</div>
+	{% endif %}
 
 	{% include 'grid/grid.twig' with {
 		count: count,

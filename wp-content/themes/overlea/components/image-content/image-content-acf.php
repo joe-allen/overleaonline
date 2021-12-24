@@ -28,6 +28,7 @@ $c_image_content
 					'preview_size'  => 'medium',
 				]
 			)
+			->setInstructions('Recommended size: 1920px by 1280px')
 			->addText('ic_title', [ 'label' => 'Title' ])
 			->addTextarea(
 				'ic_text',

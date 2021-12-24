@@ -29,6 +29,7 @@ $c_slider
 				'preview_size'  => 'medium',
 			]
 		)
+		->setInstructions('Recommended size: 1920px by 1280px')
 		->addTrueFalse(
 			'slider_img_blur',
 			[

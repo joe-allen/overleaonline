@@ -29,7 +29,7 @@
 		</div>
 	</section>
 
-{% if events %}
+	{% if events %}
 		{% set nowDate = "now"|date("m/d/Y") %}
 		{% for event in events %}
 			{% if function('strtotime', nowDate) < function('strtotime', event.event_start_date|date("m/d/Y")) or event.event_start_date == '' %}
@@ -66,8 +66,22 @@
 {% endif %}
 
 
-{# OPPOTUNITIES #}
+{# GET INVOLVED / OPPOTUNITIES #}
 {% if post.ID == 32 %}
+
+	<section class="v-intro v-intro--membership">
+		<div class="container v-intro__header">
+			<h2 class="v-intro__title">Membership Payment</h2>
+		</div>
+	</section>
+
+
+	{% include "form/form.twig" with {
+		title:    '',
+		subtitle: '',
+		class: 'v-form--contact',
+		shortcode_membership: '[contact-form-7 id="446" title="Membership"]'
+	} %}
 
 	<section class="v-intro v-intro--events">
 		<div class="container v-intro__header">
@@ -117,6 +131,6 @@
 
 {% include "form/form.twig" with {
 	title:    'Contact Us',
-	subtitle: 'We\'re all ears!'
+	subtitle: 'We\'re all ears!',
+	shortcode_contact: '[contact-form-7 id="5" title="Contact Form"]',
 } %}
-

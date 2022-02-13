@@ -10,7 +10,20 @@
 					<h3 class="v-form__content-subtitle">{{subtitle}}</h3>
 				</div>
 			{% endif %}
-			<form class="v-form__form">
+
+			{% if shortcode_membership %}
+				<div class="v-form__form">
+					{{ function( 'do_shortcode', shortcode_membership ) }}
+				</div>
+			{% endif %}
+
+			{% if shortcode_contact %}
+				<div class="v-form__form">
+					{{ function( 'do_shortcode', shortcode_contact ) }}
+				</div>
+			{% endif %}
+
+			<!-- <form class="v-form__form">
 				<div class="v-form__field">
 					<label for="input1" class="v-form__input-label">
 						<span class="sr-only">name</span>
@@ -42,7 +55,7 @@
 							<button type="submit" class="v-form__input-submit v-button v-button--dark">Send</button>
 					</div>
 				</div>
-			</form>
+			</form> -->
 		</div>
 	</div>
 </section>

@@ -9,6 +9,11 @@
 	&--contact {
 		background-color: #fff;
 		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	.page-template-template-get-involved &__inner {
+		padding-bottom: 0;
 	}
 
 	&__inner {
@@ -63,26 +68,48 @@
 
 	&__flex {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 	}
 
+	.wpcf7-checkbox label,
 	&__flex &__field {
 		display: flex;
 		align-items: center;
 	}
 
+	.page-template-template-contact &__field textarea,
+	.page-template-template-contact &__field input,
+	&__field--outline input {
+		color: var(--c-primary);
+		background: #fff;
+		border: 1px solid var(--c-primary);
+
+		&::placeholder {
+			opacity: 1;
+			color: var(--c-primary);
+		}
+	}
+
+	.wpcf7-checkbox label,
 	&__input-label {
 		color: #fff;
+	}
+
+	.page-template-template-contact &__field .wpcf7-checkbox label,
+	&__field--outline .wpcf7-checkbox label {
+		color: var(--c-primary);
 	}
 
 	&--contact &__input-label {
 		color: v.$c-text;
 	}
 
-	&__field--submit {
+	&__flex &__field--submit {
 		display: flex;
 		margin-left: auto;
 		justify-content: flex-end;
+		align-items: flex-end;
+		flex-direction: column;
 	}
 }
 
@@ -142,5 +169,45 @@
 		.v-cta &__field {
 			padding: 15px 1.75em;
 		}
+	}
+}
+
+.v-form__field--submit.v-form__field input[type="submit"] {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	padding: .75em 3em;
+	line-height: 1.2;
+	color: #fff;
+	background: var(--c-primary);
+	border: 0;
+	box-shadow: none;
+	border-radius: 25px;
+	font-weight: 800;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background .15s ease-out;
+
+	&:focus,
+	&:hover {
+		background: var(--c-primary-hover);
+		text-decoration: none;
+		color: #fff;
+	}
+}
+
+.v-form__field--submit.v-form__field--submit--dark input[type="submit"] {
+	background: var(--c-primary-hover);
+}
+
+.v-form__select-field {
+	color: var(--c-primary);
+	background: #fff;
+	border: 1px solid var(--c-primary);
+	height: 58px;
+	padding-block: 0;
+
+	&::placeholder {
+		color: var(--c-primary);
 	}
 }

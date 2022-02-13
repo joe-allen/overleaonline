@@ -17,6 +17,10 @@
 	background-color: v.$c-primary;
 }
 
+.page-template-template-contact [type="checkbox"]:not(:checked) {
+	background-color: v.$c-primary-hover;
+}
+
 [type="text"],
 [type="date"],
 [type="number"],
@@ -59,7 +63,7 @@ select {
 	background-color: v.$c-primary-hover;
 	border-radius: 4px;
 	outline: none;
-	transition-duration: 0.3s;
+	transition-duration: .3s;
 }
 
 [type="checkbox"]:focus {
@@ -159,8 +163,8 @@ label[for],
 
 	&__select-arrow {
 		position: absolute;
-		top: 50%;
-		right: 10px;
+		top: 51%;
+		right: 25px;
 		width: 0;
 		height: 0;
 		border-style: solid;

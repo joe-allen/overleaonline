@@ -14,13 +14,17 @@
 
 	}
 
+	&--event + &--event {
+		padding-top: 0;
+	}
+
 	&--event &__inner {
 		box-shadow: none;
 		// border-bottom: 1px solid ;
 	}
 
 	&--last {
-		padding: v.spacing("xsmall") 0 !important;
+		// padding: v.spacing("xsmall") 0 !important;
 	}
 
 	&--bottom-overlap {

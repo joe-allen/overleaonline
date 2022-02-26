@@ -14,6 +14,9 @@
 - on slider.twig add `element = function('is_front_page') ? a : span;`
 - Slider 'left' arrow working?
 - If you refresh 1/2 down the page, the hamburger is shown even if you scroll all the way to the top.
+- Thank you copy/image for "membership-thank-you" page
+- Yoast block site from SEO for "membership-thank-you" page
+- Buy / install SSL
 
 ----
 
@@ -23,6 +26,24 @@
 	[x] - Move sponsors below content instead of sidebar
 
 [x] - Board members, add position and email CTA https://dev.overleaonline.org/info/board/
+
+---
+
+## Plugins
+- Akismet
+  - Reason: Spam protection on contact form
+  - Price: $8.33 / mo
+  - Site:  - https://akismet.com/plans/
+
+- PayPal
+  - Reason: Paid plugin version allows for reoccuring payments and option to set membership price (otherwise site user has the ability to set the cost).
+  - Price: $59.99 / yr or 159.99 / lifetime
+  - Site: https://wpplugin.org/downloads/contact-form-7-paypal-add-on/
+
+- SSL Certificate
+  - Reason: Encrpyts data sent to and from the site. Using SSLs / the HTTPS protocal is standard these days and can also hurt SEO if not used.
+  - Price: $63.99 / yr
+  - Site: https://www.godaddy.com/web-security/ssl-certificate
 ## Nice To Haves:
 - On the date_time-acf, add a textarea for things like "every other Saturday between July - Oct."
 ## Questions:
@@ -40,5 +61,4 @@ Need images for the following:
 
 ## Comments:
 ## LAST LEFT OFF:
-- Add taxonomy to 'Events' `https://github.com/johnbillion/extended-cpts/wiki/Registering-Post-Types`
-
+- Testing PayPal w/ real account (Need doris to change to my phone so I can get in)

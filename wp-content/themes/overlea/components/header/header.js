@@ -97,10 +97,10 @@ const vHeader = () => {
 		} );
 
 		gsap.to( dropdown.querySelectorAll( 'li' ), {
-			duration: .2,
+			duration: .1,
 			opacity:  1,
 			stagger:  {
-				each: .1,
+				each: .05,
 			},
 		} );
 

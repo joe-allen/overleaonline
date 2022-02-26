@@ -28,7 +28,7 @@
 		height: 100vh;
 		border-top-right-radius: 0;
 		transform-origin: top right;
-		border-top: 50vh solid v.$c-primary-hover;
+		// border-top: 50vh solid v.$c-primary-hover;
 		border-right: 145vw solid v.$c-primary;
 		border-bottom: 50vw solid v.$c-primary;
 		transform: scale(0);
@@ -49,9 +49,7 @@
 		}
 
 		&--bottom path {
-			stroke: v.$c-text;
-			stroke-width: 1px;
-			fill: v.$c-primary;
+			fill: #fff;
 		}
 	}
 
@@ -159,7 +157,6 @@
 	}
 
 	&__nav-has-children.open:hover {
-
 		& .v-link {
 			border-bottom: 3px solid transparent;
 			opacity: 1;
@@ -248,7 +245,7 @@
 		}
 
 		&::after {
-			content: '';
+			content: "";
 			position: absolute;
 			right: 0;
 			top: 50%;
@@ -277,7 +274,8 @@
 		border: none;
 		top: clamp(2rem, 3vw, 4rem);
 		right: clamp(2rem, 3vw, 4rem);
-		transform-origin: right bottom;
+		// transform-origin: right bottom;
+		transform: scale(.6);
 		width: 54px;
 		height: 32px;
 		z-index: 1;
@@ -348,7 +346,7 @@
 	&.open &__hamburger {
 		opacity: 1 !important;
 		transform-origin: center;
-		transform: translateY(0) scale(.7) !important;
+		transform: translateY(0) scale(.5) !important;
 
 		&::after {
 			background-color: var(--c-primary-hover);
@@ -583,6 +581,7 @@
 			display: none;
 			transform: translateY(-50%) rotate(45deg);
 		}
+
 		&__nav-has-children &__nav-link {
 			cursor: text;
 		}
@@ -635,7 +634,6 @@
 		}
 
 		&.open &__nav-child-link {
-
 			&:hover::after,
 			&:focus::after,
 			&:active::after {

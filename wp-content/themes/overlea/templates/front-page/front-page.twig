@@ -15,6 +15,7 @@
 	title: post.meta('cta_type') == 'Random' ? post.meta('cta_text') : options,
 	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
 	type: post.meta('cta_type'),
+	shortcode_newsletter: post.meta('cta_type') == 'Newsletter' ? '[contact-form-7 id="477" title="Newsletter Signup"]' : '',
 } %}
 
 {% include "sponsors/sponsors.twig" with {

@@ -113,6 +113,45 @@ h6,
 	}
 }
 
+figure {
+	margin-left: 0;
+	max-width: 100%;
+}
+
+figure img {
+	margin-bottom: 1.25rem !important;
+}
+
+figure a:hover {
+	border-bottom: none !important;
+}
+
+figure.aligncenter img,
+figure.alignright img {
+	// margin-top: 0 !important;
+}
+
+figcaption {
+	margin-block-end: 3rem !important;
+	@include v.font-size("zeta");
+	font-weight: 300;
+}
+
+figure.alignleft figcaption,
+figure.alignright figcaption {
+	margin-block-end: 1.25rem !important;
+}
+
+figure.alignright figcaption,
+figure.alignright img {
+	padding-inline-start: 1.25rem !important;
+}
+
+figure.alignleft figcaption
+figure.alignleft img {
+	padding-inline-end: 1.25rem !important;
+}
+
 h1 + h2 {
 	@include v.font-size("delta");
 	opacity: .7;

@@ -119,6 +119,10 @@
 	&__nav-item:nth-last-child(2) &__nav-link {
 
 		@extend .v-button;
+
+		&:hover {
+			opacity: 1;
+		}
 	}
 
 	&__nav-item:last-of-type {

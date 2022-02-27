@@ -81,6 +81,7 @@
 		background-color: #fff;
 
 		&-title {
+			text-transform: capitalize;
 			@include v.font-size("gamma");
 		}
 	}
@@ -98,6 +99,14 @@
 
 .v-hero + .v-image-content {
 	padding: v.spacing("large", 1.5) 0 0;
+}
+
+.v-form--contact + .v-image-content {
+	padding-block-start: v.spacing("large");
+}
+
+.v-image-content + .v-form {
+	padding-top: v.spacing("small");
 }
 
 .v-intro + .v-image-content {
@@ -118,6 +127,7 @@
 		&__content {
 			padding: v.spacing("small") v.spacing("xsmall");
 		}
+
 		&__img-wrap {
 			width: 100%;
 			height: 300px;

@@ -33,8 +33,8 @@ if ( have_posts() ) :
 							'terms'    => 'featured',
 						),
 					),
-					'orderby'        => 'meta_value',
-					'order'          => 'DESC',
+					'orderby'        => 'event_start_date',
+					'order'          => 'ASC',
 				];
 
 			$context['events_featured'] = new WP_Query( $args);
@@ -45,8 +45,8 @@ if ( have_posts() ) :
 					'post_type'      => 'events',
 					'posts_per_page' => -1,
 					'meta_key'       => 'event_start_date',
-					'orderby'        => 'meta_value',
-					'order'          => 'DESC',
+					'orderby'        => 'event_start_date',
+					'order'          => 'ASC',
 				]
 			);
 		}

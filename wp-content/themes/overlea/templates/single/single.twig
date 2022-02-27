@@ -7,6 +7,7 @@
 {% include "content/content.twig" with {
 	sidebar: true,
 	content: post.meta('content'),
+	footnotes: post.meta('content_footnotes'),
 	author: Post(post.meta('author_board_member')),
 	sponsors: post.meta('sponsor'),
 	type: post.post_type
@@ -25,6 +26,7 @@
 	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
 	class: 'v-cta--bottom-overlap',
 	type: post.meta('cta_type'),
+	shortcode_newsletter: post.meta('cta_type') == 'Newsletter' ? '[contact-form-7 id="477" title="Newsletter Signup"]' : '',
 } %}
 
 {% include "form/form.twig" with {

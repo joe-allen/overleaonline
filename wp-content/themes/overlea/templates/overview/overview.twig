@@ -15,10 +15,10 @@
 {% if post.ID == 11 %}
 
 	{% include "recent-news/recent-news.twig" with {
-		count: posts|length,
 		type: 'event',
 		items: events_featured.posts,
 		title: 'Featured Events',
+		type: 'fourth',
 		subtitle: null,
 		cta: null,
 	} %}
@@ -67,7 +67,7 @@
 
 
 {# GET INVOLVED / OPPOTUNITIES #}
-{% if post.ID == 32 %}
+{% if post.ID == 17 or post.ID == 32 %}
 
 	<section class="v-intro v-intro--membership">
 		<div class="container v-intro__header">
@@ -83,35 +83,38 @@
 		shortcode_membership: '[contact-form-7 id="457" title="Membership"]'
 	} %}
 
-	<section class="v-intro v-intro--events">
-		<div class="container v-intro__header">
-			<h2 class="v-intro__title">Volunteer Opportunities</h2>
-		</div>
-	</section>
+	{% if post.ID == 32 %}
 
-	{% if opportunities %}
-		{% for event in opportunities %}
-			{% include "cta/cta.twig" with {
-				title: event.post_title,
-				date: event.event_start_date,
-				cta: {
-					link_type: 'internal',
-					link: {
-						internal_url: event.link,
-					}
-				},
-				class: loop.last ? 'v-cta--last' : '',
-				type: 'event',
-			} %}
-		{% endfor %}
-
-	{% else %}
 		<section class="v-intro v-intro--events">
 			<div class="container v-intro__header">
-				<h4 style="font-weight: 300;padding: 1.5rem 0 7rem;">Sorry, we don't have anything at the moment. Check back soon!</h4>
-
+				<h2 class="v-intro__title">Volunteer Opportunities</h2>
 			</div>
 		</section>
+
+		{% if opportunities %}
+			{% for event in opportunities %}
+				{% include "cta/cta.twig" with {
+					title: event.post_title,
+					date: event.event_start_date,
+					cta: {
+						link_type: 'internal',
+						link: {
+							internal_url: event.link,
+						}
+					},
+					class: loop.last ? 'v-cta--last' : '',
+					type: 'event',
+				} %}
+			{% endfor %}
+
+		{% else %}
+			<section class="v-intro v-intro--events">
+				<div class="container v-intro__header">
+					<h4 style="font-weight: 300;padding: 1.5rem 0 7rem;">Sorry, we don't have anything at the moment. Check back soon!</h4>
+
+				</div>
+			</section>
+		{% endif %}
 	{% endif %}
 {% endif %}
 
@@ -127,7 +130,7 @@
 	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
 	class: 'v-cta--bottom-overlap',
 	type: post.meta('cta_type'),
-	shortcode_newsletter: '[contact-form-7 id="477" title="Newsletter Signup"]',
+	shortcode_newsletter: post.meta('cta_type') == 'Newsletter' ? '[contact-form-7 id="477" title="Newsletter Signup"]' : '',
 } %}
 
 {% include "form/form.twig" with {

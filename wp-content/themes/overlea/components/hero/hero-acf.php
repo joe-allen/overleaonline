@@ -28,6 +28,6 @@ $c_hero
 				'default_value' => 0,
 			]
 		)
-		->setInstructions('Do not crop image. This is useful when entire image needs to be seen and image size is not near the suggested dimensions.');
+		->setInstructions( 'Useful when an image should expand beyond it\'s container.<br>Otherwise, an image will fill the entire space allowed.' );
 
 return $c_hero;

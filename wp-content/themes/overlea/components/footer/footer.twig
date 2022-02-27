@@ -77,30 +77,25 @@
 				</ul>
 			</nav>
 
+
 			<ul class="v-footer__social-list">
-				<li class="v-footer__social-item">
-					<a href="#!" aria="LinkedIn Opens in New Window">
-						<svg class="v-footer__social-img v-icon" role="img" aria-label="facebook icon">
-							<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-facebook" />
-						</svg>
-						<span class="sr-only">Facebook</span>
-					</a>
-				</li>
-				<li class="v-footer__social-item">
-					<a href="#!" aria="LinkedIn Opens in New Window">
-						<svg class="v-footer__social-img v-icon" role="img" aria-label="twitter icon">
-							<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-twitter" />
-						</svg>
-						<span class="sr-only">Twitter</span>
-					</a>
-				</li>
+				{% for social in options.company_social %}
+					<li class="v-footer__social-item">
+						<a href="{{social.url}}" aria="{{social.icon}} — Opens in New Window" target="_blank" rel="nofollow noopener">
+							<svg class="v-footer__social-img v-icon" role="img" aria-label="{{social.icon}} icon">
+								<use xlink:href="{{theme.link}}/img/icons.svg#v-icon-{{social.icon}}" />
+							</svg>
+							<span class="sr-only">{{social.icon}}</span>
+						</a>
+					</li>
+				{% endfor %}
 			</ul>
 
 			<p class="v-footer__outro">
-				<a class="v-footer__outro-link" href="#!">Terms of Use</a>
+				<!-- <a class="v-footer__outro-link" href="#!">Terms of Use</a>
 				<span class="divider">|</span>
 				<a class="v-footer__outro-link" href="#!">Privacy Policy</a>
-				<span class="divider">|</span>
+				<span class="divider">|</span> -->
 				<a class="v-footer__outro-link" href="https://joeallen.dev" aria="Opens in New Window">Site by joeallen.dev</a>
 			</p>
 		</div>

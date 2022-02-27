@@ -5,6 +5,12 @@
 			<div class="v-content__content">
 				{{content}}
 
+				{% if footnotes %}
+					<div class="v-content__footnotes">
+						{{footnotes}}
+					</div>
+				{% endif %}
+
 				{% if sponsors %}
 				<div class="v-content__meta">
 
@@ -47,21 +53,33 @@
 				<div class="v-content__sidebar">
 					<div class="v-content__meta">
 						<ul class="v-content__meta-list">
+							{% if event_subject_to_change %}
+							<li class="v-content__meta-item"><strong>Date subject to change</strong></li>
+							{% endif %}
+							{% if event_start_date %}
+								{% set start_date = function('explode', '/', event_start_date) %}
+							<li class="v-content__meta-item"><span>Starts:</span><br><span>{{start_date[1] ~ '/' ~ start_date[0] ~ '/' ~ start_date[2]}}</span></li>
+							{% endif %}
+							{% if event_end_date %}
+								{% set end_date = function('explode', '/', event_end_date) %}
+								<li class="v-content__meta-item"><span>Ends:</span><br><span>{{end_date[1] ~ '/' ~ end_date[0] ~ '/' ~ end_date[2]}}</span></li>
+							{% endif %}
 							{% if author[0] %}
 								<li class="v-content__meta-item"><span>{{ (type == 'post') ? 'Author' : 'Contact'}}:</span><br>
 									<span>
 										{% set auth_name = author[0].primary_title ? author[0].primary_title : author[0].post_title %}
 
 										{% if not author[0].leader_retired[0] %}
-										<a href="mailto:{{author[0].leader_email}}?subject={{post.post_title}}">{{auth_name}}</a>{% else %}{{auth_name}}{% endif %},
-										{{author[0].secondary_title}} {{author[0].leader_retired[0] ? '<em>(Retired)</em>' : ''}}
+										<a href="mailto:{{author[0].leader_email}}?subject={{post.post_title}}">{{auth_name}}</a>{% else %}{{auth_name}}{% endif %}<br>
+										<em>{{author[0].secondary_title}} {{author[0].leader_retired[0] ? '(Retired)' : ''}}</em>
 									</span>
 								</li>
 							{% endif %}
+
 							{% if post.post_modified != post.post_date %}
-								<li class="v-content__meta-item"><span>Updated:</span><br><span>{{post.post_modified|date("F j\, Y", "America/New_York")}}</span></li>
+								<li class="v-content__meta-item"><span>Updated:</span><br><span>{{post.post_modified|date("m/d/Y", "America/New_York")}}</span></li>
 							{% else %}
-								<li class="v-content__meta-item"><span>Published:</span><br><span>{{post.post_date|date("F j\, Y", "America/New_York")}}</span></li>
+								<li class="v-content__meta-item"><span>Published:</span><br><span>{{post.post_date|date("m/d/Y", "America/New_York")}}</span></li>
 							{% endif %}
 
 							{% if post.meta('Google Maps_text') %}

@@ -58,7 +58,28 @@ Need images for the following:
   - Current Newsletter's being emailed?
   - Current Analytics
   - Pagespeed Insights / Screaming Frog?
+- What Admins need to be ported?
+- Is it okay have my website linked in the footer?
+- Anything else in the footer needed? Privacy policy? Terms of Use? 501c3?
+- Should "Membership" have more presence? (It's under "Info", "Get Involved" and can be a CTA on any page).
 
 ## Comments:
 ## LAST LEFT OFF:
 - Testing PayPal w/ real account (Need doris to change to my phone so I can get in)
+
+
+---
+Meeting w/ Board:
+
+
+- Need help with content on the following (most of them are the intro  2/3 sentences):
+  - https://localhost:3000/info/
+  - https://localhost:3000/info/board-members/
+	- https://localhost:3000/info/membership/
+	- https://localhost:3000/information/news/
+	- https://localhost:3000/events/farmers-market/
+
+- Default / fallback image is the colorful overlea sign. Is this okay or should there be another default image for the site?
+- What to do about sponsors (e.g. https://localhost:3000/events/artsfest/). Are they needed right now?
+- Image of board member? Or anything that they want to use.
+- I certainly dont mind helping with content entry, but I'd like to train someone on the CMS at some point.

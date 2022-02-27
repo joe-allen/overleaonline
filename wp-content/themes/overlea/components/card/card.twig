@@ -5,7 +5,7 @@
 {% for item in items %}
 
 	<article class="v-card {{class}}">
-		{% set element = ('v-card--leader' in class) ? 'span' : 'a' %}
+		{% set element = ('v-card--leader' in class) ? 'a' : 'a' %}
 		<{{element}} tabindex=0 href="{{Post(item.ID).link}}" class="v-card__link">
 			<div class="v-card__inner">
 				<div class="v-card__bg">
@@ -15,12 +15,13 @@
 							id: item.meta('slider')[0].slider_image,
 							class: 'v-card__bg-img'
 						} %}
-					{% else %}
+					{% elseif Post(item.ID).meta('hero_img') %}
 						{% include 'img/img.twig' with {
 							id: Post(item.ID).meta('hero_img'),
 							class: 'v-card__bg-img'
 						} %}
-						<!-- <img class="v-card__bg-img" src="{{theme.link}}/img/overlea-sign.jpg" alt="overlea wall art" width="416" height="227"> -->
+						{% else %}
+						<img class="v-card__bg-img" src="{{theme.link}}/img/overlea-sign.jpg" alt="overlea neighborhood art sign" width="416" height="227">
 					{% endif %}
 
 				</div>

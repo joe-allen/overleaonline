@@ -17,6 +17,13 @@ $c_content
 				'toolbar' => 'full',
 				'delay'   => 1,
 			]
+		)
+		->addTextarea(
+			'content_footnotes',
+			[
+				'label' => 'Footnotes',
+				'new_lines' => 'br',
+			]
 		);
 
 return $c_content;

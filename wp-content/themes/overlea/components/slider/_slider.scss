@@ -120,16 +120,14 @@
 	}
 
 	&__link {
-		@include v.max-width-container;
+		// @include v.max-width-container;
 		position: absolute;
 		bottom: 0;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		height: auto;
-		width: 100%;
 		color: #fff;
-		padding: 0 0 clamp(2rem, 3vw, 4rem) clamp(2rem, 3vw, 4rem);
+		padding: 0 0 clamp(2rem, 4vw, 5rem) clamp(2rem, 4vw, 5rem);
 		transition: opacity .15s ease-out, color 0s;
 		z-index: 1;
 
@@ -148,25 +146,53 @@
 
 		&:hover {
 			text-decoration: none;
-			opacity: .7;
+			opacity: 1;
 			color: #fff;
 		}
+	}
+
+	&__link:hover &__text-title span::after {
+		transform: scale(1);
 	}
 
 	&__text-title {
 		position: relative;
 		z-index: 2;
-		width: 60%;
+		margin-bottom: 1.5rem;
+		// width: 75%;
+
+		span {
+			position: relative;
+
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: -5%;
+				left: 0;
+				width: calc(100%);
+				transform: scaleX(.8);
+				transform-origin: left center;
+				transition: transform .15s ease-out;
+				height: calc(20% + 1vw);
+				background-color: v.$c-primary;
+				border-radius: 2px;
+				z-index: -1;
+			}
+		}
 
 		&:hover {
 			text-decoration: none;
 		}
 	}
 
+	span.v-slider__link &__text-title span::after {
+		transform: scale(1);
+	}
+
 	&__text-subtitle {
 		z-index: 2;
 		padding-right: 4rem;
-		width: 75%;
+		// width: 75%;
 
 		&:hover {
 			text-decoration: none;
@@ -177,8 +203,8 @@
 		display: flex;
 		flex-direction: column;
 		position: absolute;
-		bottom: clamp(2rem, 3vw, 4rem);
-		right: clamp(2rem, 3vw, 4rem);
+		bottom: clamp(2rem, 4vw, 5rem);
+		right: clamp(2rem, 4vw, 5rem);
 
 		.dot {
 			position: relative;
@@ -284,11 +310,13 @@
 			display: none;
 		}
 
-		&__link {
-			padding-left: v.spacing("container");
-			padding-bottom: v.spacing("small");
-			padding-right: clamp(2rem, 3vw, 4rem);
 
+		&__text-title {
+			width: 80%;
+		}
+
+
+		&__link {
 			&::before {
 				top: -10%;
 				right: -50%;
@@ -296,10 +324,6 @@
 		}
 
 		&__dots {
-			right: v.spacing("container");
-			bottom: v.spacing("small");
-			// display: none;
-
 			.dot {
 				width: 20px;
 				height: 20px;

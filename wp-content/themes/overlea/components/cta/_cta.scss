@@ -99,7 +99,7 @@
 
 	&--Newsletter &__inner {
 		position: relative;
-		align-items: flex-start;
+		align-items: center;
 	}
 
 	&--Newsletter &__cta-text {
@@ -136,6 +136,10 @@
 
 	&--Newsletter form .wpcf7-response-output {
 		margin-top: 1.25rem;
+	}
+
+	.wpcf7 form.invalid .wpcf7-response-output {
+		color: var(--c-text);
 	}
 }
 

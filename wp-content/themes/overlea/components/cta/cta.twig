@@ -23,7 +23,7 @@
 					<div>
 						<h3 class="v-cta__cta-text">{{title}}</h3>
 						{% if date %}
-						<span>{{date|date("F j\, Y g:i A", "America/New_York")}}</span>
+						<span>{{date|date("F j\, Y g:i A", "America/New_York")}} {% if event.event_subject_to_change %}— Date subject to change{% endif %}</span>
 						{% endif %}
 					</div>
 					{% set link = (cta.link_type == 'external') ? cta.link.external_url : cta.link.internal_url %}
@@ -31,10 +31,6 @@
 				{% elseif type == 'Newsletter' %}
 					<h3 class="v-cta__cta-text">{{cta.Newsletter.text}}</h3>
 					<div class="v-cta__form-wrap">
-						<!-- <form class="v-cta__form">
-							<input type="email" class="v-form__field v-cta__input" placeholder="name@example.com">
-							<button type="submit" class="v-cta__cta-cta v-button v-button--lg">{{cta.Newsletter.link}}</button>
-						</form> -->
 						{{function('do_shortcode', shortcode_newsletter)}}
 					</div>
 				{% endif %}

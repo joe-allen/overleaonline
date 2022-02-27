@@ -23,10 +23,9 @@
 	{% endif %}
 
 	{% include 'grid/grid.twig' with {
-		count: count,
 		items: items,
 		cta: cta,
-		class: type == 'fourth' ? 'v-card--leader v-card--fourth' : 'v-card--third',
+		class: type == 'fourth' ? 'v-card--fourth' : 'v-card--third',
 	} %}
 
 </section>

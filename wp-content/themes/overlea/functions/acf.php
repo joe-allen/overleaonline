@@ -24,10 +24,17 @@ function v_create_link_field( $name, $label ) {
 	return (
 		$field_group
 			->addGroup( $name, [ 'label' => $label ] )
-				->addSelect( 'link_type' )
-					->addChoices( [ 'internal' => 'Internal' ], [ 'external' => 'External' ] )
+				->addSelect(
+					'link_type',
+					[
+						'default_value' => 'none',
+					]
+				)
+					->addChoices( [ 'internal' => 'Internal' ], [ 'external' => 'External' ], [ 'none' => 'None' ] )
 				->addGroup( 'link', [ 'layout' => 'table' ] )
+				->conditional( 'link_type', '!=', 'none' )
 					->addText( 'text' )
+						->conditional( 'link_type', '!=', 'none' )
 					->addPageLink(
 						'internal_url',
 						[
@@ -57,8 +64,10 @@ function v_create_link_field( $name, $label ) {
 							],
 						]
 					)
+					->conditional( 'link_type', '!=', 'none' )
 					->endGroup()
 				->addText( 'query_string', [ 'prepend' => '?' ] )
+					->conditional( 'link_type', '!=', 'none' )
 				->endGroup()
 	);
 }

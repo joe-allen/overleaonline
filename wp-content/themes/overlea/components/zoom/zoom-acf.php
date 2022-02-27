@@ -10,8 +10,8 @@ use StoutLogic\AcfBuilder\FieldsBuilder;
 $c_zoom = new FieldsBuilder( 'zoom' );
 
 $c_zoom
-	->addTab( 'zoom' )
-		->addGroup( 'Zoom', [ 'layout' => 'table' ] )
+	->addTab( 'Vitural Link' )
+		->addGroup( 'Link to Event', [ 'layout' => 'table' ] )
 			->addText( 'text' )
 			->addUrl( 'external_url', [ 'label' => 'URL' ] )
 			->addTrueFalse(

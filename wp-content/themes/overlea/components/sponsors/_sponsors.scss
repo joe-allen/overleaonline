@@ -15,7 +15,7 @@
 	}
 
 	&__header-titles {
-		width: 65%
+		width: 65%;
 	}
 
 	&__title {
@@ -52,20 +52,19 @@
 		}
 
 		&__header-titles {
-			width: 100%
+			width: 100%;
 		}
 	}
 }
 
 @media screen and (max-width: v.$b-small) {
 	.v-sponsors {
-
 		&__wrap {
 			flex-wrap: wrap;
 		}
 
 		.v-sponsor {
-			width: 100%;
+			// width: 100%;
 			margin: 0;
 
 

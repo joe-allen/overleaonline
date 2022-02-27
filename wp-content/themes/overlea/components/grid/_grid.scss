@@ -9,8 +9,8 @@
 	}
 
 	.v-card--fourth {
-		width: calc(25% - clamp(1rem, 2vw, 3rem));
-		max-width: calc(25% - clamp(1rem, 2vw, 3rem));
+		// width: calc(25% - clamp(1rem, 2vw, 3rem));
+		// max-width: calc(25% - clamp(1rem, 2vw, 3rem));
 		margin-bottom: clamp(1rem, 2vw, 3rem);
 		flex-grow: 1;
 	}
@@ -31,11 +31,11 @@
 			margin-bottom: clamp(2rem, 3vw, 4rem);
 		}
 
+
 		.v-card--fourth {
 			width: calc(50% - clamp(1rem, 2vw, 3rem));
 			max-width: calc(50% - clamp(1rem, 2vw, 3rem));
-			flex-grow: 1;
-			margin-bottom: clamp(1rem, 2vw, 3rem);
+			margin-bottom: v.spacing("container");
 		}
 	}
 }
@@ -51,7 +51,6 @@
 		.v-card--fourth {
 			width: 100%;
 			max-width: 100%;
-			margin-bottom: v.spacing("container");
 		}
 
 		// body:not(.home) & .v-card:nth-last-of-type(2) {

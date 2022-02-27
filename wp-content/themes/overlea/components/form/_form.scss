@@ -16,9 +16,15 @@
 		padding-bottom: 0;
 	}
 
+	body.home & {
+		&__inner {
+			padding-bottom: 0;
+		}
+	}
+
 	&__inner {
 		position: relative;
-		padding: v.spacing("large") 0;
+		padding: v.spacing("large") 0 v.spacing("small");
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -122,6 +128,7 @@
 	}
 }
 
+.page-template-template-contact .wpcf7-list-item-label,
 .v-intro--membership + .v-form--contact .wpcf7-list-item-label {
 	color: var(--c-text);
 }
@@ -129,6 +136,10 @@
 .v-intro--membership + .v-form--contact .wpcf7 form.invalid .wpcf7-response-output,
 .v-intro--membership + .v-form--contact .wpcf7-response-output {
 	color: var(--c-text);
+}
+
+.v-cta + .v-form .v-form__inner {
+	padding-bottom: 0;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */

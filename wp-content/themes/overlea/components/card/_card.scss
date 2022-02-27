@@ -14,7 +14,7 @@
 	}
 
 	&__link:hover &__bg-overlay {
-		opacity: .9;
+		opacity: .97;
 
 		&::after {
 			transform: scale(1) skewX(0);
@@ -23,7 +23,7 @@
 
 	&__link:focus &__bg-overlay,
 	&__link:active &__bg-overlay {
-		opacity: .9;
+		opacity: .97;
 
 		&::after {
 			transform: scale(1) skewX(0);
@@ -343,6 +343,14 @@
 			width: 100%;
 			opacity: 0;
 			font-size: 1rem;
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-small) {
+	.v-card {
+		&__content-subtitle {
+			-webkit-line-clamp: 5;
 		}
 	}
 }

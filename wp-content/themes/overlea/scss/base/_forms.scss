@@ -61,9 +61,11 @@ select {
 	-moz-appearance: none;
 	-o-appearance: none;
 	appearance: none;
-	background-color: v.$c-primary;
+	background-color: v.$c-primary-hover;
+	border-color: transparent;
 	border-radius: 4px;
 	outline: none;
+	// border-color: #fff;
 	transition-duration: .3s;
 }
 

@@ -131,6 +131,7 @@
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
+.wpcf7 form.invalid .wpcf7-response-output,
 .v-form--contact .wpcf7-response-output {
 	color: #fff;
 }
@@ -144,6 +145,49 @@
 	}
 }
 
+.v-form__field--submit.v-form__field input[type="submit"] {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	padding: .75em 3em;
+	line-height: 1.2;
+	color: #fff;
+	background: var(--c-primary);
+	border: 0;
+	box-shadow: none;
+	border-radius: 25px;
+	font-weight: 800;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background .15s ease-out;
+
+	&:focus,
+	&:hover {
+		background: var(--c-primary-hover);
+		text-decoration: none;
+		color: #fff;
+	}
+}
+
+.v-form__field--submit.v-form__field--submit--dark input[type="submit"] {
+	background: var(--c-primary-hover);
+}
+
+.v-intro--membership + .v-form--contact .v-form__field--submit.v-form__field--submit--dark input[type="submit"] {
+	background: var(--c-primary);
+}
+
+.v-form__select-field {
+	color: var(--c-text);
+	background: #fff;
+	border: 1px solid var(--c-text);
+	height: 58px;
+	padding-block: 0;
+
+	&::placeholder {
+		color: var(--c-text);
+	}
+}
 
 @media screen and (max-width: v.$b-medium-large) {
 	.v-form {
@@ -195,45 +239,5 @@
 		.v-cta &__field {
 			padding: 15px 1.75em;
 		}
-	}
-}
-
-.v-form__field--submit.v-form__field input[type="submit"] {
-	display: inline-block;
-	width: auto;
-	height: auto;
-	padding: .75em 3em;
-	line-height: 1.2;
-	color: #fff;
-	background: var(--c-primary);
-	border: 0;
-	box-shadow: none;
-	border-radius: 25px;
-	font-weight: 800;
-	text-decoration: none;
-	text-transform: uppercase;
-	transition: background .15s ease-out;
-
-	&:focus,
-	&:hover {
-		background: var(--c-primary-hover);
-		text-decoration: none;
-		color: #fff;
-	}
-}
-
-.v-form__field--submit.v-form__field--submit--dark input[type="submit"] {
-	background: var(--c-primary);
-}
-
-.v-form__select-field {
-	color: var(--c-text);
-	background: #fff;
-	border: 1px solid var(--c-text);
-	height: 58px;
-	padding-block: 0;
-
-	&::placeholder {
-		color: var(--c-text);
 	}
 }

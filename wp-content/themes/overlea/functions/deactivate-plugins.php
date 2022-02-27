@@ -23,7 +23,7 @@ function deactivate_plugin_conditional() {
 		deactivate_plugins( 'akismet/akismet.php' );
 	}
 
-	if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php' ) && 'production' !== $_ENV['location'] ) {
+	if ( is_plugin_active( 'w3-total-cache/w3-total-cache.php' ) && 'local' === $_ENV['location'] ) {
 		deactivate_plugins( 'w3-total-cache/w3-total-cache.php' );
 	}
 }

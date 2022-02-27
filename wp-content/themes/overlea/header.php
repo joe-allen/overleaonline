@@ -30,11 +30,11 @@ use Timber\Post;
 		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( get_theme_file_uri( 'favicon/favicon-32x32.png' ) ); ?>">
 		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url( get_theme_file_uri( 'favicon/favicon-16x16.png' ) ); ?>">
 		<link rel="manifest" href="<?php echo esc_url( get_theme_file_uri( 'favicon/site.webmanifest' ) ); ?>">
-		<link rel="mask-icon" href="<?php echo esc_url( get_theme_file_uri( 'favicon/safari-pinned-tab.svg' ) ); ?>" color="#1f79c1">
+		<link rel="mask-icon" href="<?php echo esc_url( get_theme_file_uri( 'favicon/safari-pinned-tab.svg' ) ); ?>" color="#00706F">
 		<link rel="shortcut icon" href="<?php echo esc_url( get_theme_file_uri( 'favicon/favicon.ico' ) ); ?>">
-		<meta name="msapplication-TileColor" content="#1f79c1">
+		<meta name="msapplication-TileColor" content="#00706F">
 		<meta name="msapplication-config" content="<?php echo esc_url( get_theme_file_uri( '' ) ); ?>/favicon/browserconfig.xml">
-		<meta name="theme-color" content="#000000">
+		<meta name="theme-color" content="#00706F">
 		<!-- End favicon -->
 
 		<?php wp_head(); ?>

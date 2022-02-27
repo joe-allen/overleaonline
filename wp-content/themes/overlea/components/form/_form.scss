@@ -2,7 +2,7 @@
 
 .v-form {
 	position: relative;
-	padding: v.spacing("large") 0;
+	padding: 0 0 v.spacing("large");
 	background-color: v.$c-primary;
 	overflow: hidden;
 
@@ -126,6 +126,7 @@
 	color: var(--c-text);
 }
 
+.v-intro--membership + .v-form--contact .wpcf7 form.invalid .wpcf7-response-output,
 .v-intro--membership + .v-form--contact .wpcf7-response-output {
 	color: var(--c-text);
 }

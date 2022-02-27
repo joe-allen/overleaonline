@@ -127,6 +127,7 @@
 	cta: post.meta('cta_type') == 'Random' ? post.meta('cta_link') : options,
 	class: 'v-cta--bottom-overlap',
 	type: post.meta('cta_type'),
+	shortcode_newsletter: '[contact-form-7 id="477" title="Newsletter Signup"]',
 } %}
 
 {% include "form/form.twig" with {

@@ -11,7 +11,7 @@ body {
 	font-size: 100%;
 	line-height: v.$t-line-height;
 	color: v.$c-text;
-	background: #fff;
+	background: v.$c-primary;
 	-webkit-font-smoothing: antialiased;
 	overflow-x: hidden;
 }

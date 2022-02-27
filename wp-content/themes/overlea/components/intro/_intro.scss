@@ -32,3 +32,11 @@
 		font-weight: 300;
 	}
 }
+
+@media screen and (max-width: v.$b-medium-large) {
+	.v-intro {
+		&--membership {
+			padding: v.spacing("large") 0 v.spacing("small");
+		}
+	}
+}

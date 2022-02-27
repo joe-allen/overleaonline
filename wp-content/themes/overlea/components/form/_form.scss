@@ -66,6 +66,11 @@
 		width: 60%;
 	}
 
+	.wpcf7-list-item-label {
+		color: #fff;
+	}
+
+	&-newsletter-acceptance label,
 	&__flex {
 		display: flex;
 		align-items: flex-start;
@@ -84,13 +89,13 @@
 	.page-template-template-contact &__field textarea,
 	.page-template-template-contact &__field input,
 	&__field--outline input {
-		color: var(--c-primary);
+		color: var(--c-text);
 		background: #fff;
-		border: 1px solid var(--c-primary);
+		border: 1px solid var(--c-text);
 
 		&::placeholder {
 			opacity: 1;
-			color: var(--c-primary);
+			color: var(--c-text);
 		}
 	}
 
@@ -117,6 +122,19 @@
 	}
 }
 
+.v-intro--membership + .v-form--contact .wpcf7-list-item-label {
+	color: var(--c-text);
+}
+
+.v-intro--membership + .v-form--contact .wpcf7-response-output {
+	color: var(--c-text);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.v-form--contact .wpcf7-response-output {
+	color: #fff;
+}
+
 @media screen and (max-width: v.$b-large) {
 	.v-form {
 		&__content {
@@ -132,6 +150,10 @@
 		&__content {
 			left: 5%;
 			transform: translate(0, -50%);
+		}
+
+		&--contact &__form {
+			width: 100%;
 		}
 	}
 }
@@ -201,17 +223,17 @@
 }
 
 .v-form__field--submit.v-form__field--submit--dark input[type="submit"] {
-	background: var(--c-primary-hover);
+	background: var(--c-primary);
 }
 
 .v-form__select-field {
-	color: var(--c-primary);
+	color: var(--c-text);
 	background: #fff;
-	border: 1px solid var(--c-primary);
+	border: 1px solid var(--c-text);
 	height: 58px;
 	padding-block: 0;
 
 	&::placeholder {
-		color: var(--c-primary);
+		color: var(--c-text);
 	}
 }

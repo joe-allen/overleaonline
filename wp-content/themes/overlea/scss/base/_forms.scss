@@ -44,11 +44,12 @@ select {
 
 	&:focus {
 		border: 1px solid #fff;
-		background-color: v.$c-primary-hover;
+		background-color: v.$c-primary;
 		color: #fff;
 		outline: none;
 	}
 
+	&:focus::placeholder,
 	&::placeholder {
 		color: #fff;
 		opacity: .65;
@@ -60,7 +61,7 @@ select {
 	-moz-appearance: none;
 	-o-appearance: none;
 	appearance: none;
-	background-color: v.$c-primary-hover;
+	background-color: v.$c-primary;
 	border-radius: 4px;
 	outline: none;
 	transition-duration: .3s;
@@ -72,7 +73,7 @@ select {
 }
 
 [type="checkbox"] {
-	background-color: v.$c-primary;
+	background-color: v.$c-primary-hover;
 	width: 24px;
 	height: 24px;
 	margin-right: 12px;

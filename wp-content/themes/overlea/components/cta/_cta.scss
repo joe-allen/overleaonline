@@ -213,6 +213,11 @@
 	.v-cta {
 		&--Newsletter form p {
 			flex-direction: column;
+			margin-top: .5rem;
+
+			[type="submit"] {
+				margin-top: -.5rem;
+			}
 		}
 
 		&--Newsletter form [type="submit"] {

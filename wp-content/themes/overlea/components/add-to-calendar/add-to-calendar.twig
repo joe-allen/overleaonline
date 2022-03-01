@@ -1,0 +1,30 @@
+{#
+	@var string class plain text
+#}
+<article class="v-add-to-calendar {{class}}">
+	<div class="v-add-to-calendar--js" style="display: none;">
+		{
+			"name":"{{name}}",
+			"description":"{{description}}",
+			"startDate":"{{start_date}}",
+			"endDate":"{{end_date}}",
+			"startTime":"{{start_time}}",
+			"endTime":"{{end_time}}",
+			"location":"{{location}}",
+			"label":"{{label}}",
+			"options":[
+				"Apple",
+				"Google",
+				"iCal",
+				"Microsoft365",
+				"MicrosoftTeams",
+				"Outlook.com",
+				"Yahoo"
+			],
+			"timeZone":"America/New_York",
+			"timeZoneOffset":"-05:00",
+			"trigger":"click",
+			"iCalFileName":"Reminder-Event"
+		}
+	</div>
+</article>

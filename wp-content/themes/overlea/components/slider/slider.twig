@@ -49,9 +49,16 @@
 				</div>
 			{% endfor %}
 		{% else %}
-		<div class="v-slider__img-wrap keen-slider__slide number-slide1">
-			<div class="v-slider__overlay"></div>
-			<img class="v-slider__img" src="{{theme.link}}/img/overlea-sign.jpg" alt="overlea neighborhood art sign" width="1920" height="1080">
+			<div class="v-slider__img-wrap keen-slider__slide number-slide1">
+				<div class="v-slider__overlay"></div>
+				<img class="v-slider__img" src="{{theme.link}}/img/overlea-sign.jpg" alt="overlea neighborhood art sign" width="1920" height="1080">
+				<span class="v-slider__link">
+					{% if slide.slider_link.link.text %}
+						<h1 class="v-slider__text-title"><span>{{ slide.slider_link.link.text }}</span></h1>
+					{% else %}
+						<h1 class="v-slider__text-title"><span>{{ title|default(post.post_title) }}</span></h1>
+					{% endif %}
+				</span>
 			</div>
 		{% endif %}
 		{% if post.meta('hero_img') %}

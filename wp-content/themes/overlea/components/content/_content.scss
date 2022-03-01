@@ -208,12 +208,13 @@
 		&__meta {
 			&-list--sponsors {
 				// align-items: center;
-				flex-direction: column;
+				// flex-direction: column;
 			}
 
 			&-list--sponsors li {
-				width: 100px;
-				height: 100px;
+				width: 50%;
+				height: auto;
+				margin-inline: 0;
 
 				&:first-child {
 					margin-block-start: 3rem;

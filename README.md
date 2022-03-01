@@ -8,6 +8,7 @@
 - resize above 1024px when mobile menu open should close menu and show desktop nav.
 - social icons
 - main logo
+- 404 page
 - checkbox on form (use accent-color)
 - search
 [x] - parallax homepage
@@ -78,6 +79,11 @@ Meeting w/ Board:
 	- https://localhost:3000/info/membership/
 	- https://localhost:3000/information/news/
 	- https://localhost:3000/events/farmers-market/
+	- https://localhost:3000/resources/
+	- https://localhost:3000/resources/health-hospital-services/
+	- https://localhost:3000/resources/safety-services/
+	- https://localhost:3000/resources/scouts/
+	- https://localhost:3000/resources/seniors/
 
 - Default / fallback image is the colorful overlea sign. Is this okay or should there be another default image for the site?
 - What to do about sponsors (e.g. https://localhost:3000/events/artsfest/). Are they needed right now?

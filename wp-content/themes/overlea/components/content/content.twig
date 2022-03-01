@@ -54,6 +54,18 @@
 					<div class="v-content__meta">
 						<ul class="v-content__meta-list">
 
+							<!-- convert dates for 'add-to-calendar' plugin -->
+							{% if event_start_date %}
+								{% set start_date = function('explode', '/', event_start_date) %}
+								{% set start_year = function('explode', ' ', start_date[2]) %}
+								{% set start_time = event_start_date|date('H:i') %}
+							{% endif %}
+							{% if event_end_date %}
+								{% set end_date = function('explode', '/', event_end_date) %}
+								{% set end_year = function('explode', ' ', end_date[2]) %}
+								{% set end_time = event_end_date|date('H:i') %}
+							{% endif %}
+
 							{% if event_subject_to_change %}
 							<li class="v-content__meta-item"><strong>Date subject to change</strong></li>
 							{% endif %}
@@ -76,19 +88,9 @@
 							{% endif %}
 
 							{% if event_start_date %}
-
-								{% set start_date = function('explode', '/', event_start_date) %}
-								{% set start_year = function('explode', ' ', start_date[2]) %}
-								{% set start_time = event_start_date|date('H:i') %}
-
 								<li class="v-content__meta-item"><span>Starts:</span><br><span>{{start_date[1] ~ '/' ~ start_date[0] ~ '/' ~ start_date[2]}}</span></li>
 							{% endif %}
 							{% if event_end_date %}
-
-								{% set end_date = function('explode', '/', event_end_date) %}
-								{% set end_year = function('explode', ' ', end_date[2]) %}
-								{% set end_time = event_end_date|date('H:i') %}
-
 								<li class="v-content__meta-item"><span>Ends:</span><br><span>{{end_date[1] ~ '/' ~ end_date[0] ~ '/' ~ end_date[2]}}</span></li>
 							{% endif %}
 

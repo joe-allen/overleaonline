@@ -20,7 +20,7 @@ $c_date_picker
 					'width' => '50',
 				],
 			])
-			->setInstructions('Events in the past will not be shown. Format: dd/mm/yyyy')
+			->setInstructions('Do not enter manually. Pick Date/Time then click \'Done\'.<br>Events in the past will not be shown.<br>Format: dd/mm/yyyy')
 			->addDateTimePicker(
 				'event_end_date',
 				[

@@ -75,19 +75,27 @@
 	}
 
 	&__content {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
 		position: relative;
 		padding: v.spacing("small");
 		background-color: #fff;
 
 		&-title {
 			text-transform: capitalize;
+			margin-bottom: 0;
 			@include v.font-size("gamma");
 		}
 
+		p:first-of-type,
 		&-title + .epsilon,
 		&-title + h2 {
 			margin-top: -.75rem;
+		}
+
+		p:not(:last-of-type) {
+			margin-bottom: 0;
 		}
 	}
 
@@ -96,6 +104,9 @@
 	}
 
 	&__content-cta {
+		margin-top: .75rem;
+		align-self: flex-start;
+
 		& + & {
 			margin-top: 1rem;
 		}

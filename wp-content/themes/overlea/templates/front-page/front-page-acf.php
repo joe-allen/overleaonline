@@ -18,7 +18,7 @@ function front_page_acf() {
 	$cta = require get_template_directory() . "/components/cta/cta-acf.php";
 	$sponsors = require get_template_directory() . "/components/sponsors/sponsors-acf.php";
 	$ic = require get_template_directory() . "/components/image-content/image-content-acf.php";
-	// $excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
+	$excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
 
 	$g_front_page = new FieldsBuilder( 'homepage' );
 	$g_front_page
@@ -26,7 +26,8 @@ function front_page_acf() {
 		->addFields( $cta )
 		->addFields( $sponsors )
 		->addFields( $ic )
-			->modifyField( 'ic', [ 'max' => 1 ] )
+		->modifyField( 'ic', [ 'max' => 1 ] )
+		->addFields( $excerpt )
 
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'page_type', '==', 'front_page' );

@@ -56,6 +56,10 @@ select {
 	}
 }
 
+.v-form--contact [type="checkbox"]:not(:checked) {
+	background-color: v.$c-primary;
+}
+
 [type="checkbox"]:not(:checked) {
 	-webkit-appearance: none;
 	-moz-appearance: none;

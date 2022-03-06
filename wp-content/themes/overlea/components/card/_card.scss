@@ -101,6 +101,10 @@
 		height: clamp(400px, 40vw, 500px);
 	}
 
+	&--fourth &__content {
+		padding: 2.5rem;
+	}
+
 	&--leader &__bg-overlay {
 		opacity: 0;
 	}
@@ -112,7 +116,7 @@
 	}
 
 	&__content {
-		padding: v.spacing("xsmall");
+		padding: 2.5rem;
 		padding-right: v.spacing("small");
 		position: absolute;
 		bottom: 0;

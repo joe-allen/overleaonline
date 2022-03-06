@@ -3,7 +3,6 @@
 #}
 
 {% for item in items %}
-
 	<article class="v-card {{class}}">
 		{% set element = ('v-card--leader' in class) ? 'a' : 'a' %}
 		<{{element}} tabindex=0 href="{{Post(item.ID).link}}" class="v-card__link">
@@ -30,9 +29,11 @@
 					{% if 'v-card--leader' in class %}
 						<p class="v-card__content-position">{{title}}</p>
 					{% endif %}
-					<p class="v-card__content-subtitle">
-						{{item.excerpt}}
-					</p>
+					{% if item.excerpt %}
+						<p class="v-card__content-subtitle">
+							{{item.excerpt}}
+						</p>
+					{% endif %}
 					<div class="v-card__content-cta">
 						<span aria-label="link to {{title}}" class="v-card__content-cta-text sr-only">{{cta}}</span>
 					</div>

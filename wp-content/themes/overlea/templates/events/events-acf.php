@@ -22,7 +22,7 @@ function events_acf() {
 	$zoom = require get_template_directory() . "/components/zoom/zoom-acf.php";
 	$cta = require get_template_directory() . "/components/cta/cta-acf.php";
 	$sponsors = require get_template_directory() . "/components/sponsors/sponsors-acf.php";
-	// $excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
+	$excerpt = require get_template_directory() . "/components/excerpt/excerpt-acf.php";
 
 	$g_events = new FieldsBuilder( 'event' );
 	$g_events
@@ -36,6 +36,7 @@ function events_acf() {
 		->addFields( $sponsors )
 			->removeField( 'sponsor_title' )
 			->removeField( 'sponsor_text' )
+		->addFields( $excerpt )
 
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'post_type', '==', 'events' );

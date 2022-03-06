@@ -55,3 +55,28 @@
 		margin-top: v.spacing("xsmall", -.5);
 	}
 }
+
+@media screen and (max-width: v.$b-small) {
+	.v-pagination {
+		&__control {
+			position: relative;
+
+			& span {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-70%, -50%);
+			}
+		}
+
+		&__control--prev {
+			position: relative;
+
+			& span {
+				transform: translate(-30%, -50%);
+			}
+		}
+
+	}
+}

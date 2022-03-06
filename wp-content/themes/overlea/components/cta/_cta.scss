@@ -6,7 +6,7 @@
 	z-index: 3;
 
 	&--event {
-		padding: v.spacing("xsmall") 0 0;
+		padding: v.spacing("xsmall", .5) 0 0;
 
 		&:hover {
 			z-index: 33 !important;
@@ -24,7 +24,7 @@
 	}
 
 	&--last {
-		// padding: v.spacing("xsmall") 0 !important;
+		padding: 0 0 v.spacing("xsmall");
 	}
 
 	&--bottom-overlap {
@@ -58,6 +58,16 @@
 		margin-bottom: 0;
 	}
 
+	&--event &__cta-text {
+		font-weight: 400;
+		@include v.font-size("delta");
+	}
+
+	&--event &__cta-text + span {
+		opacity: .75;
+		@include v.font-size("zeta");
+	}
+
 	&__cta-cta {
 		white-space: nowrap;
 		align-self: flex-end;
@@ -89,7 +99,6 @@
 	&--event &__cta-text {
 		width: 100%;
 		padding-right: clamp(2rem, 3vw, 4rem);
-		font-weight: 100;
 		letter-spacing: .05em;
 	}
 

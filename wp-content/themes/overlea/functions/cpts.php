@@ -29,8 +29,8 @@ function v_register_post_types() {
 			],
 		],
 		[
-			'singular' => 'Leader',
-			'plural'   => 'Leadership',
+			'singular' => 'Board',
+			'plural'   => 'Members',
 		]
 	);
 

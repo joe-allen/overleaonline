@@ -33,9 +33,9 @@
 				ic_phone: member.meta('leader_phone'),
 				ic_email: member.meta('leader_email'),
 				ic_link: {
-					link_type: 'internal',
+					link_type: 'external',
 					link: {
-						internal_url: member.leader_website,
+						external_url: member.leader_website,
 						new_tab: false,
 						text: 'Website'
 					}
@@ -65,16 +65,16 @@
 						<h2 class="epsilon">{{item.ic_subtitle}}</h2>
 					{% endif %}
 					{%	set default_text = 'PLACEHOLDER TEXT... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.' %}
-					<p class="v-image-content__content-text">{{item.ic_text|default(default_text)}}</p>
+					{{item.ic_text|default(default_text)}}
 					{% if item.ic_email %}
-						<a class="v-image-content__content-cta v-button" href="mailto:{{item.ic_email}}" target="_blank">Email</a>
+						<!-- <a class="v-image-content__content-cta v-button" href="mailto:{{item.ic_email}}" target="_blank">Email</a> -->
 					{% endif %}
 					{% if item.ic_phone %}
-						<a class="v-image-content__content-cta v-button" href="tel:{{item.ic_phone}}">Phone</a>
+						<!-- <a class="v-image-content__content-cta v-button" href="tel:{{item.ic_phone}}">Phone</a> -->
 					{% endif %}
 					{% if item.ic_link.link.internal_url or item.ic_link.link.external_url %}
 						{% set link = (item.ic_link.link_type == 'external') ? item.ic_link.link.external_url : item.ic_link.link.internal_url %}
-						<a class="v-image-content__content-cta v-button" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{item.ic_link.link.text}}</a>
+						<a class="v-image-content__content-cta v-button" href="{{link}}" {% if cta.link.new_tab or item.ic_link.link_type == 'external' %}target="_blank"{% endif %}>{{item.ic_link.link.text}}</a>
 					{% endif %}
 					<!-- <a href="#!" class="">Learn More</a> -->
 				</div>

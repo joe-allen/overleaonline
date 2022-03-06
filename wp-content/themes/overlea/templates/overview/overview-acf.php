@@ -38,6 +38,7 @@ function overview_acf() {
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )
 		->setLocation( 'page_template', '==', 'template-overview.php' )
 			->or( 'page_template', '==', 'template-get-involved.php' )
+			->or( 'page_template', '==', 'template-volunteer.php' )
 			->or( 'page_template', '==', 'template-leaders.php' );
 
 		return $g_overview;

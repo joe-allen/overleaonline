@@ -84,6 +84,11 @@
 			text-transform: capitalize;
 			@include v.font-size("gamma");
 		}
+
+		&-title + .epsilon,
+		&-title + h2 {
+			margin-top: -.75rem;
+		}
 	}
 
 	& + &:nth-child(even) &__inner &__content {
@@ -138,7 +143,7 @@
 @media screen and (max-width: v.$b-small) {
 	.v-image-content {
 		&__img-wrap {
-			height: 200px;
+			height: 100%;
 		}
 
 		&__content {
@@ -148,6 +153,24 @@
 
 		&__content-cta {
 			align-self: flex-start;
+		}
+	}
+
+	.page-template-template-leaders .v-intro + .v-image-content {
+		padding-top: v.spacing("small");
+	}
+
+	.page-template-template-leaders .v-image-content {
+		&__img-wrap {
+			background-color: v.$c-primary;
+		}
+
+		&__img {
+			top: 42.5%;
+			box-shadow: 4px 4px 24px rgba(0, 0, 0, .15);
+			height: 200px;
+			width: 200px;
+			border-radius: 50%;
 		}
 	}
 }

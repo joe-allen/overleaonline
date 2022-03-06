@@ -4,14 +4,13 @@
 - Start history template
 ## ToDo:
 - EWWW image
-- Volunteer dates are backwards
-- On News, add a way to choose 'Author' and and Expert in order to get description snippet on hover
+[x] - Volunteer dates are backwards
+[x] - On News, add a way to choose 'Author' and and Expert in order to get description snippet on hover
 - add add-to-calendar only to single-event page in enque-js
-- 'v-card--leader' should be 25% width and have less height.
 - Tabindex on main nav `<span>` dropdown items. W/ aria-controls label.
 - resize above 1024px when mobile menu open should close menu and show desktop nav.
-- social icons
-- main logo
+[x] - social icons
+[x] - main logo
 - 404 page
 - checkbox on form (use accent-color)
 - search

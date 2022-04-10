@@ -19,7 +19,7 @@ function v_login_logo() { ?>
 				width: 300px; /* 300px max */
 				height: 70px;
 				padding-bottom: 15px;
-				background-image: url("<?php echo esc_url( get_theme_file_uri() ); ?>/img/login-logo.png");
+				background-image: url("<?php echo esc_url( get_theme_file_uri() ); ?>/img/logo.svg");
 				background-size: 300px 70px; /* match width, height */
 				background-repeat: no-repeat;
 			}
@@ -29,7 +29,7 @@ function v_login_logo() { ?>
 			(min-resolution: 192dpi) {
 					#login h1 a,
 					.login h1 a {
-						background-image: url("<?php echo esc_url( get_theme_file_uri() ); ?>/img/login-logo@2x.png")
+						background-image: url("<?php echo esc_url( get_theme_file_uri() ); ?>/img/logo.svg")
 					}
 			}
 	</style>

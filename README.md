@@ -13,7 +13,7 @@
 [x] - main logo
 - 404 page
 - checkbox on form (use accent-color)
-- search
+- Events overview page shows out of date 'featured' events
 [x] - parallax homepage
 - on slider.twig add `element = function('is_front_page') ? a : span;`
 - Slider 'left' arrow working?

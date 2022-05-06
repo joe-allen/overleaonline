@@ -19,7 +19,16 @@ use Timber\Post;
 <html <?php language_attributes(); ?>>
 	<head>
 		<?php if ( 'production' === $_ENV['location'] ) : ?>
-			<!-- Paste GA/GTag code here -->
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-181681419-1"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+
+				gtag('config', 'UA-181681419-1');
+			</script>
+
 		<?php endif; ?>
 
 		<meta charset="<?php bloginfo( 'charset' ); ?>">

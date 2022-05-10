@@ -10,7 +10,10 @@
 	footnotes: post.meta('content_footnotes'),
 	author: Post(post.meta('author_board_member')),
 	sponsors: post.meta('sponsor'),
-	type: post.post_type
+	type: post.post_type,
+	event_subject_to_change: post.meta('event_subject_to_change'),
+	event_start_date: post.meta('event_start_date'),
+	event_end_date: post.meta('event_end_date'),
 } %}
 
 {# {% include "recent-news/recent-news.twig" with {

@@ -24,7 +24,7 @@ function leader_headshot_acf() {
 				'preview_size'  => 'medium',
 			]
 		)
-			->setInstructions( 'Recommended size: 1084x678' )
+			->setInstructions( 'Image size: 900x900, ratio of 1:1 (square)' )
 
 		->setGroupConfig( 'position', 'side' )
 		->setLocation( 'post_type', '==', 'board' )

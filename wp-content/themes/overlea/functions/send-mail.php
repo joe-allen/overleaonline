@@ -39,6 +39,6 @@ add_action( 'phpmailer_init', 'v_catch_mail', 10, 1 );
  * @return string
  */
 function v_change_sender_email( $original_email_address ) {
-	return 'president@overleaonline.com';
+	return 'president@overleaonline.org';
 }
 add_filter( 'wp_mail_from', 'v_change_sender_email' );

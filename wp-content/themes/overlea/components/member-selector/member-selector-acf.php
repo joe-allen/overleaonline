@@ -14,7 +14,7 @@ $c_member_selector
 		->addRelationship(
 			'author_board_member',
 			[
-				'label'         => 'Board Member',
+				'label'         => 'Board / Author',
 				'return_format' => 'id',
 				'post_type'     => 'board',
 				'filters'       => [

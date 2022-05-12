@@ -148,6 +148,12 @@
 	color: #fff;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
+.page-template-template-contact .wpcf7 form.invalid .wpcf7-response-output,
+.page-template-template-contact .v-form--contact .wpcf7-response-output {
+	color: var(--c-text);
+}
+
 @media screen and (max-width: v.$b-large) {
 	.v-form {
 		&__content {

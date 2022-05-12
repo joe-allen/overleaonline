@@ -53,6 +53,10 @@
 					%}
 					{% include 'img/img.twig' with {
 						id: item.ic_image,
+						class: 'v-image-content__img--bg'
+					} %}
+					{% include 'img/img.twig' with {
+						id: item.ic_image,
 						class: 'v-image-content__img'
 					} %}
 					{% else %}

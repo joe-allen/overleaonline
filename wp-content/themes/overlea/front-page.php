@@ -21,7 +21,7 @@ if ( have_posts() ) :
 		$context['post'] = new Post();
 
 		$args = [
-			'posts_per_page' => 3,
+			'posts_per_page' => 6,
 			'post_type' => 'post',
 			'order' => 'DESC',
 			'orderby' => 'date',

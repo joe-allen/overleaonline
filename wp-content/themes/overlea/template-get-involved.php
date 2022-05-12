@@ -28,7 +28,7 @@ if ( have_posts() ) :
 					'posts_per_page' => -1,
 					'meta_key'       => 'event_start_date',
 					'orderby'        => 'meta_value',
-					'order'          => 'DESC',
+					'order'          => 'ASC',
 				]
 			);
 		}

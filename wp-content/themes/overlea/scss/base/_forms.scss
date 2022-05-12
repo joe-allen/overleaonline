@@ -12,9 +12,18 @@
 .page-template-template-contact [type="time"],
 .page-template-template-contact [type="url"],
 .page-template-template-contact [type="checkbox"]:not(:checked),
-.page-template-template-contact select,
 .page-template-template-contact textarea {
 	background-color: v.$c-primary;
+}
+
+.page-template-template-contact select:focus {
+	border: 1px solid v.$c-text;
+	color: v.$c-text;
+}
+
+.page-template-template-contact select:focus,
+.page-template-template-contact select {
+	background-color: #fff;
 }
 
 .page-template-template-contact [type="checkbox"]:not(:checked) {
@@ -44,7 +53,7 @@ select {
 
 	&:focus {
 		border: 1px solid #fff;
-		background-color: v.$c-primary;
+		background-color: v.$c-primary-hover;
 		color: #fff;
 		outline: none;
 	}
@@ -176,8 +185,12 @@ label[for],
 		height: 0;
 		border-style: solid;
 		border-width: 8px 5px 0 5px;
-		border-color: currentColor transparent transparent transparent;
+		border-color: #b1b1b1 transparent transparent transparent;
 		transform: translateY(-50%);
+	}
+
+	.page-template-template-contact &__select-arrow {
+		border-color: var(--c-text) transparent transparent transparent;
 	}
 
 	&__select-field {

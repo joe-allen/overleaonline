@@ -16,6 +16,7 @@
 	background-color: v.$c-primary;
 }
 
+.page-template-template-get-involved select:focus,
 .page-template-template-contact select:focus {
 	border: 1px solid v.$c-text;
 	color: v.$c-text;
@@ -190,6 +191,10 @@ label[for],
 	}
 
 	.page-template-template-contact &__select-arrow {
+		border-color: var(--c-text) transparent transparent transparent;
+	}
+
+	.page-template-template-get-involved &__select-arrow {
 		border-color: var(--c-text) transparent transparent transparent;
 	}
 

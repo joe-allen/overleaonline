@@ -1,6 +1,7 @@
 {#
 	@var string class plain text
 #}
+{% set is404 = fn('is_404') %}
 <article class="v-slider {{class}}">
 	<div id="my-keen-slider" class="v-slider__wrap keen-slider">
 		{% if slides %}
@@ -55,6 +56,9 @@
 				<span class="v-slider__link">
 					{% if slide.slider_link.link.text %}
 						<h1 class="v-slider__text-title"><span>{{ slide.slider_link.link.text }}</span></h1>
+					{% elseif is404 %}
+						<h1 class="v-slider__text-title"><span>404</span></h1>
+						<h2 class="v-slider__text-subtitle"><span>Oooops, looks like this page cannot be found or does not exist.</span></h2>
 					{% else %}
 						<h1 class="v-slider__text-title"><span>{{ title|default(post.post_title) }}</span></h1>
 					{% endif %}

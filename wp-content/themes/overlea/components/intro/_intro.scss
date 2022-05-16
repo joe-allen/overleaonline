@@ -6,9 +6,6 @@
 
 	&__inner {
 		max-width: 1000px;
-		display: flex;
-		justify-content: space-between;
-		margin: 0 auto;
 		text-align: center;
 	}
 
@@ -38,6 +35,14 @@
 	.v-intro {
 		&--membership {
 			padding: v.spacing("large") 0 v.spacing("small");
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-small) {
+	.v-intro {
+		&__inner {
+			text-align: left;
 		}
 	}
 }

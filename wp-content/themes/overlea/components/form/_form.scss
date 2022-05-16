@@ -138,6 +138,10 @@
 	color: var(--c-text);
 }
 
+.v-cta + .v-form .wpcf7-response-output {
+	color: #fff;
+}
+
 .v-cta + .v-form .v-form__inner {
 	padding-bottom: 0;
 }
@@ -196,8 +200,8 @@
 }
 
 .v-form__select-field {
-	color: var(--c-text);
-	background: #fff;
+	color: #b1b1b1;
+	// background: #fff;
 	border: 1px solid var(--c-text);
 	height: 58px;
 	padding-block: 0;
@@ -205,6 +209,15 @@
 	&::placeholder {
 		color: var(--c-text);
 	}
+}
+
+.page-template-template-get-involved .v-form__select-field {
+	color: var(--c-text);
+	background-color: #fff;
+}
+
+.page-template-template-contact .v-form__select-field {
+	color: var(--c-text);
 }
 
 @media screen and (max-width: v.$b-medium-large) {

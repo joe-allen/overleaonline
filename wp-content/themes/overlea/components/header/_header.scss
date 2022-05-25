@@ -182,6 +182,10 @@
 		pointer-events: none;
 	}
 
+	&.open &__nav-child-arrow {
+		display: none;
+	}
+
 	&__nav-link:hover &__nav-child-arrow {
 		transform: translateY(calc(-50% - 2px)) rotate(45deg);
 	}

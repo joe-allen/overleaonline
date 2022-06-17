@@ -24,6 +24,12 @@
 	z-index: 2;
 }
 
+// hide recaptcha
+.grecaptcha-badge {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
 @media screen and (max-width: v.$b-medium) {
 	.v-main {
 		&::before {

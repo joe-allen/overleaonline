@@ -214,15 +214,12 @@
 .v-form__select-field[multiple="multiple"] {
 	padding-block-end: 4px;
 	border: 0;
-	padding-inline: 0;
 	height: 150px;
 	border-radius: 16px;
 }
 
 .v-form__select-field[multiple="multiple"] option {
 	padding-block: 8px;
-	padding-inline: 1.75em;
-
 }
 
 .v-form__select-field[multiple="multiple"] option:first-of-type {
@@ -284,6 +281,15 @@
 		&--contact &__form {
 			margin-top: 0;
 			width: 100%;
+		}
+
+		.v-form__select-field[multiple="multiple"] {
+			height: 58px;
+			border: 232px;
+		}
+
+		.v-form__select-field[multiple="multiple"] option:first-of-type {
+			padding-left: 0;
 		}
 
 		&__field {

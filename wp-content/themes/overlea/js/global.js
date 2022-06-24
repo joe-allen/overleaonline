@@ -38,7 +38,9 @@ const vGlobal = () => {
 		arrow.classList.add( 'v-form__select-arrow' );
 		selectParent.insertBefore( wrapper, select );
 		wrapper.appendChild( select );
-		wrapper.appendChild( arrow );
+		if ( ! select.getAttribute( 'multiple' ) ) {
+			wrapper.appendChild( arrow );
+		}
 		select.classList.add( 'v-form__select-field' );
 	} );
 

@@ -14,6 +14,11 @@
 		max-width: 1000px;
 	}
 
+	&__content [role="form"].wpcf7 {
+		display: flex;
+		justify-content: center;
+	}
+
 	&__footnotes {
 		border-top: 1px solid rgba(0, 0, 0, .15);
 		margin-block-start: 3rem;

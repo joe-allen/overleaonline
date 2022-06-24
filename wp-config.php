@@ -8,7 +8,6 @@
  * @author  Vitamin
  * @version 1.0.0
  */
-
 include dirname( __FILE__ ) . '/_env.php';
 
 define( 'DB_NAME', $_ENV['db_name'] );
@@ -23,6 +22,8 @@ $table_prefix = $_ENV['db_prefix'];
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
+
+define( 'WPCF7_AUTOP', false );
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';

@@ -4,7 +4,7 @@
 	display: inline-block;
 	width: auto;
 	height: auto;
-	padding: .75em 3em;
+	padding: .95em 3em .75em 3em;
 	line-height: 1.2;
 	color: #fff;
 	background: var(--c-primary);
@@ -29,7 +29,7 @@
 
 	&--lg {
 		@include v.font-size("zeta");
-		padding: .75em 3em;
+		padding: .95em 3em .75em 3em;
 	}
 }
 
@@ -54,6 +54,6 @@
 
 @media screen and (max-width: 330px) {
 	.v-button {
-		padding: .75em 2.4em;
+		padding: .95em 2.4em .75em 2.4em;
 	}
 }

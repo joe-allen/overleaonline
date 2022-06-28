@@ -1,6 +1,9 @@
 @use "sass:math";
 @use "sass:color";
 
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;600;700;800&display=swap");
+
 // Common (B)reakpoints
 $b-small: 550px; // mobile
 $b-medium: 768px; // portrait tablet
@@ -53,9 +56,9 @@ $c-text: #252525; // body copy color
 }
 
 // (T)ypography
-$t-body-font: -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", helvetica, arial, sans-serif,
+$t-body-font: "Epilogue", -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", helvetica, arial, sans-serif,
 	"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$t-heading-font: -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", helvetica, arial, sans-serif,
+$t-heading-font: "Epilogue", -apple-system, system-ui, blinkmacsystemfont, "Segoe UI", helvetica, arial, sans-serif,
 	"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $t-base-text: 16px;
 $t-line-height: 1.5;

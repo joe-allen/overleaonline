@@ -238,6 +238,11 @@
 	font-weight: 700;
 }
 
+.page-template-template-contact .v-form__select-field[multiple="multiple"] option:first-of-type {
+	background-color: #fff;
+	color: v.$c-text;
+}
+
 .page-template-template-get-involved .v-form--contact .v-form__select-field {
 	color: var(--c-text);
 	background-color: #fff;

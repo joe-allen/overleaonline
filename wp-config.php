@@ -23,9 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
 
-ini_set( 'session.cookie_httponly', 1 );
-ini_set( 'session.cookie_secure', 1 );
-
 define( 'WPCF7_AUTOP', false );
 
 /** Sets up WordPress vars and included files. */

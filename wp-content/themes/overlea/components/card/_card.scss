@@ -355,3 +355,13 @@
 		}
 	}
 }
+
+
+@media screen and (max-width: v.$b-medium) {
+	.v-card {
+		&__content {
+			padding-left: v.spacing("xsmall");
+			padding-right: v.spacing("small");
+		}
+	}
+}

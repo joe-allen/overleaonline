@@ -23,7 +23,6 @@ function single_acf() {
 	$g_single
 		->addFields( $slider )
 				->removeField( 'slider->slider_link' )
-				->removeField( 'slider->slider_subtitle' )
 		->addFields( $content )
 		->addFields( $sponsors )
 			->removeField( 'sponsor_title' )

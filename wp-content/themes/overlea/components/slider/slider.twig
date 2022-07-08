@@ -28,7 +28,7 @@
 						<a class="v-slider__link v-slider__link--link" href="{{link}}" {% if slide.slider_link.link.new_tab %}target="_blank"{% endif %}>
 							{% if slide.slider_link.link.text %}
 								{% set header = loop.index == 1 ? 1 : 2 %}
-								<h{{header}} class="v-slider__text-title"><span>{{ slide.slider_link.link.text }}</span></h{{header}}>
+								<h{{header}} class="v-slider__text-title alpha"><span>{{ slide.slider_link.link.text }}</span></h{{header}}>
 							{% endif %}
 
 							{% if slide.slider_subtitle %}
@@ -39,9 +39,9 @@
 						<span class="v-slider__link">
 							{% set header = loop.index == 1 ? 1 : 2 %}
 							{% if slide.slider_link.link.text %}
-								<h{{header}} class="v-slider__text-title"><span>{{ slide.slider_link.link.text }}</span></h{{header}}>
+								<h{{header}} class="v-slider__text-title alpha"><span>{{ slide.slider_link.link.text }}</span></h{{header}}>
 							{% else %}
-								<h{{header}} class="v-slider__text-title"><span>{{ title|default(post.post_title) }}</span></h{{header}}>
+								<h{{header}} class="v-slider__text-title alpha"><span>{{ title|default(post.post_title) }}</span></h{{header}}>
 							{% endif %}
 
 							{% if slide.slider_subtitle %}
@@ -87,7 +87,7 @@
 				{% endif %}
 				<span class="v-slider__link">
 					{% set header = loop.index == 1 ? 1 : 2 %}
-						<h{{header}} class="v-slider__text-title"><span>{{ post.post_title }}</span></h{{header}}>
+						<h{{header}} class="v-slider__text-title alpha"><span>{{ post.post_title }}</span></h{{header}}>
 				</span>
 			</div>
 		{% endif %}

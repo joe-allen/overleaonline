@@ -165,6 +165,7 @@ h1 + h2 {
 	}
 }
 
+h1 + h3,
 h2 + h3 {
 	@include v.font-size("delta");
 	opacity: .7;

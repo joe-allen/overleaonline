@@ -64,9 +64,9 @@
 					{% endif %}
 				</div>
 				<div class="v-image-content__content">
-					<h1 class="v-image-content__content-title">{{item.ic_title}}</h1>
+					<h2 class="v-image-content__content-title">{{item.ic_title}}</h2>
 					{% if item.ic_subtitle %}
-						<h2 class="epsilon">{{item.ic_subtitle}}</h2>
+						<h3 class="epsilon">{{item.ic_subtitle}}</h3>
 					{% endif %}
 					{%	set default_text = 'PLACEHOLDER TEXT... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident in aut doloremque ipsa voluptates nostrum, libero animi amet consequuntur. Voluptatem accusantium facere cupiditate suscipit necessitatibus voluptates sint ratione, eos minus.' %}
 					{{item.ic_text|default(default_text)}}

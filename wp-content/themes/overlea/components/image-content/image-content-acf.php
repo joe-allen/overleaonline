@@ -30,11 +30,12 @@ $c_image_content
 			)
 			->setInstructions('Recommended size: 1920px by 1280px')
 			->addText('ic_title', [ 'label' => 'Title' ])
-			->addTextarea(
+			->addWysiwyg(
 				'ic_text',
 				[
 					'label' => 'Text',
-					'new_lines' => 'br',
+					'toolbar' => 'full',
+					'delay'   => 1,
 				]
 			)
 			->addFields( v_create_link_field( 'ic_link', 'Link' ) )

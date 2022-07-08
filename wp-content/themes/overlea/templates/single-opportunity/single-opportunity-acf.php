@@ -28,7 +28,7 @@ function single_opportunity_acf() {
 			->modifyField( 'hero_img', [ 'instructions' => 'Recommended size: 1920px by 1080px. Less than 500kb' ] )
 		->addFields( $date_picker )
 		->addFields( $content )
-			->modifyField( 'content', [ 'toolbar' => 'bare' ] )
+			->modifyField( 'content', [ 'toolbar' => 'basic' ] )
 		->addFields( $map )
 		->addFields( $member_selector )
 		->addFields( $sponsors )

@@ -132,6 +132,7 @@
 
 	&__content-title {
 		margin-bottom: .75rem;
+		@include v.font-size("delta");
 		z-index: 1;
 	}
 
@@ -169,7 +170,7 @@
 
 	&__content-subtitle {
 		@include v.font-size("epsilon");
-		font-weight: 400;
+		font-weight: 300;
 		opacity: 0;
 		overflow: hidden;
 		line-height: 1.3;

@@ -163,6 +163,13 @@
 		}
 	}
 
+	h2 {
+		@include v.font-size("gamma");
+	}
+
+	h3 {
+		@include v.font-size("delta");
+	}
 
 	img:not(.v-content__sponsor) {
 		margin: 1.75rem 0;

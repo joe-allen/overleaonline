@@ -1,26 +1,30 @@
-# overleaonline
+# overleaonline.org
 
 ## Currently Working On:
-- Start history template
+
 ## ToDo:
-- EWWW image
-[x] - Volunteer dates are backwards
-[x] - On News, add a way to choose 'Author' and and Expert in order to get description snippet on hover
-- add add-to-calendar only to single-event page in enque-js
+
+### v1.x
 - Tabindex on main nav `<span>` dropdown items. W/ aria-controls label.
 - resize above 1024px when mobile menu open should close menu and show desktop nav.
-[x] - social icons
-[x] - main logo
-- 404 page
-- checkbox on form (use accent-color)
-- Events overview page shows out of date 'featured' events
-[x] - parallax homepage
 - on slider.twig add `element = function('is_front_page') ? a : span;`
-- Slider 'left' arrow working?
 - If you refresh 1/2 down the page, the hamburger is shown even if you scroll all the way to the top.
 - Thank you copy/image for "membership-thank-you" page
 - Yoast block site from SEO for "membership-thank-you" page
-- Buy / install SSL
+
+### v1.0
+[x] - EWWW image
+[x] - Volunteer dates are backwards
+[x] - On News, add a way to choose 'Author' and and Expert in order to get description snippet on hover
+[x] - add add-to-calendar only to single-event page in enque-js
+[x] - social icons
+[x] - main logo
+[x] - 404 page
+[x] - checkbox on form (use accent-color)
+[x] - Events overview page shows out of date 'featured' events
+[x] - parallax homepage
+[x] - Slider 'left' arrow working?
+[x] - Buy / install SSL
 
 ----
 

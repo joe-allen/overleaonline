@@ -85,7 +85,8 @@
 		&-title {
 			text-transform: capitalize;
 			margin-bottom: 0;
-			@include v.font-size("gamma");
+			// @include v.font-size("gamma");
+			@include v.font-size("epsilon");
 		}
 
 		p:first-of-type,
@@ -210,7 +211,7 @@
 
 	.page-template-template-leaders .v-image-content {
 		&__img-wrap {
-			background-color: v.$c-primary;
+			// background-color: v.$c-primary;
 		}
 
 		&__img {

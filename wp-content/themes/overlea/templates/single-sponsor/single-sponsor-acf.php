@@ -28,7 +28,7 @@ function sponsor_acf() {
 			->addUrl( 'sponsor_website', [ 'label' => 'Website' ])
 		// ->addFields($content)
 			// ->modifyField( 'content_tab', [ 'label' => 'Bio' ] )
-			// ->modifyField( 'content', [ 'toolbar' => 'simple' ] )
+			// ->modifyField( 'content', [ 'toolbar' => 'basic' ] )
 
 
 		->setGroupConfig( 'hide_on_screen', [ 'the_content' ] )

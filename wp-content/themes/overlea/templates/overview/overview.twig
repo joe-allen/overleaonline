@@ -93,19 +93,22 @@
 	</section>
 
 	{% if opportunities %}
+		{% set nowDate = "now"|date("m/d/Y") %}
 		{% for event in opportunities %}
-			{% include "cta/cta.twig" with {
-				title: event.post_title,
-				date: event.event_start_date,
-				cta: {
-					link_type: 'internal',
-					link: {
-						internal_url: event.link,
-					}
-				},
-				class: loop.last ? 'v-cta--last' : '',
-				type: 'event',
-			} %}
+			{% if function('strtotime', nowDate) < function('strtotime', event.event_start_date|date("m/d/Y")) or event.event_start_date == '' %}
+				{% include "cta/cta.twig" with {
+					title: event.post_title,
+					date: event.event_start_date,
+					cta: {
+						link_type: 'internal',
+						link: {
+							internal_url: event.link,
+						}
+					},
+					class: loop.last ? 'v-cta--last' : '',
+					type: 'event',
+				} %}
+			{% endif %}
 		{% endfor %}
 
 	{% else %}

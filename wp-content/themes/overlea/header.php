@@ -28,7 +28,7 @@ use Timber\Post;
 			<!-- End Google Tag Manager -->
 
 			<!-- Google Optimize -->
-			<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KHJ3STZ"></script>
+			<!-- <script src="https://www.googleoptimize.com/optimize.js?id=OPT-KHJ3STZ"></script> -->
 			<!-- End Google Optimize -->
 		<?php endif; ?>
 

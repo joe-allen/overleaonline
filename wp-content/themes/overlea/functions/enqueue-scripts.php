@@ -39,6 +39,13 @@ function v_register_scripts() {
 		filemtime( get_theme_file_path( 'js/min/global.min.js' ) ),
 		true
 	);
+	wp_enqueue_script(
+		'elbwalker',
+		'https://cdn.jsdelivr.net/npm/@elbwalker/walker.js@1.4/dist/walker.js',
+		[],
+		null,
+		true
+	);
 
 	wp_localize_script(
 		'global',
@@ -52,3 +59,36 @@ function v_register_scripts() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'v_register_scripts' );
+
+// // echo scripts to copy/past to defer list
+// // do this from HP while logged in to get admin js too
+// function v_echo_scripts() {
+// 	global $wp_scripts;
+
+// 	foreach( $wp_scripts->queue as $handle ) {
+// 		echo $handle . ' | ';
+// 	}
+// }
+// add_action( 'wp_print_scripts', 'v_echo_scripts', 10 );
+
+function v_defer_asyns_scripts( $tag, $handle, $src ) {
+
+	$defer = [
+		'admin-bar',
+	];
+
+	$async = [
+		'elbwalker',
+	];
+
+	if ( in_array( $handle, $defer ) ) {
+		return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
+	}
+
+	if ( in_array( $handle, $async ) ) {
+		return '<script src="' . $src . '" async="async" type="text/javascript"></script>' . "\n";
+	}
+
+	return $tag;
+}
+add_filter('script_loader_tag', 'v_defer_asyns_scripts', 10, 3);

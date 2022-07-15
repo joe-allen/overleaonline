@@ -12,8 +12,8 @@
 	<div class="container">
 		<div class="v-sponsors__wrap">
 			{% for item in items %}
-				<div class="v-sponsor">
-					<a href="{{item.sponsor_website}}" target="_blank" rel="nofollow noopener">
+				<div class="v-sponsor" data-elb="sponsor" data-elb-sponsor="name: {{item.post_title}}">
+					<a href="{{item.sponsor_website}}" target="_blank" rel="nofollow noopener" data-elbaction="click:page_view">
 						{% include 'img/img.twig' with {
 							id: item.sponsor_logo,
 							class: 'v-sponsor__img'

@@ -26,6 +26,10 @@ use Timber\Post;
 			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 			})(window,document,'script','dataLayer','GTM-P275H5G');</script>
 			<!-- End Google Tag Manager -->
+
+			<!-- Google Optimize -->
+			<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KHJ3STZ"></script>
+			<!-- End Google Optimize -->
 		<?php endif; ?>
 
 		<meta charset="<?php bloginfo( 'charset' ); ?>">

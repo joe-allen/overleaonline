@@ -14,9 +14,9 @@
 		</div>
 
 		{% if cta %}
-			<div class="v-recent-news__header-cta">
+			<div class="v-recent-news__header-cta" data-elb="recent-news" data-elb-recent-news="name:Recent News CTA Above Articles">
 				{% set link = (cta.link_type == 'internal') ? cta.link.internal_url : cta.link.external_url %}
-				<a class="v-recent-news__cta v-button" href="{{link}}" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{cta.link.text}}</a>
+				<a class="v-recent-news__cta v-button" href="{{link}}" data-elbaction="click:view" {% if cta.link.new_tab %}target="_blank"{% endif %}>{{cta.link.text}}</a>
 			</div>
 		{% endif %}
 	</div>

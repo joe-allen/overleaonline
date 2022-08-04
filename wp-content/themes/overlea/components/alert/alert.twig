@@ -1,0 +1,22 @@
+{#
+	@var string class plain text
+#}
+
+{% if function('get_permalink') != options.alert_cta.link.internal_url %}
+	{% set link = (options.alert_cta.link_type == 'internal') ? options.alert_cta.link.internal_url : options.alert_cta.link.external_url %}
+	<section class="v-alert v-alert--hide {{class}}" id="alert">
+		<div class="container">
+			<a href="{{link}}" class="v-alert__inner" {% if options.alert_cta.link.new_tab %}target="_blank"{% endif %}>
+				<div class="v-alert__content">
+					{{options.alert_text}}
+				</div>
+			</a>
+			<button data-id="{{options.alert_id}}" class="v-alert__close" aria-controls="alert">
+				<div class="sr-only">Close Alert</div>
+				<span class="v-alert__close-span"></span>
+				<span class="v-alert__close-span"></span>
+				<span class="v-alert__close-span"></span>
+			</button>
+		</div>
+	</section>
+{% endif %}

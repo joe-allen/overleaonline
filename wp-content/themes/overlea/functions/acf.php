@@ -87,6 +87,24 @@ function v_define_acf() {
 
 	$g_global = new FieldsBuilder( 'global_settings' );
 	$g_global
+		->addTab( 'Alert' )
+			->addText( 'alert_id',
+				[
+					'label' => 'Alert ID' ,
+					'instructions' => 'This needs to be updated with every different alert.'
+				]
+			)
+			->addWysiwyg(
+				'alert_text',
+				[
+					'toolbar' => 'basic',
+					'delay'   => 1,
+					'instructions' => 'Please limit alert length to less than 74 characters.'
+				]
+			)
+			->addFields( v_create_link_field( 'alert_cta', 'Link' ) )
+				->removeField( 'alert_cta->link->text' )
+				->removeField( 'alert_cta->query_string' )
 		->addTab( 'Association' )
 			->addEmail( 'association_email', [ 'label' => 'Email' ] )
 			->addText( 'association_phone', [ 'label' => 'Phone' ] )

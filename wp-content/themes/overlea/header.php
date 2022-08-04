@@ -52,16 +52,19 @@ use Timber\Post;
 		<link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( get_theme_file_uri( 'favicon/favicon-32x32.png' ) ); ?>">
 		<link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url( get_theme_file_uri( 'favicon/favicon-16x16.png' ) ); ?>">
 		<link rel="manifest" href="<?php echo esc_url( get_theme_file_uri( 'favicon/site.webmanifest' ) ); ?>">
-		<link rel="mask-icon" href="<?php echo esc_url( get_theme_file_uri( 'favicon/safari-pinned-tab.svg' ) ); ?>" color="#00706F">
+		<link rel="mask-icon" href="<?php echo esc_url( get_theme_file_uri( 'favicon/safari-pinned-tab.svg' ) ); ?>" color="#003d3c">
 		<link rel="shortcut icon" href="<?php echo esc_url( get_theme_file_uri( 'favicon/favicon.ico' ) ); ?>">
-		<meta name="msapplication-TileColor" content="#00706F">
+		<meta name="msapplication-TileColor" content="#003d3c">
 		<meta name="msapplication-config" content="<?php echo esc_url( get_theme_file_uri( '' ) ); ?>/favicon/browserconfig.xml">
-		<meta name="theme-color" content="#00706F">
+		<meta name="theme-color" content="#003d3c">
 		<!-- End favicon -->
 
 		<?php wp_head(); ?>
 	</head>
-	<body <?php body_class(); ?>>
+	<?php
+		$alert = (true) ? 'v-alert--true' : 'v-alert--false';
+	?>
+	<body <?php body_class( $alert ); ?>>
 		<?php wp_body_open(); ?>
 
 		<?php if ( 'production' === $_ENV['location'] ) : ?>
@@ -87,8 +90,12 @@ use Timber\Post;
 
 		<?php
 			$context         = Timber::context();
-			$context['menu'] = new Menu( 'header_nav' );
+			Timber::render( 'alert/alert.twig', $context);
+		?>
+
+		<?php
 			$context['post'] = new Post();
+			$context['menu'] = new Menu( 'header_nav' );
 			Timber::render( 'header/header.twig', $context );
 		?>
 

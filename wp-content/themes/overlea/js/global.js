@@ -7,6 +7,7 @@ import vHeader from '../components/header/header';
 import vSlider from '../components/slider/slider';
 import vHero from '../components/hero/hero';
 import vAddToCalendar from '../components/add-to-calendar/add-to-calendar';
+import vAlert from '../components/alert/alert';
 
 /**
  * Global functions
@@ -23,6 +24,7 @@ const vGlobal = () => {
 	vHeader();
 	vSlider();
 	vHero();
+	vAlert();
 	vAddToCalendar();
 
 	const selects = document.querySelectorAll( 'select' );

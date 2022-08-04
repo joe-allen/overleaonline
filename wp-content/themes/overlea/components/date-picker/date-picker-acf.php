@@ -31,13 +31,18 @@ $c_date_picker
 				]
 			)
 			->setInstructions('Format: dd/mm/yyyy')
-			->addCheckbox(
+			->addTrueFalse(
+			'event_show_dates',
+			[
+				'label' => 'Show dates on site?',
+				'ui' => 1,
+				'default_value' => 1,
+			])
+			->addTrueFalse(
 			'event_subject_to_change',
 			[
-				'label' => '',
-				'choices' => [
-					1 => 'Dates are subject to change?',
-				],
+				'label' => 'Dates are subject to change?',
+				'ui' => 1,
 			]);
 
 return $c_date_picker;

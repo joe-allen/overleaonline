@@ -66,32 +66,36 @@
 								{% set end_time = event_end_date|date('H:i') %}
 							{% endif %}
 
-							{% if event_subject_to_change %}
-							<li class="v-content__meta-item"><strong>Date subject to change</strong></li>
-							{% endif %}
+							{% if event_show_dates %}
 
-							{% if event_start_date %}
-							<li class="v-content__meta-item">
-								<span>
-									{% include 'add-to-calendar/add-to-calendar.twig' with {
-										name: post.title,
-										start_date: start_year[0] ~ '-' ~ start_date[1] ~ '-' ~ start_date[0],
-										end_date: end_date ? end_year[0] ~ '-' ~ end_date[1] ~ '-' ~ end_date[0] : start_year[0] ~ '-' ~ start_date[1] ~ '-' ~ start_date[0],
-										start_time: start_time ? start_time : '00:00',
-										end_time: end_time ? end_time : '21:59',
-										location: post.meta('Google Maps_text') ? post.meta('Google Maps_text') : 'Somewhere over the rainbow',
-										label: 'Add to Calendar',
-										description: 'Website: '~post.link
-									} %}
-								</span>
-							</li>
-							{% endif %}
+								{% if event_subject_to_change %}
+								<li class="v-content__meta-item"><strong>Date subject to change</strong></li>
+								{% endif %}
 
-							{% if event_start_date %}
-								<li class="v-content__meta-item"><span>Starts:</span><br><span>{{start_date[1] ~ '/' ~ start_date[0] ~ '/' ~ start_date[2]}}</span></li>
-							{% endif %}
-							{% if event_end_date %}
-								<li class="v-content__meta-item"><span>Ends:</span><br><span>{{end_date[1] ~ '/' ~ end_date[0] ~ '/' ~ end_date[2]}}</span></li>
+								{% if event_start_date %}
+								<li class="v-content__meta-item">
+									<span>
+										{% include 'add-to-calendar/add-to-calendar.twig' with {
+											name: post.title,
+											start_date: start_year[0] ~ '-' ~ start_date[1] ~ '-' ~ start_date[0],
+											end_date: end_date ? end_year[0] ~ '-' ~ end_date[1] ~ '-' ~ end_date[0] : start_year[0] ~ '-' ~ start_date[1] ~ '-' ~ start_date[0],
+											start_time: start_time ? start_time : '00:00',
+											end_time: end_time ? end_time : '21:59',
+											location: post.meta('Google Maps_text') ? post.meta('Google Maps_text') : 'Somewhere over the rainbow',
+											label: 'Add to Calendar',
+											description: 'Website: '~post.link
+										} %}
+									</span>
+								</li>
+								{% endif %}
+
+
+								{% if event_start_date %}
+									<li class="v-content__meta-item"><span>Starts:</span><br><span>{{start_date[1] ~ '/' ~ start_date[0] ~ '/' ~ start_date[2]}}</span></li>
+								{% endif %}
+								{% if event_end_date %}
+									<li class="v-content__meta-item"><span>Ends:</span><br><span>{{end_date[1] ~ '/' ~ end_date[0] ~ '/' ~ end_date[2]}}</span></li>
+								{% endif %}
 							{% endif %}
 
 							{% if author[0] %}
@@ -123,7 +127,7 @@
 							{% endif %}
 
 							{% if post.terms %}
-								<li class="v-content__meta-item">
+								<!-- <li class="v-content__meta-item">
 									<span>Tags:</span><br>
 									<span>
 										{% for tag in post.terms %}
@@ -132,7 +136,7 @@
 											{% endif %}
 										{% endfor %}
 									</span>
-								</li>
+								</li> -->
 							{% endif %}
 
 							{% if post.post_modified != post.post_date %}

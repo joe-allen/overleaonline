@@ -1,0 +1,127 @@
+@use "bootstrap" as v;
+
+.v-alert {
+	position: fixed;
+	padding: 8px v.spacing("container");
+	width: 100vw;
+	height: 42px;
+	display: flex;
+	background: v.$c-primary;
+	transform: translateY(-42px);
+	transition: transform .2s ease-out, opacity .2s ease-out;
+	align-items: center;
+	z-index: 9998;
+	top: 0;
+	opacity: 0;
+	box-shadow: 1px 10px 30px rgba(0, 0, 0, .15);
+	color: #fff;
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		transition: opacity .2s ease-out;
+		border-bottom: 1px solid transparent;
+
+		&:hover {
+			text-decoration: none;
+			color: #fff;
+			opacity: .7;
+		}
+	}
+
+
+	&__content {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		max-width: 80vw;
+
+		p {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			max-width: 80vw;
+		}
+	}
+
+	&__close {
+		background-color: transparent;
+		position: absolute;
+		border: none;
+		top: calc(50% + 3px);
+		right: clamp(2rem, 3vw, 4rem);
+		transform: translateY(-50%) scale(.5);
+		width: 32px;
+		height: 32px;
+		z-index: 9999;
+		transition: transform .1s ease-out;
+
+		&:hover {
+			transform: translateY(-50%) scale(.55);
+		}
+
+		&-span {
+			content: "";
+			position: absolute;
+			display: block;
+			background-color: #fff;
+			top: 0;
+			right: 0;
+			width: 100%;
+			height: 6px;
+			z-index: 2;
+			transform-origin: left;
+		}
+
+		&-span {
+			right: 12px;
+		}
+
+		&-span {
+			top: -5px;
+			left: 5px;
+			transform: rotate(45deg);
+		}
+
+		&-span:nth-child(2) {
+			top: 50%;
+			transform: translateY(-50%) scaleX(0);
+		}
+
+		&-span:nth-child(3) {
+			transform: rotate(-45deg);
+			top: 18px;
+			left: 4px;
+		}
+	}
+}
+
+body.v-alert--show .v-alert {
+	// display: flex;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media screen and (max-width: v.$b-medium-large) {
+	.v-alert {
+		&__close {
+			right: calc(v.spacing("container") + 14px);
+		}
+	}
+}
+
+@media screen and (max-width: v.$b-medium) {
+	.v-alert {
+		text-align: left;
+
+		.container {
+			padding-inline-start: 0;
+		}
+
+		&__inner {
+			justify-content: flex-start;
+		}
+	}
+}

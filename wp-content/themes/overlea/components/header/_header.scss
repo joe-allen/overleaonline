@@ -550,10 +550,19 @@
 	}
 }
 
+body.v-alert--show,
+body.v-alert--show .v-alert + .v-header .v-header__logo,
+body.v-alert--show .v-alert + .v-header .v-header__hamburger {
+	transition: margin-top .2s ease-out;
+	margin-top: 42px;
+}
+
+body.v-alert--show .v-alert + .v-header.open .v-header__logo {
+	margin-top: 64px;
+}
+
 @media screen and (max-width: v.$b-medium-large) {
 	.v-header {
-		// height: 100%;
-
 		&__logo {
 			position: fixed;
 		}

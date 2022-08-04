@@ -88,6 +88,7 @@ function v_define_acf() {
 	$g_global = new FieldsBuilder( 'global_settings' );
 	$g_global
 		->addTab( 'Alert' )
+			->addMessage('Important: Purge cache after updating alert. (Performance -> Purge All Caches)','')
 			->addTrueFalse(
 			'alert_show',
 			[

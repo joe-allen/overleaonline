@@ -62,7 +62,8 @@ use Timber\Post;
 		<?php wp_head(); ?>
 	</head>
 	<?php
-		$alert = (true) ? 'v-alert--true' : 'v-alert--false';
+		$context         = Timber::context();
+		$alert = ($context['options']['alert_show']) ? 'v-alert--true' : 'v-alert--false';
 	?>
 	<body <?php body_class( $alert ); ?>>
 		<?php wp_body_open(); ?>
@@ -89,7 +90,6 @@ use Timber\Post;
 		<a href="#v-content" class="v-skip-nav">Skip Navigation</a>
 
 		<?php
-			$context         = Timber::context();
 			Timber::render( 'alert/alert.twig', $context);
 		?>
 

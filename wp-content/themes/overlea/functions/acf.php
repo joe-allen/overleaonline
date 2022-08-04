@@ -88,6 +88,13 @@ function v_define_acf() {
 	$g_global = new FieldsBuilder( 'global_settings' );
 	$g_global
 		->addTab( 'Alert' )
+			->addTrueFalse(
+			'alert_show',
+			[
+				'label' => 'Show Alert?',
+				'ui' => 1,
+				'default_value' => 0,
+			])
 			->addText( 'alert_id',
 				[
 					'label' => 'Alert ID' ,

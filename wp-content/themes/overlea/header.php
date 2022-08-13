@@ -63,7 +63,7 @@ use Timber\Post;
 	</head>
 	<?php
 		$context         = Timber::context();
-		$alert = ($context['options']['alert_show']) ? 'v-alert--true' : 'v-alert--false';
+		$alert = ( $context['options']['alert_show'] ) ? 'v-alert--true' : 'v-alert--false';
 	?>
 	<body <?php body_class( $alert ); ?>>
 		<?php wp_body_open(); ?>

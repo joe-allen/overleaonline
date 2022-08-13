@@ -32,7 +32,7 @@
 	{% if events %}
 		{% set nowDate = "now"|date("m/d/Y") %}
 		{% for event in events %}
-			{% if function('strtotime', nowDate) < function('strtotime', event.event_start_date|date("m/d/Y")) or event.event_start_date == '' %}
+			{% if function('strtotime', nowDate) <= function('strtotime', event.event_start_date|date("m/d/Y")) or event.event_start_date == '' %}
 				{% include "cta/cta.twig" with {
 					title: event.post_title,
 					date: event.event_start_date,

@@ -65,7 +65,7 @@
 										{% set auth_name = author[0].primary_title ? author[0].primary_title : author[0].post_title %}
 										{% if not author[0].leader_retired %}
 											<a href="mailto:{{author[0].leader_email}}?subject={{post.post_title}}">{{auth_name}}</a>
-											<em>{{author[0].secondary_title}} {{author[0].leader_retired ? '(Retired)' : ''}}</em>
+											<div><em>{{author[0].secondary_title}} {{author[0].leader_retired ? '(Retired)' : ''}}</em></div>
 										{% else %}
 											{{auth_name}}
 										{% endif %}<br>

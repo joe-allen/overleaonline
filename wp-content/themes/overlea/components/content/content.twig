@@ -53,6 +53,25 @@
 				<div class="v-content__sidebar">
 					<div class="v-content__meta">
 						<ul class="v-content__meta-list">
+							{% if author[0] %}
+								<li class="v-content__meta-item">
+									<div>
+										{% include 'img/img.twig' with {
+											id: author[0].leader_headshot,
+											class: 'v-content__author v-content__sponsor'
+										} %}
+									</div>
+									<span>
+										{% set auth_name = author[0].primary_title ? author[0].primary_title : author[0].post_title %}
+										{% if not author[0].leader_retired %}
+											<a href="mailto:{{author[0].leader_email}}?subject={{post.post_title}}">{{auth_name}}</a>
+											<em>{{author[0].secondary_title}} {{author[0].leader_retired ? '(Retired)' : ''}}</em>
+										{% else %}
+											{{auth_name}}
+										{% endif %}<br>
+									</span>
+								</li>
+							{% endif %}
 
 							<!-- convert dates for 'add-to-calendar' plugin -->
 							{% if event_start_date %}
@@ -67,6 +86,13 @@
 							{% endif %}
 
 							{% if event_show_dates %}
+
+								{% if event_start_date %}
+									<li class="v-content__meta-item"><span>Starts:</span><br><span>{{start_date[1] ~ '/' ~ start_date[0] ~ '/' ~ start_date[2]}}</span></li>
+								{% endif %}
+								{% if event_end_date %}
+									<li class="v-content__meta-item"><span>Ends:</span><br><span>{{end_date[1] ~ '/' ~ end_date[0] ~ '/' ~ end_date[2]}}</span></li>
+								{% endif %}
 
 								{% if event_subject_to_change %}
 								<li class="v-content__meta-item"><strong>Date subject to change</strong></li>
@@ -88,26 +114,6 @@
 									</span>
 								</li>
 								{% endif %}
-
-
-								{% if event_start_date %}
-									<li class="v-content__meta-item"><span>Starts:</span><br><span>{{start_date[1] ~ '/' ~ start_date[0] ~ '/' ~ start_date[2]}}</span></li>
-								{% endif %}
-								{% if event_end_date %}
-									<li class="v-content__meta-item"><span>Ends:</span><br><span>{{end_date[1] ~ '/' ~ end_date[0] ~ '/' ~ end_date[2]}}</span></li>
-								{% endif %}
-							{% endif %}
-
-							{% if author[0] %}
-								<li class="v-content__meta-item"><span>{{ (type == 'post') ? 'Author' : 'Contact'}}:</span><br>
-									<span>
-										{% set auth_name = author[0].primary_title ? author[0].primary_title : author[0].post_title %}
-
-										{% if not author[0].leader_retired[0] %}
-										<a href="mailto:{{author[0].leader_email}}?subject={{post.post_title}}">{{auth_name}}</a>{% else %}{{auth_name}}{% endif %}<br>
-										<em>{{author[0].secondary_title}} {{author[0].leader_retired[0] ? '(Retired)' : ''}}</em>
-									</span>
-								</li>
 							{% endif %}
 
 							{% if post.meta('Google Maps_text') %}

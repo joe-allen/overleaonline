@@ -13,7 +13,7 @@ include dirname( __FILE__ ) . '/_env.php';
 define( 'DB_NAME', $_ENV['db_name'] );
 define( 'DB_USER', $_ENV['db_user'] );
 define( 'DB_PASSWORD', $_ENV['db_pass'] );
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', $_ENV['db_host'] ?? 'localhost' );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 $table_prefix = $_ENV['db_prefix'];

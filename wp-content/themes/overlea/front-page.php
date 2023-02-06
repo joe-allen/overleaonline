@@ -28,6 +28,14 @@ if ( have_posts() ) :
 		];
 		$context['posts'] = Timber::get_posts( $args );
 
+		// $event_args = [
+		// 	'posts_per_page' => -1,
+		// 	'post_type' => 'events',
+		// 	'order' => 'DESC',
+		// 	'orderby' => 'date',
+		// ];
+		// $context['events'] = Timber::get_posts( $event_args );
+
 		Timber::render( 'front-page/front-page.twig', $context );
 
 	endwhile;

@@ -3,8 +3,8 @@
 namespace DeliciousBrains\WPMDB\Common\Filesystem;
 
 use DeliciousBrains\WPMDB\Common\MigrationPersistence\Persistence;
-use DeliciousBrains\WPMDB\Pro\Transfers\Files\Excludes;
-use DeliciousBrains\WPMDB\Pro\Transfers\Files\Util;
+use DeliciousBrains\WPMDB\Common\Transfers\Files\Excludes;
+use DeliciousBrains\WPMDB\Common\Transfers\Files\Util;
 
 class RecursiveScanner
 {
@@ -79,9 +79,11 @@ class RecursiveScanner
      * Recursively scans a directory contents while minding the scan bottleneck.
      *
      * @param string $abs_path
+     * @param string $stage
+     *
      * @return array|bool|\WP_error
      */
-    public function scan($abs_path)
+    public function scan($abs_path, $stage = '')
     {
         $offset = 0;
 
@@ -109,7 +111,7 @@ class RecursiveScanner
 
         $scan_count = 0;
 
-        $dirlist = $this->filesystem->scandir($abs_path, $offset, $this->get_bottleneck(), $scan_count);
+        $dirlist = $this->filesystem->scandir($abs_path, $stage, $offset, $this->get_bottleneck(), $scan_count);
 
         if (is_wp_error($dirlist)) {
             return $dirlist;
@@ -134,7 +136,7 @@ class RecursiveScanner
         if (!$this->reached_bottleneck()) {
             $this->update_manifest_item($abs_path, $root, 0, true);
             if (!$this->is_scan_complete($root)) {
-                $dirlist += $this->scan($root);
+                $dirlist += $this->scan($root, $stage);
             }
         } else {
             //Scan isn't complete, just update the offset.
@@ -419,7 +421,7 @@ class RecursiveScanner
     private function get_scandir_manifest()
     {
         $file_data = $this->filesystem->get_contents($this->get_scandir_manifest_filename());
-        return unserialize($file_data);
+        return json_decode($file_data, true);
     }
 
     /**
@@ -428,9 +430,9 @@ class RecursiveScanner
     private function save_manifest()
     {
         $manifest_filename = $this->get_scandir_manifest_filename();
-        $result = $this->filesystem->put_contents($manifest_filename, serialize($this->manifest));
+        $result            = $this->filesystem->put_contents($manifest_filename, json_encode($this->manifest));
 
-        if (!$result) {
+        if ( ! $result) {
             $this->transfer_utils->catch_general_error('Could not create scandir manifest.');
         }
     }
@@ -505,6 +507,8 @@ class RecursiveScanner
      * @return bool
      */
     private function should_exclude($path) {
-        return !empty(Excludes::shouldExcludeFile($path, $this->excludes));
+        $excludes = Excludes::shouldExcludeFile($path, $this->excludes);
+
+        return !empty($excludes['exclude']);
     }
 }

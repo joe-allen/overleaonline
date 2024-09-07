@@ -1,10 +1,10 @@
 <?php
 
-namespace Sober\Intervention\Admin\Support;
+namespace Jacoby\Intervention\Admin\Support;
 
-use Sober\Intervention\Admin\Support\Maps;
-use Sober\Intervention\Support\Arr;
-use Sober\Intervention\Support\Str;
+use Jacoby\Intervention\Support\Arr;
+use Jacoby\Intervention\Support\Config;
+use Jacoby\Intervention\Support\Str;
 
 /**
  * Support/Tabs
@@ -63,7 +63,7 @@ class Tabs
      * Interface
      *
      * @param string $key
-     * @return Sober\Intervention\Admin\Support\Tabs
+     * @return Jacoby\Intervention\Admin\Support\Tabs
      */
     public static function set($key = false)
     {
@@ -78,7 +78,7 @@ class Tabs
     public function __construct($key = false)
     {
         $this->key = $key;
-        $this->filter = Maps::set('screens')->get($this->key);
+        $this->filter = Config::get('admin/pagenow')->get($this->key);
         // Remove anything after `?`
         $this->filter = Str::explode('?', $this->filter)[0];
     }

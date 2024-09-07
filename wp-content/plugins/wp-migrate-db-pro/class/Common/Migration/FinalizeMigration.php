@@ -132,7 +132,7 @@ class FinalizeMigration
                 )
             );
             $data['form_data']    = base64_encode($data['form_data']);
-            $data['site_details'] = base64_encode(serialize($data['site_details']));
+            $data['site_details'] = base64_encode(json_encode($data['site_details']));
 
             $data['action']   = 'wpmdb_remote_finalize_migration';
             $data['intent']   = 'pull';
@@ -147,7 +147,7 @@ class FinalizeMigration
         } else {
             $return = $this->finalize_migration($state_data);
         }
-
+        do_action('wpmdb_after_finalize_migration');
         $result = $this->http->end_ajax($return);
 
         return $result;
@@ -268,7 +268,10 @@ class FinalizeMigration
      **/
     private function get_tables($state_data)
     {
-        $source_tables      = explode(',', $state_data['tables']);
+        if ($state_data['tables'] === '') {
+            return [];
+        }
+        $source_tables      = is_string($state_data['tables']) ? explode(',', $state_data['tables']) : $state_data['tables'];
         $source_prefix      = $state_data['source_prefix'];
         $destination_prefix = $state_data['destination_prefix'];
         if ($source_prefix === $destination_prefix || (isset($state_data['mst_select_subsite']) && '1' === $state_data['mst_select_subsite'])) {

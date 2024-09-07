@@ -5,10 +5,11 @@ namespace AC\Controller;
 use AC\Capabilities;
 use AC\ListScreenRepository\Storage;
 use AC\Message\Notice;
-use AC\Registrable;
+use AC\Registerable;
 use AC\Type\ListScreenId;
+use LogicException;
 
-class ListScreenRestoreColumns implements Registrable {
+class ListScreenRestoreColumns implements Registerable {
 
 	/**
 	 * @var Storage
@@ -19,7 +20,8 @@ class ListScreenRestoreColumns implements Registrable {
 		$this->repository = $repository;
 	}
 
-	public function register() {
+	public function register(): void
+    {
 		add_action( 'admin_init', [ $this, 'handle_request' ] );
 	}
 
@@ -32,7 +34,13 @@ class ListScreenRestoreColumns implements Registrable {
 
 			case 'restore_by_type' :
 				if ( $this->verify_nonce( 'restore-type' ) ) {
-					$list_screen = $this->repository->find( new ListScreenId( filter_input( INPUT_POST, 'layout' ) ) );
+					try {
+						$id = new ListScreenId( filter_input( INPUT_POST, 'layout' ) );
+					} catch ( LogicException $e ) {
+						return;
+					}
+
+					$list_screen = $this->repository->find( $id );
 
 					if ( ! $list_screen ) {
 						return;

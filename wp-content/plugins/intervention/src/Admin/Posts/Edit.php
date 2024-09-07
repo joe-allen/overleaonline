@@ -1,13 +1,12 @@
 <?php
 
-namespace Sober\Intervention\Admin\Posts;
+namespace Jacoby\Intervention\Admin\Posts;
 
-use Sober\Intervention\Admin\SharedApi;
-use Sober\Intervention\Admin\Support\BlockEditor;
-use Sober\Intervention\Admin\Support\PostComponents;
-use Sober\Intervention\Admin\Support\Title;
-use Sober\Intervention\Support\Arr;
-use Sober\Intervention\Support\Composer;
+use Jacoby\Intervention\Admin\SharedApi;
+use Jacoby\Intervention\Admin\Support\BlockEditor;
+use Jacoby\Intervention\Admin\Support\PostComponents;
+use Jacoby\Intervention\Support\Arr;
+use Jacoby\Intervention\Support\Composer;
 
 /**
  * Posts/Edit
@@ -20,9 +19,24 @@ use Sober\Intervention\Support\Composer;
  * [
  *     'posts.item',
  *     'posts.item' => (string) $route,
- *     'posts.item.tabs',
- *     'posts.item.tabs.[screen-options, help]',
  *     'posts.item.add',
+ *     'posts.item.add' => [
+ *          search,
+ *          preview,
+ *          headers,
+ *          tips,
+ *          grid,
+ *          icons,
+ *      ],
+ *     'posts.item.add.blocks',
+ *     'posts.item.add.blocks' => [
+ *          text,
+ *          media,
+ *          design,
+ *          widgets,
+ *          theme,
+ *          embeds,
+ *      ],
  *     'posts.item.editor',
  *     'posts.item.author',
  *     'posts.item.excerpt',
@@ -36,6 +50,9 @@ use Sober\Intervention\Support\Composer;
  *     'posts.item.categories',
  *     'posts.item.tags',
  *     'posts.item.sticky',
+ *      --- classic ---
+ *     'posts.item.tabs',
+ *     'posts.item.tabs.[screen-options, help]',
  * ]
  */
 class Edit

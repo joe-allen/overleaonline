@@ -2,7 +2,9 @@
 
 namespace AC\Form;
 
-abstract class Element {
+use AC\Renderable;
+
+abstract class Element implements Renderable {
 
 	/**
 	 * @var array
@@ -62,7 +64,7 @@ abstract class Element {
 	 * Render this element
 	 * @return string
 	 */
-	abstract public function render();
+	abstract public function render(): string;
 
 	/**
 	 * @param $key

@@ -1,9 +1,9 @@
 <?php
 
-namespace Sober\Intervention\Admin\Support\All\Lists;
+namespace Jacoby\Intervention\Admin\Support\All\Lists;
 
-use Sober\Intervention\Admin\Support\Maps;
-use Sober\Intervention\Support\Str;
+use Jacoby\Intervention\Support\Config;
+use Jacoby\Intervention\Support\Str;
 
 /**
  * Support/All/Lists/Count
@@ -23,7 +23,7 @@ class Count
      * Interface
      *
      * @param string $key
-     * @return Sober\Intervention\Admin\Support\Menu
+     * @return Jacoby\Intervention\Admin\Support\Menu
      */
     public static function set($key = false)
     {
@@ -38,7 +38,7 @@ class Count
     public function __construct($key = false)
     {
         $this->key = $key;
-        $this->filter = Maps::set('screens')->get($this->key);
+        $this->filter = Config::get('admin/pagenow')->get($this->key);
         // Remove anything after `?`
         $this->filter = Str::explode('?', $this->filter)[0];
     }

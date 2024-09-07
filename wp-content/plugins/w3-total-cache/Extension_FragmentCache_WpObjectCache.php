@@ -325,6 +325,8 @@ class Extension_FragmentCache_WpObjectCache {
 			$cache = $this->_get_cache( $descriptor['global'] );
 			$cache->flush( $group );
 		}
+
+		return true;
 	}
 
 	/**
@@ -480,7 +482,11 @@ class Extension_FragmentCache_WpObjectCache {
 			case 'redis':
 				$engineConfig = array(
 					'servers' => $this->_config->get_array( array( 'fragmentcache', 'redis.servers' ) ),
+					'verify_tls_certificates' => $this->_config->get_boolean( array( 'fragmentcache', 'redis.verify_tls_certificates' ) ),
 					'persistent' => $this->_config->get_boolean( array( 'fragmentcache', 'redis.persistent' ) ),
+					'timeout' => $this->_config->get_integer( array( 'fragmentcache', 'redis.timeout' ) ),
+					'retry_interval' => $this->_config->get_integer( array( 'fragmentcache', 'redis.retry_interval' ) ),
+					'read_timeout' => $this->_config->get_integer( array( 'fragmentcache', 'redis.read_timeout' ) ),
 					'dbid' => $this->_config->get_integer( array( 'fragmentcache', 'redis.dbid' ) ),
 					'password' => $this->_config->get_string( array( 'fragmentcache', 'redis.password' ) )
 				);

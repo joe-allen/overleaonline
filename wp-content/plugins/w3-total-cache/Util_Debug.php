@@ -155,4 +155,16 @@ class Util_Debug {
 
 		return '(' . implode( ', ', $args_strings ) . ')';
 	}
+
+	/**
+	 * Clean debug output with label headers.
+	 */
+	static public function debug( $label, $data ) {
+		error_log(
+			"\n\n" . '===============Debug ' . $label . ' Start===============' . "\n" .
+			'Microtime: ' . microtime( true ) . "\n" .
+			'Content  : ' . print_r( $data, true ) . "\n" .
+			'===============Debug ' . $label . ' End===============' . "\n"
+		);
+	}
 }

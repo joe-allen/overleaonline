@@ -2,18 +2,12 @@
 
 namespace AC\Storage;
 
-class OptionFactory {
+final class OptionFactory implements KeyValueFactory
+{
 
-	/**
-	 * @param string $key
-	 * @param bool   $network_active
-	 *
-	 * @return KeyValuePair
-	 */
-	public function create( $key, $network_active ) {
-		return $network_active
-			? new SiteOption( (string) $key )
-			: new Option( (string) $key );
-	}
+    public function create(string $key): KeyValuePair
+    {
+        return new Option($key);
+    }
 
 }

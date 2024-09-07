@@ -1,13 +1,11 @@
 <?php
 
-namespace Sober\Intervention\Support;
-
-use Illuminate\Support\Collection;
+namespace Jacoby\Intervention\Support;
 
 /**
  * String
  *
- * Laravel based helper class for strings.
+ * Illuminate based helper class for strings.
  *
  * @package WordPress
  * @subpackage Intervention
@@ -39,7 +37,7 @@ class Str
      */
     public static function explode($delimiter, $value, $limit = PHP_INT_MAX)
     {
-        return collect(explode($delimiter, $value, $limit));
+        return Arr::collect(explode($delimiter, $value, $limit));
     }
 
     /**

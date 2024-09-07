@@ -3,7 +3,7 @@
 ## Onboarding
 
 ```shell
-$ git clone git@github.com:soberwp/intervention.git
+$ git clone git@github.com:darrenjacoby/intervention.git
 $ composer install
 ```
 
@@ -31,4 +31,14 @@ Run [Phing](https://www.phing.info/) to build the `dist` folder.
 
 ```shell
 $ composer build
+```
+
+### NPM
+
+Changes to folder `resources/` require a build step to create a `assets` folder for styles and scripts. If you have run `composer build` prior you can skip this step.
+
+Run [NPM](https://www.npmjs.com/) to build the `assets/styles` and `assets/scripts` folder.
+
+```shell
+$ composer build:assets
 ```

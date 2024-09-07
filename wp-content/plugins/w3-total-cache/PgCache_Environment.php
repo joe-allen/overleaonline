@@ -189,7 +189,7 @@ class PgCache_Environment {
 
 			try{
 			if ( file_exists( $dir ) && !is_writeable( $dir ) )
-				Util_WpFile::delete_folder( $dir, '', $_SERVER['REQUEST_URI'] );
+				Util_WpFile::delete_folder( $dir, '', isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '' );
 		} catch ( Util_WpFile_FilesystemRmdirException $ex ) {
 			$exs->push( $ex );
 		}
@@ -411,7 +411,6 @@ class PgCache_Environment {
 			W3TC_MARKER_BEGIN_PGCACHE_CORE,
 			W3TC_MARKER_END_PGCACHE_CORE,
 			array(
-				W3TC_MARKER_BEGIN_BROWSERCACHE_NO404WP => 0,
 				W3TC_MARKER_BEGIN_WORDPRESS => 0,
 				W3TC_MARKER_END_MINIFY_CORE =>
 					strlen( W3TC_MARKER_END_MINIFY_CORE ) + 1,
@@ -688,20 +687,30 @@ class PgCache_Environment {
 		$cache_path = str_replace( Util_Environment::document_root(), '', $cache_dir );
 
 		/**
-		 * Set Accept-Encoding
+		 * Set Accept-Encoding gzip
+		 */
+		if ( $config->get_boolean( 'browsercache.enabled' ) && $config->get_boolean( 'browsercache.html.compression' ) ) {
+			$rules .= "    RewriteCond %{HTTP:Accept-Encoding} gzip\n";
+			$rules .= "    RewriteRule .* - [E=W3TC_ENC:_gzip]\n";
+			$env_W3TC_ENC = '%{ENV:W3TC_ENC}';
+		}
+
+		/**
+		 * Set Accept-Encoding brotli
 		 */
 		if ( $config->get_boolean( 'browsercache.enabled' ) && $config->get_boolean( 'browsercache.html.brotli' ) ) {
 			$rules .= "    RewriteCond %{HTTP:Accept-Encoding} br\n";
 			$rules .= "    RewriteRule .* - [E=W3TC_ENC:_br]\n";
 			$env_W3TC_ENC = '%{ENV:W3TC_ENC}';
-		} else if ( $config->get_boolean( 'browsercache.enabled' ) && $config->get_boolean( 'browsercache.html.compression' ) ) {
-			$rules .= "    RewriteCond %{HTTP:Accept-Encoding} gzip\n";
-			$rules .= "    RewriteRule .* - [E=W3TC_ENC:_gzip]\n";
-			$env_W3TC_ENC = '%{ENV:W3TC_ENC}';
 		}
+
 		$rules .= "    RewriteCond %{HTTP_COOKIE} w3tc_preview [NC]\n";
 		$rules .= "    RewriteRule .* - [E=W3TC_PREVIEW:_preview]\n";
 		$env_W3TC_PREVIEW = '%{ENV:W3TC_PREVIEW}';
+
+		$rules .= "    RewriteCond %{REQUEST_URI} \\/$\n";
+		$rules .= "    RewriteRule .* - [E=W3TC_SLASH:_slash]\n";
+		$env_W3TC_SLASH = '%{ENV:W3TC_SLASH}';
 
 		$use_cache_rules = '';
 		/**
@@ -735,7 +744,7 @@ class PgCache_Environment {
 		 * Make final rewrites for specific files
 		 */
 		$uri_prefix =  $cache_path . '/%{HTTP_HOST}/%{REQUEST_URI}/' .
-			'_index' . $env_W3TC_UA . $env_W3TC_REF . $env_W3TC_COOKIE .
+			'_index' . $env_W3TC_SLASH . $env_W3TC_UA . $env_W3TC_REF . $env_W3TC_COOKIE .
 			$env_W3TC_SSL . $env_W3TC_PREVIEW;
 		$uri_prefix = apply_filters( 'w3tc_pagecache_rules_apache_uri_prefix',
 			$uri_prefix );
@@ -749,17 +758,29 @@ class PgCache_Environment {
 		if ($config->get_boolean('pgcache.cache.nginx_handle_xml'))
 			$exts[] = '.xml';
 
+		/**
+		 * Filter: Allow adding additional rules at the end of the PGCACHE_CORE block, before the last rule.
+		 *
+		 * @since 2.7.1
+		 *
+		 * @param string $rules           Additional rules.
+		 * @param string $use_cache_rules Rewrite conditions for non-POST, empty query string, rejected cookies, and rejected user agents.
+		 * @param string $document_root   Document root.
+		 * @param string $uri_prefix      URI prefix, after the "w3tc_pagecache_rules_apache_uri_prefix" WP filter.
+		 * @param array  $exts            File extensions used; iterate to use them all.
+		 * @param string $env_W3TC_ENC    Encoding string: "", "_br", or "_gzip".
+		 */
+		$rules = \apply_filters(
+			'w3tc_pgcache_rules_apache_last',
+			$rules,
+			$use_cache_rules,
+			$document_root,
+			$uri_prefix,
+			$env_W3TC_ENC
+		);
+
 		foreach ( $exts as $ext ) {
 			$rules .= $use_cache_rules;
-
-			if ( $ext == '.html' ) {
-				/**
-				 * Check permalink structure trailing slash
-				 */
-				if ( substr( $permalink_structure, -1 ) == '/' ) {
-					$rules .= "    RewriteCond %{REQUEST_URI} \\/$\n";
-				}
-			}
 
 			$rules .= "    RewriteCond \"" . $document_root . $uri_prefix . $ext .
 				$env_W3TC_ENC . "\"" . $switch . "\n";
@@ -956,17 +977,11 @@ class PgCache_Environment {
 		$rules .= "    set \$w3tc_rewrite 0;\n";
 		$rules .= "}\n";
 
-		/**
-		 * Check permalink structure trailing slash
-		 * and allow WordPress to redirect for non-slash URIs
-		 */
-		if ( $pgcache_engine == 'file_generic' ) {
-			if ( substr( $permalink_structure, -1 ) == '/' ) {
-				$rules .= "if ($env_request_uri !~ \\/$) {\n";
-				$rules .= "    set \$w3tc_rewrite 0;\n";
-				$rules .= "}\n";
-			}
-		}
+		$rules .= "set \$w3tc_slash \"\";\n";
+		$rules .= "if ($env_request_uri ~ \\/$) {\n";
+		$rules .= "    set \$w3tc_slash _slash;\n";
+		$rules .= "}\n";
+		$env_w3tc_slash = "\$w3tc_slash";
 
 		/**
 		 * Check for rejected cookies
@@ -1108,17 +1123,6 @@ class PgCache_Environment {
 		}
 
 		if ( $config->get_boolean( 'browsercache.enabled' ) &&
-			 $config->get_boolean( 'browsercache.html.brotli' ) ) {
-			$rules .= "set \$w3tc_enc \"\";\n";
-
-			$rules .= "if (\$http_accept_encoding ~ br) {\n";
-			$rules .= "    set \$w3tc_enc _br;\n";
-			$rules .= "}\n";
-
-			$env_w3tc_enc = '$w3tc_enc';
-		}
-
-		if ( $config->get_boolean( 'browsercache.enabled' ) &&
 			$config->get_boolean( 'browsercache.html.compression' ) ) {
 			$rules .= "set \$w3tc_enc \"\";\n";
 
@@ -1129,8 +1133,28 @@ class PgCache_Environment {
 			$env_w3tc_enc = '$w3tc_enc';
 		}
 
-		$key_postfix = $env_w3tc_ua . $env_w3tc_ref . $env_w3tc_cookie .
+		if ( $config->get_boolean( 'browsercache.enabled' ) &&
+			$config->get_boolean( 'browsercache.html.brotli' ) ) {
+			$rules .= "set \$w3tc_enc \"\";\n";
+
+			$rules .= "if (\$http_accept_encoding ~ br) {\n";
+			$rules .= "    set \$w3tc_enc _br;\n";
+			$rules .= "}\n";
+
+			$env_w3tc_enc = '$w3tc_enc';
+		}
+
+		$key_postfix = $env_w3tc_slash . $env_w3tc_ua . $env_w3tc_ref . $env_w3tc_cookie .
 			$env_w3tc_ssl . $env_w3tc_preview;
+
+		/**
+		 * Filter: Allow modifying the key_postfix string used in the PGCACHE_CORE block.
+		 *
+		 * @since 2.7.1
+		 *
+		 * @param string $key_postfix Key postfix string.
+		 */
+		$key_postfix = \apply_filters( 'w3tc_pgcache_postfix_nginx', $key_postfix );
 
 		if ( $pgcache_engine == 'file_generic' ) {
 			$rules .= $this->for_file_generic( $config, $cache_dir,
@@ -1253,7 +1277,6 @@ class PgCache_Environment {
 				W3TC_MARKER_BEGIN_BROWSERCACHE_CACHE => 0,
 				W3TC_MARKER_BEGIN_MINIFY_CORE => 0,
 				W3TC_MARKER_BEGIN_PGCACHE_CORE => 0,
-				W3TC_MARKER_BEGIN_BROWSERCACHE_NO404WP => 0,
 				W3TC_MARKER_BEGIN_WORDPRESS => 0,
 				W3TC_MARKER_END_MINIFY_CACHE => strlen( W3TC_MARKER_END_MINIFY_CACHE ) + 1
 			)

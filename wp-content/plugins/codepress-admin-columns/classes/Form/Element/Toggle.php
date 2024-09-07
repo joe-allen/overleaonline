@@ -5,39 +5,78 @@ namespace AC\Form\Element;
 use AC\Form\Element;
 use AC\View;
 
-class Toggle extends Element {
+class Toggle extends Element
+{
 
-	/**
-	 * @var boolean
-	 */
-	private $checked;
+    /**
+     * @var bool
+     */
+    private $checked;
 
-	public function __construct( $name, $label, $checked = false, $value = null ) {
-		parent::__construct( $name, [] );
+    /**
+     * @var string
+     */
+    private $unchecked_value;
 
-		$this->set_label( $label );
-		$this->checked = (bool) $checked;
+    /**
+     * @var array
+     */
+    private $container_attributes;
 
-		if ( $value ) {
-			$this->set_value( $value );
-		}
-	}
+    /**
+     * @var string
+     */
+    private $container_class;
 
-	protected function get_type() {
-		return 'checkbox';
-	}
+    public function __construct(
+        string $name,
+        string $label,
+        bool $checked = false,
+        $value = null,
+        string $unchecked_value = 'false'
+    ) {
+        parent::__construct($name);
 
-	public function render() {
-		$view = new View( [
-			'id'         => $this->get_name(),
-			'name'       => $this->get_name(),
-			'label'      => $this->get_label(),
-			'checked'    => $this->checked,
-			'value'      => $this->get_value(),
-			'attributes' => $this->get_attributes_as_string( $this->get_attributes() ),
-		] );
+        $this->set_label($label);
+        $this->checked = $checked;
+        $this->unchecked_value = $unchecked_value;
+        $this->container_attributes = [];
 
-		return $view->set_template( 'component/toggle-v2' )->render();
-	}
+        if ($value) {
+            $this->set_value($value);
+        }
+    }
+
+    public function set_container_attributes($attributes): void
+    {
+        if (isset($attributes['class'])) {
+            $this->container_class = $attributes['class'];
+            unset($attributes['class']);
+        }
+
+        $this->container_attributes = (array)$attributes;
+    }
+
+    protected function get_type(): string
+    {
+        return 'checkbox';
+    }
+
+    public function render(): string
+    {
+        $view = new View([
+            'id'                   => $this->get_name(),
+            'name'                 => $this->get_name(),
+            'label'                => $this->get_label(),
+            'checked'              => $this->checked,
+            'value'                => $this->get_value(),
+            'unchecked_value'      => $this->unchecked_value,
+            'attributes'           => $this->get_attributes_as_string($this->get_attributes()),
+            'container_attributes' => $this->get_attributes_as_string($this->container_attributes),
+            'container_class'      => $this->container_class,
+        ]);
+
+        return $view->set_template('component/toggle-v2')->render();
+    }
 
 }

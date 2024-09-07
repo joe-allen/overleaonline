@@ -2,9 +2,9 @@
 
 namespace AC\Table;
 
-use AC;
+use AC\Registerable;
 
-final class TableFormView implements AC\Renderable {
+final class TableFormView implements Registerable {
 
 	const PARAM_ACTION = 'ac-actions-form';
 
@@ -33,10 +33,8 @@ final class TableFormView implements AC\Renderable {
 		$this->priority = (int) $priority;
 	}
 
-	/**
-	 * Register hooks
-	 */
-	public function register() {
+	public function register(): void
+    {
 
 		switch ( $this->type ) {
 			case 'post':

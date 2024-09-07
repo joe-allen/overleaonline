@@ -1,9 +1,9 @@
 <?php
 
-namespace Sober\Intervention\Admin\Support;
+namespace Jacoby\Intervention\Admin\Support;
 
-use Sober\Intervention\Admin\Support\Maps;
-use Sober\Intervention\Support\Str;
+use Jacoby\Intervention\Support\Config;
+use Jacoby\Intervention\Support\Str;
 
 /**
  * Support/Menu
@@ -26,7 +26,7 @@ class Menu
      * Interface
      *
      * @param string $key
-     * @return Sober\Intervention\Admin\Support\Menu
+     * @return Jacoby\Intervention\Admin\Support\Menu
      */
     public static function set($key = false)
     {
@@ -45,13 +45,13 @@ class Menu
         /**
          * Eg: dashboard or dashboard.home
          */
-        $this->position = Maps::set('menu-positions')
+        $this->position = Config::get('admin/menu-positions')
             ->get($this->key);
 
-        $this->page = Maps::set('screens')
+        $this->page = Config::get('admin/pagenow')
             ->get(Str::explode('.', $this->key)->first());
 
-        $this->subpage = Maps::set('screens')
+        $this->subpage = Config::get('admin/pagenow')
             ->get($this->key);
     }
 
@@ -114,7 +114,7 @@ class Menu
      */
     public function remove()
     {
-        add_action('admin_init', function () {
+        add_action('admin_menu', function () {
             // customize.php exception for removing menu items
             if ($this->subpage === 'customize.php') {
                 $this->subpage = 'customize.php?return=' . urlencode($_SERVER['REQUEST_URI']);

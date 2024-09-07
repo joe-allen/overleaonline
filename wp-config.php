@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WP Config
  *
@@ -8,27 +9,27 @@
  * @author  Vitamin
  * @version 1.0.0
  */
-include dirname( __FILE__ ) . '/_env.php';
+include dirname(__FILE__) . '/_env.php';
 
-define( 'DB_NAME', $_ENV['db_name'] );
-define( 'DB_USER', $_ENV['db_user'] );
-define( 'DB_PASSWORD', $_ENV['db_pass'] );
-define( 'DB_HOST', $_ENV['db_host'] ?? 'localhost' );
-define( 'DB_CHARSET', 'utf8' );
-define( 'DB_COLLATE', '' );
+define('DB_NAME', $_ENV['db_name']);
+define('DB_USER', $_ENV['db_user']);
+define('DB_PASSWORD', $_ENV['db_pass']);
+define('DB_HOST', $_ENV['db_host'] ?? 'localhost');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
 $table_prefix = $_ENV['db_prefix'];
 
 /** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
+if (! defined('ABSPATH')) {
+  define('ABSPATH', dirname(__FILE__) . '/');
 }
 
-define( 'WPCF7_AUTOP', false );
+define('WPCF7_AUTOP', false);
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 
-if ( 'local' !== $_ENV['location'] ) {
-	define( 'DISALLOW_FILE_EDIT', true );
-	define( 'DISALLOW_FILE_MODS', true );
+if ('local' !== $_ENV['location']) {
+  define('DISALLOW_FILE_EDIT', true);
+  define('DISALLOW_FILE_MODS', true);
 }

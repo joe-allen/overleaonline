@@ -12,13 +12,14 @@ class InlineMessage extends Message {
 	 */
 	private $class;
 
-	public function __construct( $message, $class = null ) {
-		parent::__construct( $message );
+	public function __construct( $message, $type = null, $class = null ) {
+		parent::__construct( $message, $type );
 
 		$this->class = $class;
 	}
 
-	public function render() {
+	public function render(): string
+    {
 		$view = new View( [
 			'message' => $this->message,
 			'class'   => trim( $this->type . ' ' . $this->class ),

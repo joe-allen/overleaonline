@@ -2,13 +2,14 @@
 
 namespace DeliciousBrains\WPMDB\Pro\MF;
 
-use DeliciousBrains\WPMDB\Pro\Addon\AddonManagerInterface;
+use DeliciousBrains\WPMDB\Common\MF\MediaFilesAddon;
+use DeliciousBrains\WPMDB\Common\MF\MediaFilesLocal;
 use DeliciousBrains\WPMDB\Pro\MF\CliCommand\MediaFilesCli;
 use DeliciousBrains\WPMDB\WPMDBDI;
 
-class Manager implements AddonManagerInterface
+class Manager extends \DeliciousBrains\WPMDB\Common\MF\Manager
 {
-    public function register()
+    public function register($licensed)
     {
         global $wpmdbpro_media_files;
 
@@ -17,23 +18,16 @@ class Manager implements AddonManagerInterface
         }
 
         $container = WPMDBDI::getInstance();
-        $container->get(MediaFilesAddon::class)->register();
+        $media_files = $container->get(MediaFilesAddon::class);
+        $media_files->register();
+        $media_files->set_licensed($licensed);
+
         $container->get(MediaFilesLocal::class)->register();
         $container->get(MediaFilesRemote::class)->register();
         $container->get(MediaFilesCli::class)->register();
 
-        if ( ! function_exists('wp_migrate_db_pro_loaded') || ! wp_migrate_db_pro_loaded()) {
-            return false;
-        }
-
         add_filter('wpmdb_addon_registered_mf', '__return_true');
 
-        return $container->get(MediaFilesAddon::class);
-    }
-
-
-    public function get_license_response_key()
-    {
-        return 'wp-migrate-db-pro-media-files';
+        return $media_files;
     }
 }

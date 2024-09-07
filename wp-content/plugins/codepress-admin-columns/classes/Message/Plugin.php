@@ -5,100 +5,92 @@ namespace AC\Message;
 use AC\Message;
 use AC\View;
 
-class Plugin extends Message {
+class Plugin extends Message
+{
 
-	/**
-	 * @var string
-	 */
-	protected $plugin_basename;
+    protected $plugin_basename;
 
-	/**
-	 * @var string
-	 */
-	protected $icon;
+    protected $icon;
 
-	/**
-	 * @param string $message
-	 * @param string $plugin_basename
-	 */
-	public function __construct( $message, $plugin_basename ) {
-		parent::__construct( $message );
+    public function __construct(string $message, string $plugin_basename, string $type = null)
+    {
+        if (null === $type) {
+            $type = self::WARNING;
+        }
 
-		$this->plugin_basename = $plugin_basename;
-		$this->type = self::WARNING;
-		$this->icon = $this->get_icon_by_current_type();
-	}
+        parent::__construct($message, $type);
 
-	public function register() {
-		add_action( 'after_plugin_row_' . $this->plugin_basename, [ $this, 'display' ], 11 );
-	}
+        $this->plugin_basename = $plugin_basename;
+        $this->icon = $this->get_icon_by_current_type();
+    }
 
-	public function render() {
-		switch ( $this->type ) {
-			case self::SUCCESS :
-				$class = 'updated-message notice-success';
+    public function register(): void
+    {
+        add_action('after_plugin_row_' . $this->plugin_basename, [$this, 'display'], 11);
+    }
 
-				break;
-			case self::INFO :
-				$class = self::WARNING;
+    public function render(): string
+    {
+        switch ($this->type) {
+            case self::SUCCESS :
+                $class = 'updated-message notice-success';
 
-				break;
-			default:
-				$class = $this->type;
-		}
+                break;
+            case self::INFO :
+                $class = self::WARNING;
 
-		$is_plugin_active = is_multisite() && is_network_admin()
-			? is_plugin_active_for_network( $this->plugin_basename )
-			: is_plugin_active( $this->plugin_basename );
+                break;
+            default:
+                $class = $this->type;
+        }
 
-		$status = $is_plugin_active
-			? 'active'
-			: 'inactive';
+        $is_plugin_active = is_multisite() && is_network_admin()
+            ? is_plugin_active_for_network($this->plugin_basename)
+            : is_plugin_active($this->plugin_basename);
 
-		$data = [
-			'plugin_basename' => $this->plugin_basename,
-			'icon'            => $this->icon,
-			'class'           => $class,
-			'message'         => $this->message,
-			'type'            => $this->type,
-			'status'          => $status,
-		];
+        $status = $is_plugin_active
+            ? 'active'
+            : 'inactive';
 
-		$view = new View( $data );
-		$view->set_template( 'message/plugin' );
+        $data = [
+            'plugin_basename' => $this->plugin_basename,
+            'icon'            => $this->icon,
+            'class'           => $class,
+            'message'         => $this->message,
+            'type'            => $this->type,
+            'status'          => $status,
+        ];
 
-		return $view->render();
-	}
+        $view = new View($data);
+        $view->set_template('message/plugin');
 
-	/**
-	 * @return string
-	 */
-	protected function get_icon_by_current_type() {
-		$mapping = [
-			self::SUCCESS => '\f147',
-			self::WARNING => '\f348',
-			self::ERROR   => '\f534',
-			self::INFO    => '\f463',
-		];
+        return $view->render();
+    }
 
-		if ( ! isset( $mapping[ $this->type ] ) ) {
-			return false;
-		}
+    /**
+     * @return string
+     */
+    protected function get_icon_by_current_type()
+    {
+        $mapping = [
+            self::SUCCESS => '\f147', // yes
+            self::WARNING => '\f348', // info
+            self::ERROR   => '\f534', // warning
+            self::INFO    => '\f14c', // info outline
+        ];
 
-		return $mapping[ $this->type ];
-	}
+        if ( ! isset($mapping[$this->type])) {
+            return false;
+        }
 
-	/**
-	 * Set the icon of this notice
-	 *
-	 * @param string $icon
-	 *
-	 * @return $this
-	 */
-	public function set_icon( $icon ) {
-		$this->icon = $icon;
+        return $mapping[$this->type];
+    }
 
-		return $this;
-	}
+    public function set_icon(string $icon): self
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
 
 }

@@ -4,33 +4,20 @@ namespace AC\Type\Url;
 
 use AC\Admin;
 use AC\Admin\RequestHandlerInterface;
-use AC\Type;
+use AC\Type\Uri;
 
-class EditorNetwork implements Type\Url {
+class EditorNetwork extends Uri
+{
 
-	/**
-	 * @var string|null
-	 */
-	private $slug;
+    public function __construct($slug = null)
+    {
+        parent::__construct(network_admin_url('settings.php'));
 
-	public function __construct( $slug = null ) {
-		$this->slug = $slug;
-	}
+        $this->add_arg(RequestHandlerInterface::PARAM_PAGE, Admin\Admin::NAME);
 
-	public static function create_with_slug( $slug ) {
-		return new self( $slug );
-	}
-
-	public function get_url() {
-		$args = [
-			RequestHandlerInterface::PARAM_PAGE => Admin\Admin::NAME,
-		];
-
-		if ( $this->slug ) {
-			$args[ RequestHandlerInterface::PARAM_TAB ] = $this->slug;
-		}
-
-		return add_query_arg( $args, network_admin_url( 'settings.php' ) );
-	}
+        if ($slug) {
+            $this->add_arg(RequestHandlerInterface::PARAM_TAB, $slug);
+        }
+    }
 
 }

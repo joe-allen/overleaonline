@@ -35,12 +35,25 @@ class MediaFilesCompat
      */
     public function get_subsite_from_state_data($state_data, $target = 'source')
     {
-        $is_two_multisites = 'true' === $state_data['site_details']['local']['is_multisite'] && 'true' === $state_data['site_details']['remote']['is_multisite'];
-        if ('destination' === $target && $is_two_multisites ) {
-            return (int)isset($state_data['mst_destination_subsite']) ? $state_data['mst_destination_subsite'] : 0;
+        $local_multisite   = 'true' === $state_data['site_details']['local']['is_multisite'];
+        $remote_multisite  = 'true' === $state_data['site_details']['remote']['is_multisite'];
+        if ($local_multisite && $remote_multisite) {
+            if ('destination' === $target) {
+                return (int)isset($state_data['mst_destination_subsite']) ? $state_data['mst_destination_subsite'] : 0;
+            }
+            return (int)isset($state_data['mst_selected_subsite']) ? $state_data['mst_selected_subsite'] : 0;
         }
-        
-        return (int)isset($state_data['mst_selected_subsite']) ? $state_data['mst_selected_subsite'] : 0;
+        if ($local_multisite){
+            if ('push' === $state_data['intent']) {
+                return 'source' === $target ? $state_data['mst_selected_subsite'] : 0;
+            }
+            return 'source' === $target ? 0 : $state_data['mst_selected_subsite'];
+        }
+        //if remote is multisite
+        if ('push' === $state_data['intent']) {
+            return 'source' === $target ? 0 : $state_data['mst_selected_subsite'];
+        }
+        return isset($state_data['mst_selected_subsite']) && 'source' === $target ? $state_data['mst_selected_subsite']: 0;
     }
 
     /**
@@ -84,9 +97,7 @@ class MediaFilesCompat
      */
     public function filter_media_destination($file, $state_data)
     {
-        $target = 'push' === $state_data['intent'] ? 'source' : 'destination';
-        $site_id = $this->get_subsite_from_state_data($state_data, $target);
-
+        $site_id = $this->get_subsite_from_state_data($state_data, 'source');
         if ($site_id === 0 || !$this->is_subsite_migration($state_data)) {
             return $file;
         }
@@ -102,6 +113,26 @@ class MediaFilesCompat
         $file = preg_replace($pattern, '', $slashed_file);
 
         return $file;
+    }
+
+    /**
+     * Filter relative paths for media exports
+     *
+     * Hooked to filter_media_export_destination
+     *
+     * @param string $relative_path
+     * @param string $state_data
+     * @return string
+     **/
+    public function filter_media_export_destination($relative_path, $state_data)
+    {
+
+        if ( ! isset($state_data['mst_select_subsite']) || $state_data['mst_select_subsite'] !== '1' || $state_data['mst_selected_subsite'] < 2) {
+            return $relative_path;
+        }
+
+        return str_replace('sites/' . $state_data['mst_selected_subsite'], '', $relative_path);
+
     }
 
     /**
@@ -144,21 +175,42 @@ class MediaFilesCompat
      */
     public function filter_uploads_path($path, $state_data, $location = 'local')
     {
-        $target = 'push' === $state_data['intent'] ? 'source' : 'destination';
+        $target = 'local' === $location ? 'source' : 'destination';
+        if ('pull' === $state_data['intent']) {
+            $target = 'local' === $location ? 'destination' : 'source';
+        }
         $blog_id = $this->get_subsite_from_state_data($state_data, $target);
 
         if ($blog_id <= 1  || !$this->is_subsite_migration($state_data)) {
             return $path;
         }
 
-        $uploads = $this->util->uploads_info($blog_id);
+        $uploads = 'remote' === $location ? $this->get_remote_uploads_dir($blog_id, $state_data) : $this->util->uploads_info($blog_id);
 
-        if (isset($uploads['basedir'])) {
+        if (isset($uploads['basedir']) && 'remote' !== $location) {
             $path = $uploads['basedir'];
+        } else {
+            $path = $uploads;
         }
 
         $path = $location === 'remote' ? (array)$path : $path;
 
+        return $path;
+    }
+
+    /**
+     *
+     * Get path of remote uploads directory
+     *
+     * @param int $blog_id
+     * @param array $state_data
+     * @return string
+     **/
+    public function get_remote_uploads_dir($blog_id, $state_data) {
+        $path = $state_data['site_details']['remote']['uploads']['basedir'];
+        if ($blog_id > 1) {
+            $path .= '/sites/' . $blog_id;
+        }
         return $path;
     }
 
@@ -179,13 +231,13 @@ class MediaFilesCompat
             return $excludes;
         }
         $blog_id = $this->get_subsite_from_state_data($state_data, 'source');
-        
+
         if ($blog_id !== 1) {
             return $excludes;
         }
 
         $excludes[] = '**/sites/*';
-        
+
         return $excludes;
     }
 

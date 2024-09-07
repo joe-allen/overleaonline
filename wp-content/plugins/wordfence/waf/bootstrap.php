@@ -12,12 +12,21 @@ if (!defined('WFWAF_AUTO_PREPEND')) {
 if (!defined('WF_IS_WP_ENGINE')) {
 	define('WF_IS_WP_ENGINE', isset($_SERVER['IS_WPE']));
 }
+if (!defined('WF_IS_FLYWHEEL')) {
+	define('WF_IS_FLYWHEEL', isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Flywheel/') === 0);
+}
 if (!defined('WF_IS_PRESSABLE')) {
 	define('WF_IS_PRESSABLE', (defined('IS_ATOMIC') && IS_ATOMIC) || (defined('IS_PRESSABLE') && IS_PRESSABLE));
 }
 
+require(dirname(__FILE__) . '/../lib/wfVersionSupport.php');
+/**
+ * @var string $wfPHPDeprecatingVersion
+ * @var string $wfPHPMinimumVersion
+ */
+
 if (!defined('WF_PHP_UNSUPPORTED')) {
-	define('WF_PHP_UNSUPPORTED', version_compare(PHP_VERSION, '5.3', '<'));
+	define('WF_PHP_UNSUPPORTED', version_compare(PHP_VERSION, $wfPHPMinimumVersion, '<'));
 }
 
 if (WF_PHP_UNSUPPORTED) {
@@ -122,7 +131,8 @@ class wfWAFWordPressRequest extends wfWAFRequest {
 				continue; //This was an array so we can skip to the next item
 			}
 			$skipToNext = false;
-			$trustedProxies = explode("\n", wfWAF::getInstance()->getStorageEngine()->getConfig('howGetIPs_trusted_proxies', '', 'synced'));
+			$trustedProxyConfig = wfWAF::getInstance()->getStorageEngine()->getConfig('howGetIPs_trusted_proxies_unified', null, 'synced');
+			$trustedProxies = $trustedProxyConfig === null ? array() : explode("\n", $trustedProxyConfig);
 			foreach (array(',', ' ', "\t") as $char) {
 				if (strpos($item, $char) !== false) {
 					$sp = explode($char, $item);
@@ -811,6 +821,8 @@ class wfWAFWordPressI18n implements wfWAFI18nEngine {
 	}
 }
 
+try {
+
 if (!defined('WFWAF_LOG_PATH')) {
 	if (!defined('WP_CONTENT_DIR')) { //Loading before WordPress
 		exit();
@@ -825,8 +837,10 @@ if (!is_dir(WFWAF_LOG_PATH)) {
 
 
 try {
-
-	if (!defined('WFWAF_STORAGE_ENGINE') && WF_IS_WP_ENGINE) {
+	if (!defined('WFWAF_STORAGE_ENGINE') && isset($_SERVER['WFWAF_STORAGE_ENGINE'])) {
+		define('WFWAF_STORAGE_ENGINE', $_SERVER['WFWAF_STORAGE_ENGINE']);
+	}
+	else if (!defined('WFWAF_STORAGE_ENGINE') && (WF_IS_WP_ENGINE || WF_IS_FLYWHEEL)) {
 		define('WFWAF_STORAGE_ENGINE', 'mysqli');
 	}
 
@@ -882,7 +896,7 @@ try {
 				}
 
 				if (!empty($wfWAFDBCredentials)) {
-					$wfWAFStorageEngine = new wfWAFWordPressStorageMySQL(new wfWAFStorageEngineMySQLi(), $wfWAFDBCredentials['tablePrefix']);
+					$wfWAFStorageEngine = new wfWAFWordPressStorageMySQL(new wfWAFStorageEngineMySQLi(), $wfWAFDBCredentials['tablePrefix'], wfShutdownRegistry::getDefaultInstance());
 					$wfWAFStorageEngine->getDb()->connect(
 						$wfWAFDBCredentials['user'],
 						$wfWAFDBCredentials['pass'],
@@ -898,8 +912,17 @@ try {
 							->setCharset($wfWAFDBCredentials['charset'],
 								!empty($wfWAFDBCredentials['collation']) ? $wfWAFDBCredentials['collation'] : '');
 					}
-					if (function_exists('get_option')) {
-						$wfWAFStorageEngine->installing = !get_option('wordfenceActivated');
+					if (defined('ABSPATH')) {
+						$tableExists = false;
+						$optionName = 'wordfence_installed'; //Also exists in wfConfig.php
+						if (is_multisite() && function_exists('get_network_option')) {
+							$tableExists = get_network_option(null, $optionName, null);
+						}
+						else {
+							$tableExists = get_option($optionName, null);
+						}
+						
+						$wfWAFStorageEngine->installing = !$tableExists;
 						$wfWAFStorageEngine->getDb()->installing = $wfWAFStorageEngine->installing;
 					}
 
@@ -985,9 +1008,6 @@ try {
 	} catch (wfWAFBuildRulesException $e) {
 		// Log this
 		error_log($e->getMessage());
-	} catch (Exception $e) {
-		// Suppress this
-		error_log($e->getMessage());
 	}
 
 } catch (wfWAFStorageFileConfigException $e) {
@@ -1002,5 +1022,27 @@ try {
 	// We need to choose another storage engine here.
 }
 
+}
+catch (Exception $e) { // In PHP 5, Throwable does not exist
+	error_log("An unexpected exception occurred during WAF execution: {$e}");
+	$wf_waf_failure = array(
+		'throwable' => $e
+	);
+}
+catch (Throwable $t) {
+	error_log("An unexpected exception occurred during WAF execution: {$t}");
+	if (class_exists('ParseError') && $t instanceof ParseError) {
+		//Do nothing
+	}
+	else {
+		$wf_waf_failure = array(
+			'throwable' => $t
+		);
+	}
+}
+if (wfWAF::getInstance() === null) {
+	require_once __DIR__ . '/dummy.php';
+	wfWAF::setInstance(new wfDummyWaf());
+}
 define('WFWAF_RUN_COMPLETE', true);
 }

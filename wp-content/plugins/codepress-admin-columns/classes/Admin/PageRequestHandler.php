@@ -2,32 +2,32 @@
 
 namespace AC\Admin;
 
-use AC;
 use AC\Request;
 
-class PageRequestHandler implements RequestHandlerInterface {
+class PageRequestHandler implements RequestHandlerInterface
+{
 
-	/**
-	 * @var PageFactoryInterface
-	 */
-	private $factory;
+    /**
+     * @var PageFactoryInterface[]
+     */
+    private $factories;
 
-	/**
-	 * @var string
-	 */
-	private $default;
+    public function add(string $slug, PageFactoryInterface $factory): self
+    {
+        $this->factories[$slug] = $factory;
 
-	public function __construct( PageFactoryInterface $factory, $default = '' ) {
-		$this->factory = $factory;
-		$this->default = (string) $default;
-	}
+        return $this;
+    }
 
-	public function handle( Request $request ) {
-		$page = $this->factory->create(
-			$request->get_query()->get( self::PARAM_TAB ) ?: $this->default
-		);
+    public function handle(Request $request)
+    {
+        $slug = $request->get_query()->get(self::PARAM_TAB) ?: 'columns';
 
-		return apply_filters( 'ac/admin/request/page', $page, $request );
-	}
+        $page = isset($this->factories[$slug])
+            ? $this->factories[$slug]->create()
+            : null;
+
+        return apply_filters('ac/admin/request/page', $page, $request);
+    }
 
 }

@@ -1,5 +1,5 @@
 <?php
 
-define( 'REDIRECTION_VERSION', '5.2.3' );
-define( 'REDIRECTION_BUILD', 'cb109e7c800603ff2d5cc098451320be' );
-define( 'REDIRECTION_MIN_WP', '4.6' );
+define( 'REDIRECTION_VERSION', '5.5.0' );
+define( 'REDIRECTION_MIN_WP', '6.4' );
+define( 'REDIRECTION_BUILD', 'eff218e8a6050e14b616f8d6629e0ae4' );

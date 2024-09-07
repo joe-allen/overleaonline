@@ -8,7 +8,7 @@ define( 'W3TC_MARKER_BEGIN_CLOUDFLARE', '# BEGIN W3TC CloudFlare' );
 define( 'W3TC_MARKER_END_CLOUDFLARE', '# END W3TC CloudFlare' );
 
 /**
- * Class W3_Plugin_CloudFlare
+ * Class: Extension_CloudFlare_Plugin
  */
 class Extension_CloudFlare_Plugin {
 	private $_config;
@@ -103,7 +103,7 @@ class Extension_CloudFlare_Plugin {
 				$api->purge();
 			} catch ( \Exception $ex ) {
 				$action_made['error'] =
-					'CloudFlare cache: ' . $ex->getMessage();
+					'Cloudflare cache: ' . $ex->getMessage();
 			}
 
 			$this->flush_operation_requested = false;
@@ -148,7 +148,7 @@ class Extension_CloudFlare_Plugin {
 		$menu_items = array_merge( $menu_items, array(
 				array(
 					'id' => 'cloudflare',
-					'title' => __( 'CloudFlare', 'w3-total-cache' ),
+					'title' => __( 'Cloudflare', 'w3-total-cache' ),
 					'href' => 'https://www.cloudflare.com'
 				),
 				array(
@@ -178,25 +178,37 @@ class Extension_CloudFlare_Plugin {
 	 * Fix client's IP-address
 	 */
 	private function fix_remote_addr() {
-		if ( empty( $_SERVER['HTTP_CF_CONNECTING_IP'] ) )
-			return;
+		$remote_addr           = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		$http_cf_connecting_ip = isset( $_SERVER['HTTP_CF_CONNECTING_IP'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_CF_CONNECTING_IP'] ) ) : '';
 
-		if ( strpos( $_SERVER["REMOTE_ADDR"], ":" ) === FALSE ) {
-			$ip4_ranges = $this->_config->get_array( array(
-					'cloudflare', 'ips.ip4' ) );
+		if ( empty( $http_cf_connecting_ip ) ) {
+			return;
+		}
+
+		if ( strpos( $remote_addr, ':' ) === false ) {
+			$ip4_ranges = $this->_config->get_array(
+				array(
+					'cloudflare',
+					'ips.ip4',
+				)
+			);
 			foreach ( $ip4_ranges as $range ) {
-				if ( $this->ipv4_in_range( $_SERVER['REMOTE_ADDR'], $range ) ) {
-					$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+				if ( $this->ipv4_in_range( $remote_addr, $range ) ) {
+					$_SERVER['REMOTE_ADDR'] = $http_cf_connecting_ip;
 					break;
 				}
 			}
-		} elseif ( !empty( $_SERVER["REMOTE_ADDR"] ) ) {
-			$ip6_ranges = $this->_config->get_array( array(
-					'cloudflare', 'ips.ip6' ) );
-			$ip6 = $this->get_ipv6_full( $_SERVER["REMOTE_ADDR"] );
+		} elseif ( ! empty( $remote_addr ) ) {
+			$ip6_ranges = $this->_config->get_array(
+				array(
+					'cloudflare',
+					'ips.ip6',
+				)
+			);
+			$ip6        = $this->get_ipv6_full( $remote_addr );
 			foreach ( $ip6_ranges as $range ) {
 				if ( $this->ipv6_in_range( $ip6, $range ) ) {
-					$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+					$_SERVER['REMOTE_ADDR'] = $http_cf_connecting_ip;
 					break;
 				}
 			}

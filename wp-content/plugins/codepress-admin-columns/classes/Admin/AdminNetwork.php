@@ -2,40 +2,59 @@
 
 namespace AC\Admin;
 
-use AC\Registrable;
+use AC\Asset\Location\Absolute;
+use AC\Registerable;
 
-class AdminNetwork implements Registrable {
+class AdminNetwork implements Registerable
+{
 
-	/**
-	 * @var NetworkRequestHandler
-	 */
-	private $request_handler;
+    /**
+     * @var RequestHandlerInterface
+     */
+    private $request_handler;
 
-	/**
-	 * @var WpMenuFactory
-	 */
-	private $wp_menu_factory;
+    /**
+     * @var Absolute
+     */
+    private $location_core;
 
-	/**
-	 * @var AdminScripts
-	 */
-	private $scripts;
+    /**
+     * @var AdminScripts
+     */
+    private $scripts;
 
-	public function __construct( NetworkRequestHandler $request_handler, WpMenuFactory $wp_menu_factory, AdminScripts $scripts ) {
-		$this->request_handler = $request_handler;
-		$this->wp_menu_factory = $wp_menu_factory;
-		$this->scripts = $scripts;
-	}
+    public function __construct(
+        PageNetworkRequestHandlers $request_handler,
+        Absolute $location_core,
+        AdminScripts $scripts
+    ) {
+        $this->request_handler = $request_handler;
+        $this->location_core = $location_core;
+        $this->scripts = $scripts;
+    }
 
-	public function register() {
-		add_action( 'network_admin_menu', [ $this, 'init' ] );
-	}
+    public function register(): void
+    {
+        add_action('network_admin_menu', [$this, 'init']);
+    }
 
-	public function init() {
-		$hook = $this->wp_menu_factory->create_sub_menu( 'settings.php' );
+    private function get_menu_page_factory(): MenuPageFactory
+    {
+        return apply_filters(
+            'acp/menu_network_page_factory',
+            new MenuPageFactory\SubMenu()
+        );
+    }
 
-		$loader = new AdminLoader( $hook, $this->request_handler, $this->scripts );
-		$loader->register();
-	}
+    public function init(): void
+    {
+        $hook = $this->get_menu_page_factory()->create([
+            'parent' => 'settings.php',
+            'icon'   => $this->location_core->with_suffix('assets/images/page-menu-icon.svg')->get_url(),
+        ]);
+
+        $loader = new AdminLoader($hook, $this->request_handler, $this->scripts);
+        $loader->register();
+    }
 
 }

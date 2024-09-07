@@ -1,9 +1,9 @@
 <?php
 
-namespace Sober\Intervention\Admin\Support;
+namespace Jacoby\Intervention\Admin\Support;
 
-use Sober\Intervention\Admin\Support\Maps;
-use Sober\Intervention\Admin\Support\Menu;
+use Jacoby\Intervention\Admin\Support\Menu;
+use Jacoby\Intervention\Support\Config;
 
 /**
  * Support/Router
@@ -24,7 +24,7 @@ class Router
      * Interface
      *
      * @param string $key
-     * @return Sober\Intervention\Admin\Support\Router
+     * @return Jacoby\Intervention\Admin\Support\Router
      */
     public static function set($key = '')
     {
@@ -51,11 +51,11 @@ class Router
         // Support for shorthand/true
         $value = $str === true ? 'posts' : $str;
 
-        if (!Maps::set('screens')->get($value)) {
+        if (!Config::get('admin/pagenow')->get($value)) {
             return;
         }
 
-        $this->route = Maps::set('screens')->get($value);
+        $this->route = Config::get('admin/pagenow')->get($value);
 
         if (wp_doing_ajax()) {
             return;
@@ -63,7 +63,7 @@ class Router
 
         // Route
         add_action('admin_init', function () {
-            if (Maps::set('screens')->get($this->key) === $GLOBALS['pagenow'] . $_SERVER['QUERY_STRING']) {
+            if (Config::get('admin/pagenow')->get($this->key) === $GLOBALS['pagenow'] . $_SERVER['QUERY_STRING']) {
                 wp_redirect(admin_url($this->route));
             };
         });

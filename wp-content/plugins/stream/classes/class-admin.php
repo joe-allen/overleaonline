@@ -10,8 +10,8 @@ namespace WP_Stream;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
-use \WP_CLI;
-use \WP_Roles;
+use WP_CLI;
+use WP_Roles;
 
 /**
  * Class - Admin
@@ -191,13 +191,6 @@ class Admin {
 			)
 		);
 
-		/**
-		 * Uninstall Streams and Deactivate plugin.
-		 *
-		 * @todo Confirm if variable assignment is necessary.
-		 */
-		$uninstall = $this->plugin->db->driver->purge_storage( $this->plugin );
-
 		// Auto purge setup.
 		add_action( 'wp_loaded', array( $this, 'purge_schedule_setup' ) );
 		add_action(
@@ -227,6 +220,12 @@ class Admin {
 		$this->network     = new Network( $this->plugin );
 		$this->live_update = new Live_Update( $this->plugin );
 		$this->export      = new Export( $this->plugin );
+
+		// Check if the host has configured the `REMOTE_ADDR` correctly.
+		$client_ip = $this->plugin->get_client_ip_address();
+		if ( empty( $client_ip ) && $this->is_stream_screen() ) {
+			$this->notice( __( 'Stream plugin can\'t determine a reliable client IP address! Please update the hosting environment to set the $_SERVER[\'REMOTE_ADDR\'] variable or use the wp_stream_client_ip_address filter to specify the verified client IP address!', 'stream' ) );
+		}
 	}
 
 	/**
@@ -397,8 +396,8 @@ class Admin {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts( $hook ) {
-		wp_register_script( 'wp-stream-select2', $this->plugin->locations['url'] . 'ui/lib/select2/js/select2.full.min.js', array( 'jquery' ), '3.5.2', true );
-		wp_register_style( 'wp-stream-select2', $this->plugin->locations['url'] . 'ui/lib/select2/css/select2.min.css', array(), '3.5.2' );
+		wp_register_script( 'wp-stream-select2', $this->plugin->locations['url'] . 'ui/lib/select2/js/select2.full.min.js', array( 'jquery' ), '4.0.13', true );
+		wp_register_style( 'wp-stream-select2', $this->plugin->locations['url'] . 'ui/lib/select2/css/select2.min.css', array(), '4.0.13' );
 		wp_register_script( 'wp-stream-timeago', $this->plugin->locations['url'] . 'ui/lib/timeago/jquery.timeago.js', array(), '1.4.1', true );
 
 		$locale    = strtolower( substr( get_locale(), 0, 2 ) );
@@ -470,9 +469,8 @@ class Admin {
 				'wp_stream',
 				array(
 					'i18n'       => array(
-						'confirm_purge'     => esc_html__( 'Are you sure you want to delete all Stream activity records from the database? This cannot be undone.', 'stream' ),
-						'confirm_defaults'  => esc_html__( 'Are you sure you want to reset all site settings to default? This cannot be undone.', 'stream' ),
-						'confirm_uninstall' => esc_html__( 'Are you sure you want to uninstall and deactivate Stream? This will delete all Stream tables from the database and cannot be undone.', 'stream' ),
+						'confirm_purge'    => esc_html__( 'Are you sure you want to delete all Stream activity records from the database? This cannot be undone.', 'stream' ),
+						'confirm_defaults' => esc_html__( 'Are you sure you want to reset all site settings to default? This cannot be undone.', 'stream' ),
 					),
 					'locale'     => esc_js( $locale ),
 					'gmt_offset' => get_option( 'gmt_offset' ),
@@ -490,7 +488,7 @@ class Admin {
 					'current_order'       => isset( $_GET['order'] ) && in_array( strtolower( $_GET['order'] ), $order_types, true ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						? esc_js( $_GET['order'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 						: 'desc',
-					'current_query'       => wp_stream_json_encode( $_GET ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					'current_query'       => wp_json_encode( $_GET ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					'current_query_count' => count( $_GET ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				)
 			);
@@ -540,13 +538,19 @@ class Admin {
 	 * @return bool
 	 */
 	public function is_stream_screen() {
-		if ( is_admin() && false !== strpos( wp_stream_filter_input( INPUT_GET, 'page' ), $this->records_page_slug ) ) {
+		if ( ! is_admin() ) {
+			return false;
+		}
+
+		$page = wp_stream_filter_input( INPUT_GET, 'page' );
+		if ( is_string( $page ) && false !== strpos( $page, $this->records_page_slug ) ) {
 			return true;
 		}
 
-		$screen = get_current_screen();
-		if ( is_admin() && Alerts::POST_TYPE === $screen->post_type ) {
-			return true;
+		if ( is_admin() && function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+
+			return ( Alerts::POST_TYPE === $screen->post_type );
 		}
 
 		return false;
@@ -817,18 +821,6 @@ class Admin {
 
 		$links[] = sprintf( '<a href="%s">%s</a>', esc_url( $admin_page_url ), esc_html__( 'Settings', 'default' ) );
 
-		if ( ! defined( 'DISALLOW_FILE_MODS' ) || false === DISALLOW_FILE_MODS ) {
-			$url = add_query_arg(
-				array(
-					'action'          => 'wp_stream_uninstall',
-					'wp_stream_nonce' => wp_create_nonce( 'stream_nonce' ),
-				),
-				admin_url( 'admin-ajax.php' )
-			);
-
-			$links[] = sprintf( '<span id="wp_stream_uninstall" class="delete"><a href="%s">%s</a></span>', esc_url( $url ), esc_html__( 'Uninstall', 'stream' ) );
-		}
-
 		return $links;
 	}
 
@@ -872,7 +864,7 @@ class Admin {
 				<h2 class="nav-tab-wrapper">
 					<?php $i = 0; ?>
 					<?php foreach ( $sections as $section => $data ) : ?>
-						<?php $i++; ?>
+						<?php ++$i; ?>
 						<?php $is_active = ( ( 1 === $i && ! $active_tab ) || $active_tab === $section ); ?>
 						<a href="<?php echo esc_url( add_query_arg( 'tab', $section ) ); ?>" class="nav-tab <?php echo $is_active ? esc_attr( ' nav-tab-active' ) : ''; ?>">
 							<?php echo esc_html( $data['title'] ); ?>
@@ -887,7 +879,7 @@ class Admin {
 						<?php
 						$i = 0;
 						foreach ( $sections as $section => $data ) {
-							$i++;
+							++$i;
 
 							$is_active = ( ( 1 === $i && ! $active_tab ) || $active_tab === $section );
 
@@ -1046,7 +1038,7 @@ class Admin {
 		}
 
 		if ( isset( $results ) ) {
-			echo wp_stream_json_encode( $results ); // xss ok.
+			echo wp_json_encode( $results );
 		}
 
 		die();
@@ -1086,10 +1078,6 @@ class Admin {
 	 * @return mixed
 	 */
 	public function get_user_meta( $user_id, $meta_key, $single = true ) {
-		if ( wp_stream_is_vip() && function_exists( 'get_user_attribute' ) ) {
-			return get_user_attribute( $user_id, $meta_key );
-		}
-
 		return get_user_meta( $user_id, $meta_key, $single );
 	}
 
@@ -1104,10 +1092,6 @@ class Admin {
 	 * @return int|bool
 	 */
 	public function update_user_meta( $user_id, $meta_key, $meta_value, $prev_value = '' ) {
-		if ( wp_stream_is_vip() && function_exists( 'update_user_attribute' ) ) {
-			return update_user_attribute( $user_id, $meta_key, $meta_value );
-		}
-
 		return update_user_meta( $user_id, $meta_key, $meta_value, $prev_value );
 	}
 
@@ -1121,10 +1105,6 @@ class Admin {
 	 * @return bool
 	 */
 	public function delete_user_meta( $user_id, $meta_key, $meta_value = '' ) {
-		if ( wp_stream_is_vip() && function_exists( 'delete_user_attribute' ) ) {
-			return delete_user_attribute( $user_id, $meta_key, $meta_value );
-		}
-
 		return delete_user_meta( $user_id, $meta_key, $meta_value );
 	}
 }

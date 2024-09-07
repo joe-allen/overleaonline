@@ -11,10 +11,9 @@ use AC\Settings;
 class ExifData extends Column\Media\MetaValue {
 
 	public function __construct() {
-		parent::__construct();
-
 		$this->set_type( 'column-exif_data' )
-		     ->set_label( __( 'EXIF Data', 'codepress-admin-columns' ) );
+		     ->set_group( 'media-image' )
+		     ->set_label( __( 'Image Meta (EXIF)', 'codepress-admin-columns' ) );
 	}
 
 	protected function get_option_name() {

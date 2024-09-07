@@ -1,9 +1,9 @@
 <?php
 
-namespace Sober\Intervention\Admin\Pages;
+namespace Jacoby\Intervention\Admin\Pages;
 
-use Sober\Intervention\Support\Arr;
-use Sober\Intervention\Support\Composer;
+use Jacoby\Intervention\Support\Arr;
+use Jacoby\Intervention\Support\Composer;
 
 /**
  * Pages/Item
@@ -18,9 +18,24 @@ use Sober\Intervention\Support\Composer;
  *     'pages.item' => (string) $route,
  *     'pages.item.title' => (string) $title,
  *     'pages.item.title.[menu, page]' => (string) $title,
- *     'pages.item.title-link',
- *     'pages.item.tabs',
- *     'pages.item.tabs.[screen-options, help]',
+ *     'pages.item.add',
+ *     'pages.item.add' => [
+ *          search,
+ *          preview,
+ *          headers,
+ *          tips,
+ *          grid,
+ *          icons,
+ *      ],
+ *     'pages.item.add.blocks',
+ *     'pages.item.add.blocks' => [
+ *          text,
+ *          media,
+ *          design,
+ *          widgets,
+ *          theme,
+ *          embeds,
+ *      ],
  *     'pages.item.editor',
  *     'pages.item.author',
  *     'pages.item.link',
@@ -28,6 +43,10 @@ use Sober\Intervention\Support\Composer;
  *     'pages.item.attributes',
  *     'pages.item.custom-fields',
  *     'pages.item.discussion',
+ *      --- classic ---
+ *     'pages.item.title-link',
+ *     'pages.item.tabs',
+ *     'pages.item.tabs.[screen-options, help]',
  * ]
  */
 class Item

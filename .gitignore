@@ -28,3 +28,5 @@ wp-content/db.php
 /readme.html
 /sitemap.xml
 /sitemap.xml.gz
+wp-config.php
+test.txt

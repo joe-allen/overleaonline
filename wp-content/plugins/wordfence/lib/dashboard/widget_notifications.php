@@ -34,7 +34,7 @@
 				<div class="wf-central-dashboard">
 					<img class="wf-central-dashboard-logo" src="<?php echo wfUtils::getBaseURL() ?>images/wf-central-logo.svg" alt="Wordfence Central">
 					<div class="wf-central-dashboard-copy">
-						<p><strong><?php esc_html_e('Wordfence Central Status', 'wordfence') ?></strong></p>
+						<p id="wf-central-status"><strong><?php esc_html_e('Wordfence Central Status', 'wordfence') ?></strong></p>
 						<p><?php
 							if ($d->wordfenceCentralConnected) {
 								echo esc_html(sprintf(
@@ -115,8 +115,22 @@
 					$('#wf-central-prompt-disconnect').on('click', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
+						WFAD.colorboxClose();
 						WFAD.ajax('wordfence_wfcentral_disconnect', {}, function(response) {
-							window.location.reload(true);
+							var onClosed = function() { window.location.reload(true); };
+							if (response && response.success && response.message && response.title) {
+								WFAD.colorboxModal(
+									(self.isSmallScreen ? '300px' : '400px'),
+									response.title,
+									response.message,
+									{
+										onClosed: onClosed
+									}
+								);
+							}
+							else {
+								onClosed();
+							}
 						});
 					});
 				}

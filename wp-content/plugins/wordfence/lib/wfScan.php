@@ -96,7 +96,9 @@ class wfScan {
 		}
 		wfConfig::set('currentCronKey', '');
 		/* --------- end cronkey check ---------- */
-		
+
+		wfScanMonitor::logLastSuccess();
+
 		$scanMode = wfScanner::SCAN_TYPE_STANDARD;
 		if (isset($_GET['scanMode']) && wfScanner::isValidScanType($_GET['scanMode'])) {
 			$scanMode = $_GET['scanMode'];
@@ -105,6 +107,8 @@ class wfScan {
 
 		wfConfig::remove('scanStartAttempt');
 		$isFork = ($_GET['isFork'] == '1' ? true : false);
+
+		wfScanMonitor::handleStageStart($isFork);
 
 		if(! $isFork){
 			self::status(4, 'info', __("Checking if scan is already running", 'wordfence'));
@@ -228,7 +232,7 @@ class wfScan {
 			));
 			self::status(2, 'error', sprintf(/* translators: Error message. */ __("Scan terminated with error: %s", 'wordfence'), $e->getMessage()));
 			
-			$nextScheduledScan = wordfence::getNextScanStartTimestamp();
+			$nextScheduledScan = wfScanner::shared()->nextScheduledScanTime();
 			if ($nextScheduledScan !== false && $nextScheduledScan - time() > 21600 /* 6 hours */) {
 				$nextScheduledScan = time() + 3600;
 				wfScanner::shared()->scheduleSingleScan($nextScheduledScan);

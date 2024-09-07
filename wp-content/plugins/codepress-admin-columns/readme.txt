@@ -1,11 +1,12 @@
 === Admin Columns ===
-Contributors: codepress, tschutter, davidmosterd, engelen, dungengronovius
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZDZRSYLQ4Z76J
-Tags: plugins, wordpress, admin, column, columns, custom columns, custom fields, image, dashboard, sortable, filters, posts, media, users, pages, posttypes, manage columns, wp-admin
-Requires at least: 4.7.1
-Tested up to: 5.8.1
-Requires PHP: 5.6.20
-Stable tag: 4.4.5
+Contributors: codepress, tschutter, davidmosterd, dungengronovius, engelen
+Tags: admin, column, columns, table, tables
+Requires at least: 4.7.3
+Tested up to: 6.5.4
+Requires PHP: 7.2
+Stable tag: 4.7.7
+License: GPLv2
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 Customise columns on the administration screens for post(types), pages, media, comments, links and users with an easy to use drag-and-drop interface.
 
@@ -209,10 +210,158 @@ You can find a list of the available actions and filters (and examples on how to
 
 == Changelog ==
 
+= 4.7.7 =
+Release Date: June 10th, 2024
+
+* [Fixed] Gravity Forms column no longer relies on namespace check
+
+= 4.7.6 =
+Release Date: June 4th, 2024
+
+* [Fixed] Custom Field column with Post as Display value could give an error
+
+= 4.7.5 =
+Release Date: April 14th, 2024
+
+* [Fixed] SVG Support in image columns
+
+= 4.7.4 =
+Release Date: March 4th, 2024
+
+* [Fixed] The Custom Field column setting gave an error when using the text field hook
+
+= 4.7.3 =
+Release Date: February 6th, 2024
+
+* [Improved] Better loading of available integrations
+
+= 4.7.2 =
+Release Date: January 16th, 2024
+
+* [Fixed] Fatal error when Restoring the settings in the Settings tab
+
+= 4.7.1 =
+Release Date: January 9th, 2024
+
+* [Fixed] When the edit columns button was disabled, a styled container was displayed
+
+= 4.7 =
+Release Date: December 6th, 2023
+
+* [Improved] It is now possible to choose how dates are stored in the Custom Field column
+* [Improved] Webp images are not recognized for the custom field column
+* [Fixed] Fixed an issue where non-existing terms could cause an error on the column settings page
+
+
+= 4.6.9 =
+Release Date: October 2nd, 2023
+
+* [Fixed] Render values for Taxonomies fixed
+* [Fixed] URLs for Terms in Taxonomy columns were incorrect
+
+= 4.6.8 =
+Release Date: September 19th, 2023
+
+* [Improved] Taxonomy Helper fixes and improvements
+
+= 4.6.7 =
+Release Date: August 25th, 2023
+
+* [Fixed] Error when adding the 'Last Modified Author' column
+
+= 4.6.6 =
+Release Date: August 21st, 2023
+
+* [Improved] Give better feedback when the settings could not be saved because of missing database tables
+* [Fixed] Error on the WPML string translation page
+* [Fixed] Some custom columns could give a fatal error on the settings page
+
+= 4.6.5 =
+Release Date: August 15th, 2023
+
+* [Added] New hook to disable Admin Columns for certain list tables `ac/list_screen/is_active`
+* [Added] New hook to disable Admin Columns for certain list tables based on keys `ac/list_screen/key/is_active`
+* [Improved] The Preview Column now also show a preview for video and audio files
+* [Fixed] The hook `ac/post_types` works again to disable Admin Columns for specific post types
+
+= 4.6.4 =
+Release Date: May 25th, 2023
+
+* [MLA] Media Library Assistant columns were not loaded correctly
+
+= 4.6.3 =
+Release Date: April 26th, 2023
+
+* [Fixed] Fixed the array helper that could throw an error when an array contained an object
+* [Fixed] Re-added deprecated register_group function to prevent fatal errors for third-party plugins
+
+= 4.6.2 =
+Release Date: April 25th, 2023
+
+* [Improved] Minor changes
+
+= 4.6.1 =
+Release Date: February 22nd, 2023
+
+* [Added] Integration for Media Library Assistant
+
+= 4.6 =
+Release Date: November 30th, 2022
+
+* [Improved] Styling for dynamic select boxes is improved
+* [Improved] The date column setting has some minor UI improvements
+
+= 4.5.5 =
+Release Date: October 17th, 2022
+
+* [Fixed] DOMDocument will use `libxml_clear_errors` to clear any possible errors
+* [Fixed] The `word_count` method will always return an `int`
+* [Fixed] The column separator will always go through the filter: `ac/column/separator`
+* [Fixed] The link to the user profile will only be visible for users than can access that particular profile page
+* [Improved] Added the atrribute tag `ReturnTypeWillChange` to be compliant with PHP 8.x
+
+= 4.5.4 =
+Release Date: September 13th, 2022
+
+* [Fixed] JS null checks that could lead to JS errors
+* [Fixed] More PHP 8.1 compatibility fixes
+
+= 4.5.3 =
+Release Date: July 4th, 2022
+
+* [Fixed] Suppress PHP 8.1 warnings
+
+= 4.5.2 =
+Release Date: June 14th, 2022
+
+* [Added] It is now possible to select the Website display for User related columns
+* [Added] New hook to disable the column value sanitation on the table `ac/column/value/sanitize`
+
+= 4.5.1 =
+Release Date: May 16th, 2022
+
+* [Added] New Audio player column for Media list table
+* [Fixed] Prevent fatal error, when removing a non-existent column set from a Local Storage repository
+
+= 4.5 =
+Release Date: March 22nd, 2022
+
+* [Added] New Image column for the Media list table
+* [Added] The Slug column is now also available for the Media list table
+* [Improved] More thorough logic for the 'Restore Settings' option.
+* [Improved] Refactor of the Setup Script that runs when the plugin is installed and activated for the first time
+* [Improved] The Permalink column now also shows the (upcoming) permalinks for future and draft posts
+
+= 4.4.6 =
+Release Date: February 8th, 2022
+
+* [Fixed] Tooltip arrows were always visible in the dom behind the admin toolbar
+* [Removed] Support for the Ninja Forms integration is removed because of incompatibility with the new submission list table
+
 = 4.4.5 =
 Release Date: December 6th, 2021
 
-* [Hotfix] The ReadOnly class is renamed because it gave fatal error in PHP 8.1
+* [Hotfix] The ReadOnly class is renamed because it gave a fatal error in PHP 8.1
 
 = 4.4.4 =
 Release Date: November 8th, 2021

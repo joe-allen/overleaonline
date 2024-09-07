@@ -19,6 +19,7 @@ class wfRESTConfigController extends wfRESTBaseController {
 		wfConfig::set('wordfenceCentralDisconnected', true);
 		wfConfig::set('wordfenceCentralDisconnectTime', time());
 		wfConfig::set('wordfenceCentralDisconnectEmail', $adminEmail);
+		wfConfig::set('wordfenceCentralConfigurationIssue', false);
 
 		return !!$result;
 	}
@@ -311,7 +312,7 @@ class wfRESTConfigController extends wfRESTBaseController {
 	 * @return mixed|WP_REST_Response
 	 */
 	public function premiumConnect($request) {
-		require_once(WORDFENCE_PATH . '/crypto/vendor/paragonie/sodium_compat/autoload-fast.php');
+		require_once(WORDFENCE_PATH . '/lib/sodium_compat_fast.php');
 
 		// Store values sent by Central.
 		$wordfenceCentralPK = $request['public-key'];

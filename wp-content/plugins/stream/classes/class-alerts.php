@@ -25,6 +25,11 @@ class Alerts {
 	const ALERTS_TRIGGERED_META_KEY = 'wp_stream_alerts_triggered';
 
 	/**
+	 * Capability required to access alerts.
+	 */
+	const CAPABILITY = 'manage_options';
+
+	/**
 	 * Holds Instance of plugin object
 	 *
 	 * @var Plugin
@@ -129,7 +134,6 @@ class Alerts {
 			11,
 			2
 		);
-
 	}
 
 	/**
@@ -280,6 +284,10 @@ class Alerts {
 		foreach ( $alerts->posts as $alert ) {
 			$alert = $this->get_alert( $alert->ID );
 
+			if ( false === $alert ) {
+				continue;
+			}
+
 			$status = $alert->check_record( $record_id, $recordarr );
 			if ( $status ) {
 				$alert->send_alert( $record_id, $recordarr ); // @todo send_alert expects int, not array.
@@ -287,7 +295,6 @@ class Alerts {
 		}
 
 		return $recordarr;
-
 	}
 
 	/**
@@ -363,14 +370,14 @@ class Alerts {
 			'show_in_menu'        => false, // @see modify_admin_menu
 			'supports'            => false,
 			'capabilities'        => array(
-				'publish_posts'       => 'manage_options',
-				'edit_others_posts'   => 'manage_options',
-				'delete_posts'        => 'manage_options',
-				'delete_others_posts' => 'manage_options',
-				'read_private_posts'  => 'manage_options',
-				'edit_post'           => 'manage_options',
-				'delete_post'         => 'manage_options',
-				'read_post'           => 'manage_options',
+				'publish_posts'       => self::CAPABILITY,
+				'edit_others_posts'   => self::CAPABILITY,
+				'delete_posts'        => self::CAPABILITY,
+				'delete_others_posts' => self::CAPABILITY,
+				'read_private_posts'  => self::CAPABILITY,
+				'edit_post'           => self::CAPABILITY,
+				'delete_post'         => self::CAPABILITY,
+				'read_post'           => self::CAPABILITY,
 			),
 		);
 
@@ -403,18 +410,19 @@ class Alerts {
 	/**
 	 * Return alert object of the given ID
 	 *
-	 * @param string $post_id Post ID for the alert.
+	 * @param string|int $post_id Post ID for the alert.
 	 *
 	 * @return Alert
 	 */
 	public function get_alert( $post_id = '' ) {
 		if ( ! $post_id ) {
-			$obj = new Alert( null, $this->plugin );
-
-			return $obj;
+			return new Alert( null, $this->plugin );
 		}
 
 		$post = get_post( $post_id );
+		if ( ! ( $post instanceof \WP_Post ) ) {
+			return new Alert( null, $this->plugin );
+		}
 
 		$alert_type = get_post_meta( $post_id, 'alert_type', true );
 		$alert_meta = get_post_meta( $post_id, 'alert_meta', true );
@@ -429,7 +437,6 @@ class Alerts {
 		);
 
 		return new Alert( $obj, $this->plugin );
-
 	}
 
 	/**
@@ -444,7 +451,7 @@ class Alerts {
 			$this->plugin->admin->records_page_slug,
 			__( 'Alerts', 'stream' ),
 			__( 'Alerts', 'stream' ),
-			'manage_options',
+			self::CAPABILITY,
 			'edit.php?post_type=wp_stream_alerts'
 		);
 	}
@@ -509,14 +516,18 @@ class Alerts {
 	 * @return void
 	 */
 	public function display_notification_box( $post = array() ) {
+		$alert      = null;
 		$alert_type = 'none';
 		if ( is_object( $post ) ) {
-			$alert      = $this->get_alert( $post->ID );
-			$alert_type = $alert->alert_type;
+			$alert = $this->get_alert( $post->ID );
+			if ( false !== $alert ) {
+				$alert_type = $alert->alert_type;
+			}
 		}
 		$form = new Form_Generator();
 
-		$field_html = $form->render_field(
+		echo '<label>' . esc_html__( 'Alert me by', 'stream' ) . '</label>';
+		$form->render_field(
 			'select',
 			array(
 				'id'          => 'wp_stream_alert_type',
@@ -527,9 +538,6 @@ class Alerts {
 				'title'       => 'Alert Type:',
 			)
 		);
-
-		echo '<label>' . esc_html__( 'Alert me by', 'stream' ) . '</label>';
-		echo $field_html; // Xss ok.
 
 		echo '<div id="wp_stream_alert_type_form">';
 		if ( is_object( $alert ) ) {
@@ -549,11 +557,18 @@ class Alerts {
 	 * @return void
 	 */
 	public function load_alerts_settings() {
+		if ( ! current_user_can( self::CAPABILITY ) ) {
+			wp_send_json_error(
+				array(
+					'message' => 'You do not have permission to do this.',
+				)
+			);
+		}
 		$alert   = array();
 		$post_id = wp_stream_filter_input( INPUT_POST, 'post_id' );
-		if ( ! empty( $post_id ) ) {
+		if ( ! empty( $post_id ) && 'new' !== $post_id ) {
 			$alert = $this->get_alert( $post_id );
-			if ( ! $alert ) {
+			if ( false === $alert ) {
 				wp_send_json_error(
 					array(
 						'message' => 'Could not find alert.',
@@ -593,16 +608,19 @@ class Alerts {
 	 * @return void
 	 */
 	public function display_triggers_box( $post = array() ) {
+		$alert = false;
 		if ( is_object( $post ) ) {
 			$alert = $this->get_alert( $post->ID );
-		} else {
+		}
+		if ( false === $alert ) {
 			$alert = array();
 		}
+
 		$form = new Form_Generator();
 		do_action( 'wp_stream_alert_trigger_form_display', $form, $alert );
 		// @TODO use human readable text.
 		echo '<label>' . esc_html__( 'Alert me when', 'stream' ) . '</label>';
-		echo $form->render_fields(); // Xss ok.
+		$form->render_fields();
 		wp_nonce_field( 'save_alert', 'wp_stream_alerts_nonce' );
 	}
 
@@ -732,6 +750,13 @@ class Alerts {
 	 */
 	public function save_new_alert() {
 		check_ajax_referer( 'save_alert', 'wp_stream_alerts_nonce' );
+
+		if ( ! current_user_can( $this->plugin->admin->settings_cap ) ) {
+			wp_die(
+				esc_html__( "You don't have sufficient privileges to do this action.", 'stream' )
+			);
+		}
+
 		$trigger_author                = wp_stream_filter_input( INPUT_POST, 'wp_stream_trigger_author' );
 		$trigger_connector_and_context = wp_stream_filter_input( INPUT_POST, 'wp_stream_trigger_context' );
 		if ( false !== strpos( $trigger_connector_and_context, '-' ) ) {
@@ -739,16 +764,14 @@ class Alerts {
 			$trigger_connector_and_context_split = explode( '-', $trigger_connector_and_context );
 			$trigger_connector                   = $trigger_connector_and_context_split[0];
 			$trigger_context                     = $trigger_connector_and_context_split[1];
-		} else {
-			if ( ! empty( $trigger_connector_and_context ) ) {
+		} elseif ( ! empty( $trigger_connector_and_context ) ) {
 				// This is a parent connector with no dash such as posts.
 				$trigger_connector = $trigger_connector_and_context;
 				$trigger_context   = '';
-			} else {
-				// There is no connector or context.
-				$trigger_connector = '';
-				$trigger_context   = '';
-			}
+		} else {
+			// There is no connector or context.
+			$trigger_connector = '';
+			$trigger_context   = '';
 		}
 
 		$trigger_action = wp_stream_filter_input( INPUT_POST, 'wp_stream_trigger_action' );
@@ -799,6 +822,12 @@ class Alerts {
 	 * Return HTML string of the Alert page controls.
 	 */
 	public function get_new_alert_triggers_notifications() {
+		if ( ! current_user_can( $this->plugin->admin->settings_cap ) ) {
+			wp_die(
+				esc_html__( "You don't have sufficient privileges to do this action.", 'stream' )
+			);
+		}
+
 		ob_start();
 		?>
 		<fieldset class="inline-edit-col inline-edit-wp_stream_alerts inline-edit-add-new-triggers">

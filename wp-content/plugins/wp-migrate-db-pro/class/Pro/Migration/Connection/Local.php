@@ -116,7 +116,9 @@ class Local
 		    return $this->http->end_ajax( new \WP_Error( 'invalid-license', $message ) );
 	    }
 
-	    $data = array(
+        do_action('wpmdb_before_verify_connection_to_remote_site', $state_data);
+
+        $data = array(
 		    'action'  => 'wpmdb_verify_connection_to_remote_site',
 		    'intent'  => $state_data['intent'],
 		    'referer' => $this->util->get_short_home_address_from_url( Util::home_url() ),
@@ -140,16 +142,20 @@ class Local
 	    }
 
 	    $response = false;
-	    if ( is_serialized( $remote_response ) ) {
-		    $response = unserialize( $remote_response );
+        if ( Util::is_json( $remote_response ) ) {
+		    $response = json_decode( $remote_response, true );
 	    }
 
-	    if ( !$response ) {
+        if ( !$response ) {
 		    return $this->http->end_ajax(
-			    new \WP_Error( 'unserialize-failure', __( 'Failed attempting to unserialize the response from the remote server. Please contact support.', 'wp-migrate-db' ) ),
+			    new \WP_Error( 'json-decode-failure', __( 'Failed attempting to decode the response from the remote server. Please contact support.', 'wp-migrate-db' ) ),
 			    $remote_response
 		    );
 	    }
+
+        if (isset($response['site_details']['wpe_cookie'])) {
+            Persistence::storeRemoteWPECookie($response['site_details']['wpe_cookie']);
+        }
 
         $data['scheme'] = $url_bits['scheme'];
 	    $data += $response;

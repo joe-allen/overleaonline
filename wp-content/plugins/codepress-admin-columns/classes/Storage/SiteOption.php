@@ -2,37 +2,34 @@
 
 namespace AC\Storage;
 
-class SiteOption extends Option {
+final class SiteOption implements KeyValuePair
+{
 
-	/**
-	 * @param array $args
-	 *
-	 * @return mixed
-	 */
-	public function get( array $args = [] ) {
-		$args = array_merge( [
-			self::OPTION_DEFAULT => false,
-		], $args );
+    protected $key;
 
-		wp_cache_delete( $this->key, 'site-options' );
+    public function __construct(string $key)
+    {
+        $this->key = $key;
+    }
 
-		return get_site_option( $this->key, $args[ self::OPTION_DEFAULT ] );
-	}
+    public function get()
+    {
+        return get_site_option($this->key);
+    }
 
-	/**
-	 * @param $value
-	 *
-	 * @return bool
-	 */
-	public function save( $value ) {
-		return update_site_option( $this->key, $value );
-	}
+    public function save($value): bool
+    {
+        return update_site_option($this->key, $value);
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function delete() {
-		return delete_site_option( $this->key );
-	}
+    public function delete(): bool
+    {
+        return delete_site_option($this->key);
+    }
+
+    public function exists(): bool
+    {
+        return false !== $this->get();
+    }
 
 }
